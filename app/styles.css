@@ -1,4 +1,14 @@
 /* Inside "styles/style.css" */
+
+.menu_header ul li a {
+  opacity: 0.6;
+  font-weight: 200;
+  padding: 8px 0px;
+  display: block;
+  font-size: 0.75rem; /* This sets the font size to text-xs equivalent */
+}
+
+/* Ensure the rest of your styles remain the same */
 header.header_left {
   position: fixed;
   width: 20%;
@@ -137,14 +147,6 @@ header.header_left img.w-24.h-11 {
   list-style-type: none;
   display: inline-block;
   padding: 0px 15px;
-}
-
-.menu_header ul li a {
-  opacity: 0.6;
-  font-weight: 200;
-  padding: 8px 0px;
-  display: block;
-  font-size: 14px;
 }
 
 .made_change {

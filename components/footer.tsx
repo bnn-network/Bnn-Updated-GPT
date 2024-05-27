@@ -17,28 +17,28 @@ const Footer: React.FC = () => {
       <div className="menu_header flex-1 text-center min-w-[530px] ml-5">
         <ul className="flex space-x-6 m-0 p-0">
           <li className="list-none inline-block px-4">
-            <a href="/" className="hover:text-muted font-light text-sm">
+            <a href="/" className="hover:text-muted font-light text-xs">
               Home
             </a>
           </li>
           <li className="list-none inline-block px-4">
-            <a href="/about" className="hover:text-muted font-light text-sm">
-              About Us
+            <a href="/about" className="hover:text-muted font-light text-xs">
+              About
             </a>
           </li>
           <li className="list-none inline-block px-4">
-            <a href="/privacy" className="hover:text-muted font-light text-sm">
-              Privacy Policy
+            <a href="/privacy" className="hover:text-muted font-light text-xs">
+              Privacy
             </a>
           </li>
           <li className="list-none inline-block px-4">
-            <a href="/terms" className="hover:text-muted font-light text-sm">
-              Terms & Conditions
+            <a href="/terms" className="hover:text-muted font-light text-xs">
+              Terms
             </a>
           </li>
           <li className="list-none inline-block px-4">
-            <a href="/contact" className="hover:text-muted font-light text-sm">
-              Contact Us
+            <a href="/contact" className="hover:text-muted font-light text-xs">
+              Contact
             </a>
           </li>
         </ul>

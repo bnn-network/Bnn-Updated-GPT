@@ -24,8 +24,8 @@ export default function Page() {
         <meta property="og:image" content="https://www.bnngpt.com/logo.jpg" />
         <meta property="og:site_name" content="BNNGPT" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@rashadphz" />
-        <meta name="twitter:creator" content="@rashadphz" />
+        <meta name="twitter:site" content="" />
+        <meta name="twitter:creator" content="" />
         <meta
           name="twitter:title"
           content="Contact BNNGPT - Get in Touch with Our AI Search Engine Team"
