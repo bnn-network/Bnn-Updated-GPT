@@ -1,4 +1,3 @@
-// app/layout.tsx
 import type { Metadata, Viewport } from 'next'
 import { Inter as FontSans } from 'next/font/google'
 import './globals.css'
@@ -28,7 +27,7 @@ export const metadata: Metadata = {
   twitter: {
     title,
     description,
-    card: '',
+    card: 'summary_large_image', // Use a valid card type here
     creator: 'BNNGPT'
   }
 }
