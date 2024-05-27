@@ -3,20 +3,20 @@ import { ArrowRight } from 'lucide-react'
 
 const exampleMessages = [
   {
-    heading: "What's new with the iPad Pro?",
-    message: "What's new with the iPad Pro?"
+    heading: 'What causes inflation?',
+    message: 'What causes inflation?'
   },
   {
-    heading: 'Why is Nvidia growing rapidly?',
-    message: 'Why is Nvidia growing rapidly?'
+    heading: 'What is the latest news in Gaza?',
+    message: 'What is the latest news in Gaza?'
   },
   {
-    heading: 'How does the Vercel AI SDK work?',
-    message: 'How does the Vercel AI SDK work?'
+    heading: 'Can you recommend a Mr Beast video?',
+    message: 'Can you recommend a Mr Beast video?'
   },
   {
-    heading: 'Tesla vs Rivian',
-    message: 'Tesla vs Rivian'
+    heading: 'What is GPT-4o?',
+    message: 'What is GPT-4o?'
   }
 ]
 

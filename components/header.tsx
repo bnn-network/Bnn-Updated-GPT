@@ -14,7 +14,7 @@ export const Header: React.FC = () => {
             className={cn('w-24 h-11')}
             alt="Logo"
           />
-          <span className="sr-only">Morphic</span>
+          <span className="sr-only">BNNGPT</span>
         </a>
       </div>
       <div className="flex gap-0.5">
