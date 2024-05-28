@@ -13,31 +13,31 @@ import { Button } from './ui/button'
 
 const Footer: React.FC = () => {
   return (
-    <footer className="w-full flex fixed bottom-0 right-0 p-4 z-50 bg-secondary border-top border-gray-600 items-center">
+    <footer className="w-full flex fixed bottom-0 right-0 p-4 z-50 bg-secondary text-primary border-top border-gray-600 items-center">
       <div className="menu_header flex-1 text-center min-w-[530px] ml-5">
         <ul className="flex space-x-6 m-0 p-0">
           <li className="list-none inline-block px-4">
-            <a href="/" className="hover:text-muted font-light text-xs">
+            <a href="/" className="hover:text-muted-foreground font-light text-xs">
               Home
             </a>
           </li>
           <li className="list-none inline-block px-4">
-            <a href="/about" className="hover:text-muted font-light text-xs">
+            <a href="/about" className="hover:text-muted-foreground font-light text-xs">
               About
             </a>
           </li>
           <li className="list-none inline-block px-4">
-            <a href="/privacy" className="hover:text-muted font-light text-xs">
+            <a href="/privacy" className="hover:text-muted-foreground font-light text-xs">
               Privacy
             </a>
           </li>
           <li className="list-none inline-block px-4">
-            <a href="/terms" className="hover:text-muted font-light text-xs">
+            <a href="/terms" className="hover:text-muted-foreground font-light text-xs">
               Terms
             </a>
           </li>
           <li className="list-none inline-block px-4">
-            <a href="/contact" className="hover:text-muted font-light text-xs">
+            <a href="/contact" className="hover:text-muted-foreground font-light text-xs">
               Contact
             </a>
           </li>
