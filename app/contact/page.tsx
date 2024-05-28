@@ -3,7 +3,7 @@ import Head from 'next/head'
 
 export default function Page() {
   return (
-    <div className="inner_page">
+    <div className="inner_page bg-secondary">
       <Head>
         <title>
           Contact BNNGPT - Get in Touch with Our AI Search Engine Team
