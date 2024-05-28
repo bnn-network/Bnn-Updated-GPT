@@ -98,7 +98,7 @@ export default function Page() {
           with analytics service providers that assist us in improving and
           optimizing our website. For example, we use Google Analytics:{' '}
           <a href="https://policies.google.com/technologies/partner-sites">
-            Google's Privacy Policy
+            Google&apos;s Privacy Policy
           </a>
           .
         </li>

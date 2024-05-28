@@ -41,7 +41,7 @@ export default function Page() {
       <h2>About Us</h2>
       <h3>Welcome to BNNGPT – The Future of AI-Powered Search</h3>
       <p>
-        At BNNGPT, we're redefining the way you search and interact with
+        At BNNGPT, we&apos;re redefining the way you search and interact with
         information. As a leading AI-powered search engine, we are dedicated to
         providing the most accurate, relevant, and human-like responses to your
         queries. BNNGPT stands at the forefront of artificial intelligence,
@@ -50,7 +50,7 @@ export default function Page() {
       </p>
       <h3>Our Technology</h3>
       <p>
-        BNNGPT, or "Big Neural Network GPT," represents the pinnacle of AI
+        BNNGPT, or &quot;Big Neural Network GPT,&quot; represents the pinnacle of AI
         innovation. Building on the revolutionary GPT (Generative Pre-trained
         Transformer), BNNGPT utilizes advanced transformers to comprehend and
         generate text with remarkable coherence and relevance. Trained on vast
@@ -68,7 +68,7 @@ export default function Page() {
         known for its revolutionary approach to artificial intelligence,
         blending advanced technology with user-friendly solutions to transform
         business operations and everyday interactions. This powerful partnership
-        enhances BNNGPT's capabilities, ensuring it remains at the cutting edge
+        enhances BNNGPT&apos;s capabilities, ensuring it remains at the cutting edge
         of AI development.
       </p>
       <h3>Why Use BNNGPT?</h3>
@@ -98,7 +98,7 @@ export default function Page() {
       <p>
         At BNNGPT, our mission is to transform the way people access and engage
         with information. We aim to empower users by making knowledge more
-        accessible, understandable, and actionable. Whether you're a student, a
+        accessible, understandable, and actionable. Whether you&apos;re a student, a
         professional, or just someone with a curious mind, BNNGPT is here to
         help you find the answers you seek with ease and confidence.
       </p>
@@ -110,7 +110,7 @@ export default function Page() {
         reliability, accuracy, and innovative approach to information retrieval.
       </p>
       <p>
-        Explore BNNGPT today and see how we're making the future of search
+        Explore BNNGPT today and see how we&apos;re making the future of search
         smarter, faster, and more intuitive.
       </p>
     </div>
