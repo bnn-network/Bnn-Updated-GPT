@@ -22,6 +22,7 @@ import SearchRelated from '@/components/search-related'
 import { CopilotDisplay } from '@/components/copilot-display'
 import RetrieveSection from '@/components/retrieve-section'
 import { VideoSearchSection } from '@/components/video-search-section'
+import { auth } from '@/auth'
 
 async function submit(formData?: FormData, skip?: boolean) {
   'use server'
@@ -288,7 +289,8 @@ export const AI = createAI<AIState, UIState>({
 
     const { chatId, messages } = state
     const createdAt = new Date()
-    const userId = 'anonymous'
+    const session = await auth()
+    const userId = session?.user?.id || 'anonymous'
     const path = `/search/${chatId}`
     const title =
       messages.length > 0
