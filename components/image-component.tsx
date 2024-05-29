@@ -3,6 +3,7 @@ import { cn } from '@/lib/utils'
 import { useTheme } from 'next-themes'
 import Image from 'next/image'
 import React from 'react'
+import NoSsr from './no-ssr'
 
 const ImageComponent = () => {
   const { theme, systemTheme } = useTheme()
@@ -14,8 +15,10 @@ const ImageComponent = () => {
     ? '/images/logo-white.png'
     : '/images/logo-black.png'
   return (
+
     <div className="pl-2 pt-2">
       <a href="/">
+      <NoSsr>
         <Image
           src={conditionForTheme}
           className={cn('w-24 h-11')}
@@ -23,9 +26,11 @@ const ImageComponent = () => {
           width={96}
           height={55}
         />
+          </NoSsr>
         <span className="sr-only">BNNGPT</span>
       </a>
     </div>
+  
   )
 }
 
