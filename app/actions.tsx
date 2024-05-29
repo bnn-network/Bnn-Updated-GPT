@@ -320,7 +320,8 @@ export const AI = createAI<AIState, UIState>({
   }
 })
 
-export const getUIStateFromAIState = (aiState: Chat) => {
+export const getUIStateFromAIState = async (aiState: Chat) => {
+  const session = await auth()
   const chatId = aiState.chatId
   const isSharePage = aiState.isSharePage
   return aiState.messages
@@ -348,7 +349,7 @@ export const getUIStateFromAIState = (aiState: Chat) => {
                   <UserMessage
                     message={value}
                     chatId={chatId}
-                    showShare={index === 0 && !isSharePage}
+                    showShare={session?.user?.email ? true : false}
                   />
                 )
               }
