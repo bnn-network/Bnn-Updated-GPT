@@ -67,7 +67,7 @@ export async function researcher(
             // Update the UI
             uiStream.update(answerSection)
           }
-
+          
           fullResponse += delta.textDelta
           streamText.update(fullResponse)
         }
