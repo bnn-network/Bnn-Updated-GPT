@@ -12,13 +12,13 @@ import { KeyRound, LogOut, User } from 'lucide-react'
 import Link from 'next/link'
 import { auth, signOut } from '@/auth'
 
-const LoginButton = async () => {
+const AuthButton = async () => {
   const session = await auth()
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className='z-10' asChild>
-        <Button variant="ghost" className='z-10' size={'icon'}>
+      <DropdownMenuTrigger className="z-10" asChild>
+        <Button variant="ghost" className="z-10" size={'icon'}>
           <User className="w-5 h-5" />
         </Button>
       </DropdownMenuTrigger>
@@ -32,7 +32,7 @@ const LoginButton = async () => {
             <form
               action={async () => {
                 'use server'
-                await signOut()
+                await signOut({ redirect: true, redirectTo: '/' })
               }}
               className="flex w-full px-1 items-center"
             >
@@ -51,4 +51,4 @@ const LoginButton = async () => {
   )
 }
 
-export default LoginButton
+export default AuthButton

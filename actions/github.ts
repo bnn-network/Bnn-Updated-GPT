@@ -3,5 +3,5 @@
 import { signIn } from "@/auth"
 
 export default async function GithubOauthLogin(){
-    await signIn('github')
+    await signIn('github',{redirect:true, redirectTo:'/'})
 }
