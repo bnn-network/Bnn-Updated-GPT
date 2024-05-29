@@ -1,4 +1,4 @@
-
+"use client"
 import {
   CardTitle,
   CardDescription,
@@ -7,27 +7,32 @@ import {
   Card
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import GithubOauthLogin from '@/actions/github'
+import GoogleOauthLogin from '@/actions/google'
 
 export default function Component() {
   return (
-    <Card className="w-full max-w-sm bg-primary text-secondary">
+    <>
+    <Card className="w-full max-w-sm bg-primary-foreground text-primary">
       <CardHeader>
         <CardTitle className="text-2xl">Login</CardTitle>
-        <CardDescription className='text-secondary'>
+        <CardDescription className="text-primary">
           Choose an option to login to your account.
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">
-        <Button className="w-full text-primary" variant="outline">
+        <Button onClick={async()=>{await GithubOauthLogin()}} className="w-full text-primary" variant="outline">
           <GithubIcon className="mr-2 h-6 w-6 font-bold " />
           Login with GitHub
         </Button>
-        <Button className="w-full text-primary" variant="outline">
+        <Button onClick={async()=>{await GoogleOauthLogin()}} className="w-full text-primary" variant="outline">
           <ChromeIcon className="mr-2 h-6 w-6 font-bold " />
           Login with Google
         </Button>
       </CardContent>
     </Card>
+   
+    </>
   )
 }
 

@@ -25,10 +25,10 @@ export function History({ location }: HistoryProps) {
           variant="ghost"
           size="icon"
           className={cn({
-            'rounded-full text-foreground/30': location === 'sidebar'
+            'rounded-full z-10 text-foreground/30': location === 'sidebar'
           })}
         >
-          {location === 'header' ? <Menu /> : <ChevronLeft size={16} />}
+          {location === 'header' ? <Menu /> : <ChevronLeft size={18} />}
         </Button>
       </SheetTrigger>
       <SheetContent className="w-64 rounded-tl-xl rounded-bl-xl">
