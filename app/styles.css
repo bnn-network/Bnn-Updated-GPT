@@ -16,7 +16,7 @@ header.header_left {
   height: 100%;
   top: 0px;
   left: 0px;
-  z-index: 999;
+  z-index: 999; 
   padding: 40px;
 }
 

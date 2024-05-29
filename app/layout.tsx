@@ -46,17 +46,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn('font-sans antialiased', fontSans.variable)}>
+      <body
+        className={cn('font-sans antialiased bg-secondary', fontSans.variable)}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
           {children}
-          <Sidebar />
-          <Footer />
           <Toaster />
         </ThemeProvider>
       </body>

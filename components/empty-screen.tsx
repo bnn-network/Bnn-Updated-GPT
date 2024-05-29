@@ -15,8 +15,8 @@ const exampleMessages = [
     message: 'Can you recommend a Mr Beast video?'
   },
   {
-    heading: 'What is GPT-4o?',
-    message: 'What is GPT-4o?'
+    heading: 'What is gpt-4o?',
+    message: 'What is gpt-4o?'
   }
 ]
 
@@ -29,7 +29,7 @@ export function EmptyScreen({
 }) {
   return (
     <div className={`mx-auto w-full transition-all ${className}`}>
-      <div className="bg-background p-2">
+      <div className=" p-2">
         <div className="mt-4 flex flex-col items-start space-y-2 mb-4">
           {exampleMessages.map((message, index) => (
             <Button

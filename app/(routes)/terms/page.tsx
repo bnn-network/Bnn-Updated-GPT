@@ -1,4 +1,4 @@
-import '../styles.css' // This should be the correct relative path
+import '../../styles.css' // This should be the correct relative path
 import Head from 'next/head'
 
 export default function Page() {
@@ -16,7 +16,7 @@ export default function Page() {
         <meta
           property="og:title"
           content="BNNGPT Terms of Service - Your Guide to Using Our AI-Powered Search Engine"
-        />
+        /> 
         <meta
           property="og:description"
           content="Read BNNGPT's Terms of Service to understand the rules and guidelines for using our AI-powered search engine."

@@ -1,4 +1,4 @@
-import '../styles.css' // This should be the correct relative path
+import '../../styles.css' // This should be the correct relative path
 import Head from 'next/head'
 
 export default function Page() {
