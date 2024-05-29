@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { type Chat } from '@/lib/types'
 import { Redis } from '@upstash/redis'
+import { auth } from '@/auth'
 
 const redis = new Redis({
   url: process.env.UPSTASH_REDIS_REST_URL || '',
@@ -33,7 +34,7 @@ export async function getChats(userId?: string | null) {
   }
 }
 
-export async function getChat(id: string, userId: string = 'anonymous') {
+export async function getChat(id: string) {
   const chat = await redis.hgetall<Chat>(`chat:${id}`)
 
   if (!chat) {
@@ -43,9 +44,9 @@ export async function getChat(id: string, userId: string = 'anonymous') {
   return chat
 }
 
-export async function clearChats(
-  userId: string = 'anonymous'
-): Promise<{ error?: string }> {
+export async function clearChats() {
+  const session = await auth()
+  const userId = session?.user?.id || 'anonymous'
   const chats: string[] = await redis.zrange(`user:chat:${userId}`, 0, -1)
   if (!chats.length) {
     return { error: 'No chats to clear' }
@@ -63,7 +64,7 @@ export async function clearChats(
   redirect('/')
 }
 
-export async function saveChat(chat: Chat, userId: string = 'anonymous') {
+export async function saveChat(chat: Chat) {
   const pipeline = redis.pipeline()
   pipeline.hmset(`chat:${chat.id}`, chat)
   pipeline.zadd(`user:chat:${chat.userId}`, {
@@ -83,7 +84,9 @@ export async function getSharedChat(id: string) {
   return chat
 }
 
-export async function shareChat(id: string, userId: string = 'anonymous') {
+export async function shareChat(id: string) {
+  const session = await auth()
+  const userId = session?.user?.id || 'anonymous'
   const chat = await redis.hgetall<Chat>(`chat:${id}`)
 
   if (!chat || chat.userId !== userId) {

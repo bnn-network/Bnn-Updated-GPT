@@ -2,7 +2,7 @@ import React from 'react'
 import { ModeToggle } from './mode-toggle'
 import HistoryContainer from './history-container'
 import ImageComponent from './image-component'
-import LoginButton from './login-button'
+import LoginButton from './auth-button'
 
 export const Header: React.FC = () => {
   return (

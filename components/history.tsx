@@ -12,12 +12,15 @@ import { History as HistoryIcon } from 'lucide-react'
 import { HistoryList } from './history-list'
 import { Suspense } from 'react'
 import { HistorySkeleton } from './history-skelton'
+import { auth } from '@/auth'
 
 type HistoryProps = {
   location: 'sidebar' | 'header'
 }
 
-export function History({ location }: HistoryProps) {
+export async function History({ location }: HistoryProps) {
+  const session = await auth()
+  const userId = session?.user?.id || 'anonymous'
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -40,7 +43,7 @@ export function History({ location }: HistoryProps) {
         </SheetHeader>
         <div className="my-2 h-full pb-12 md:pb-10">
           <Suspense fallback={<HistorySkeleton />}>
-            <HistoryList userId="anonymous" />
+            <HistoryList userId={userId} />
           </Suspense>
         </div>
       </SheetContent>
