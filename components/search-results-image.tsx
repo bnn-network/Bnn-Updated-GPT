@@ -76,7 +76,7 @@ export const SearchResultsImageSection: React.FC<
                       alt={`Image ${index + 1}`}
                       className="h-full w-full object-cover"
                       onError={e =>
-                        (e.currentTarget.src = '/images/placeholder-image.png')
+                        (e.currentTarget.src = '/images/logo-white.png')
                       }
                     />
                   ) : (

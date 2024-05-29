@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState, useRef } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import type { AI, UIState } from '@/app/actions'
 import { useUIState, useActions } from 'ai/rsc'
 import { cn } from '@/lib/utils'
@@ -22,8 +22,9 @@ export function ChatPanel({ messages }: ChatPanelProps) {
   const { submit } = useActions()
   const inputRef = useRef<HTMLTextAreaElement>(null)
   const [showEmptyScreen, setShowEmptyScreen] = useState(false)
+  const [generating, setGenerating] = useState(false)
   const router = useRouter()
-
+  const params = useSearchParams()
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
@@ -38,10 +39,17 @@ export function ChatPanel({ messages }: ChatPanelProps) {
 
     // Submit and get response message
     const formData = new FormData(e.currentTarget)
+
     const responseMessage = await submit(formData)
     setMessages(currentMessages => [...currentMessages, responseMessage])
+    setGenerating(false)
   }
-
+  useEffect(() => {
+    if (params.get('prequery') !== null && !generating) {
+      const input = params.get('prequery') as string
+      setInput(input)
+    }
+  }, [])
   // Clear messages
   const handleClear = () => {
     router.push('/')

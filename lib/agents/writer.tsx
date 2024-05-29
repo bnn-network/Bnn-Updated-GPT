@@ -22,7 +22,7 @@ export async function writer(
     apiKey: process.env.SPECIFIC_API_KEY,
     organization: '' // optional organization
   })
-  
+
   await nonexperimental_streamText({
     model: openai!.chat(process.env.SPECIFIC_API_MODEL || 'gpt-4o'),
     maxTokens: 2500,
