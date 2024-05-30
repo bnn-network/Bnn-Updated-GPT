@@ -22,7 +22,6 @@ export function ChatPanel({ messages }: ChatPanelProps) {
   const { submit } = useActions()
   const inputRef = useRef<HTMLTextAreaElement>(null)
   const [showEmptyScreen, setShowEmptyScreen] = useState(false)
-  const [generating, setGenerating] = useState(false)
   const router = useRouter()
   const params = useSearchParams()
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -42,14 +41,14 @@ export function ChatPanel({ messages }: ChatPanelProps) {
 
     const responseMessage = await submit(formData)
     setMessages(currentMessages => [...currentMessages, responseMessage])
-    setGenerating(false)
+
   }
   useEffect(() => {
-    if (params.get('prequery') !== null && !generating) {
+    if (params.get('prequery') !== null) {
       const input = params.get('prequery') as string
       setInput(input)
     }
-  }, [])
+  }, [params])
   // Clear messages
   const handleClear = () => {
     router.push('/')
