@@ -3,8 +3,6 @@ import { Inter as FontSans } from 'next/font/google'
 import './globals.css'
 import { cn } from '@/lib/utils'
 import { ThemeProvider } from '@/components/theme-provider'
-import Header from '@/components/header'
-import Footer from '@/components/footer'
 import { Sidebar } from '@/components/sidebar'
 import { Toaster } from '@/components/ui/sonner'
 
@@ -15,6 +13,8 @@ const fontSans = FontSans({
 
 const title = 'BNNGPT'
 const description = 'Elevate Your Search Experience with AI.'
+export const dynamic = 'force-dynamic'
+
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://bnngpt.com'),
