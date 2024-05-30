@@ -12,7 +12,7 @@ const fontSans = FontSans({
 
 const title = 'BNNGPT'
 const description = 'Elevate Your Search Experience with AI.'
-export const dynamic = 'force-dynamic'
+
 
 
 export const metadata: Metadata = {
