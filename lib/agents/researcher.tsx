@@ -8,7 +8,7 @@ import {
 import { Section } from '@/components/section'
 import { BotMessage } from '@/components/message'
 import { getTools } from './tools'
-import { getModel } from '../utils'
+import { getModel, groqModel } from '../utils'
 
 export async function researcher(
   uiStream: ReturnType<typeof createStreamableUI>,
@@ -23,10 +23,11 @@ export async function researcher(
       <BotMessage content={streamText.value} />
     </Section>
   )
+  
 
   const currentDate = new Date().toLocaleString()
   const result = await nonexperimental_streamText({
-    model: getModel(),
+    model: groqModel(),
     maxTokens: 2500,
     system: `As a professional search expert, you possess the ability to search for any information on the web.
     or any information on the web.
