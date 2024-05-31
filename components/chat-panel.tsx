@@ -25,7 +25,7 @@ export function ChatPanel({ messages }: ChatPanelProps) {
   const [shouldSubmit, setShouldSubmit] = useState(false)
   const router = useRouter()
   const params = useSearchParams()
-  const isFirstRender = useRef(true)
+
   const handleSubmit = async (e?: React.FormEvent<HTMLFormElement>) => {
     e?.preventDefault()
     let formData
@@ -53,10 +53,7 @@ export function ChatPanel({ messages }: ChatPanelProps) {
     setMessages(currentMessages => [...currentMessages, responseMessage])
   }
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false
-      return
-    }
+   
     const handleQuery = () => {
       if (params.get('prequery') !== null) {
         const input = params.get('prequery') as string
