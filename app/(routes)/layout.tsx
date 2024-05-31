@@ -10,7 +10,7 @@ const RoutesLayout = async ({ children }: { children: React.ReactNode }) => {
       <Header />
       <Sidebar />
       {children}
-      <Footer />
+   
     </div>
   )
 }
