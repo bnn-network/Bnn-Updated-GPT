@@ -41,11 +41,8 @@ export function ChatPanel({ messages }: ChatPanelProps) {
 
     // Submit and get response message
     if (!e) {
-
-      responseMessage = await submit(null,false,input)
-    }else
-    {
-      console.log(e?.currentTarget)
+      responseMessage = await submit(null, false, input)
+    } else {
       formData = new FormData(e?.currentTarget)
       responseMessage = await submit(formData)
     }
@@ -53,15 +50,11 @@ export function ChatPanel({ messages }: ChatPanelProps) {
     setMessages(currentMessages => [...currentMessages, responseMessage])
   }
   useEffect(() => {
-   
-    const handleQuery = () => {
-      if (params.get('prequery') !== null) {
-        const input = params.get('prequery') as string
-        setInput(input)
-        setShouldSubmit(true)
-      }
+    if (params.get('prequery')?.length !== undefined) {
+      const input = params.get('prequery') as string
+      setInput(input)
+      setShouldSubmit(true)
     }
-    handleQuery()
   }, [params])
   // Clear messages
   const handleClear = () => {
