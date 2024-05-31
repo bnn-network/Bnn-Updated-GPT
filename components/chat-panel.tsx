@@ -22,11 +22,14 @@ export function ChatPanel({ messages }: ChatPanelProps) {
   const { submit } = useActions()
   const inputRef = useRef<HTMLTextAreaElement>(null)
   const [showEmptyScreen, setShowEmptyScreen] = useState(false)
+  const [shouldSubmit, setShouldSubmit] = useState(false)
   const router = useRouter()
   const params = useSearchParams()
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-
+  const isFirstRender = useRef(true)
+  const handleSubmit = async (e?: React.FormEvent<HTMLFormElement>) => {
+    e?.preventDefault()
+    let formData
+    let responseMessage: any
     // Add user message to UI state
     setMessages(currentMessages => [
       ...currentMessages,
@@ -37,25 +40,44 @@ export function ChatPanel({ messages }: ChatPanelProps) {
     ])
 
     // Submit and get response message
-    const formData = new FormData(e.currentTarget)
+    if (!e) {
 
-    const responseMessage = await submit(formData)
+      responseMessage = await submit(null,false,input)
+    }else
+    {
+      console.log(e?.currentTarget)
+      formData = new FormData(e?.currentTarget)
+      responseMessage = await submit(formData)
+    }
+
     setMessages(currentMessages => [...currentMessages, responseMessage])
-
   }
   useEffect(() => {
-    if (params.get('prequery') !== null) {
-      const input = params.get('prequery') as string
-      setInput(input)
+    if (isFirstRender.current) {
+      isFirstRender.current = false
+      return
     }
+    const handleQuery = () => {
+      if (params.get('prequery') !== null) {
+        const input = params.get('prequery') as string
+        setInput(input)
+        setShouldSubmit(true)
+      }
+    }
+    handleQuery()
   }, [params])
   // Clear messages
   const handleClear = () => {
     router.push('/')
   }
+  useEffect(() => {
+    if (shouldSubmit) {
+      handleSubmit()
+      setShouldSubmit(false)
+    }
+  }, [shouldSubmit])
 
   useEffect(() => {
-    // focus on input when the page loads
     inputRef.current?.focus()
   }, [])
 
@@ -86,7 +108,6 @@ export function ChatPanel({ messages }: ChatPanelProps) {
     >
       <form onSubmit={handleSubmit} className="max-w-2xl w-full px-6">
         <div className="relative flex items-center w-full">
-          
           <Textarea
             ref={inputRef}
             name="input"
@@ -147,7 +168,6 @@ export function ChatPanel({ messages }: ChatPanelProps) {
           >
             <ArrowRight size={20} />
           </Button>
-         
         </div>
         <EmptyScreen
           submitMessage={message => {

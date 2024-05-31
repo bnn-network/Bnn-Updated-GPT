@@ -24,9 +24,12 @@ import RetrieveSection from '@/components/retrieve-section'
 import { VideoSearchSection } from '@/components/video-search-section'
 import { auth } from '@/auth'
 
-async function submit(formData?: FormData, skip?: boolean) {
+async function submit(
+  formData?: FormData,
+  skip?: boolean,
+  directInput?: string
+) {
   'use server'
-
   const aiState = getMutableAIState<typeof AI>()
   const uiStream = createStreamableUI()
   const isGenerating = createStreamableValue(true)
@@ -55,20 +58,26 @@ async function submit(formData?: FormData, skip?: boolean) {
   // Get the user input from the form data
   const userInput = skip
     ? `{"action": "skip"}`
+    : directInput
+    ? directInput
     : (formData?.get('input') as string)
 
   const content = skip
     ? userInput
     : formData
     ? JSON.stringify(Object.fromEntries(formData))
-    : null
+    : directInput
+    ? JSON.stringify({ input: directInput })
+    : undefined
+  console.log('content', content)
   const type = skip
     ? undefined
-    : formData?.has('input')
+    : formData?.has('input') || directInput
     ? 'input'
     : formData?.has('related_query')
     ? 'input_related'
     : 'inquiry'
+  console.log('type', type)
 
   // Add the user message to the state
   if (content) {
