@@ -66,7 +66,7 @@ export function ChatPanel({ messages }: ChatPanelProps) {
       handleSubmit()
       setShouldSubmit(false)
     }
-  }, [shouldSubmit])
+  }, [shouldSubmit,handleSubmit])
 
   useEffect(() => {
     inputRef.current?.focus()

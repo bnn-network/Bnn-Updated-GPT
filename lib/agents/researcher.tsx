@@ -23,11 +23,10 @@ export async function researcher(
       <BotMessage content={streamText.value} />
     </Section>
   )
-  
 
   const currentDate = new Date().toLocaleString()
   const result = await nonexperimental_streamText({
-    model: groqModel(),
+    model: getModel(),
     maxTokens: 2500,
     system: `As a professional search expert, you possess the ability to search for any information on the web.
     or any information on the web.
@@ -68,7 +67,7 @@ export async function researcher(
             // Update the UI
             uiStream.update(answerSection)
           }
-          
+
           fullResponse += delta.textDelta
           streamText.update(fullResponse)
         }
