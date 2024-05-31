@@ -4,6 +4,7 @@ import './globals.css'
 import { cn } from '@/lib/utils'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/sonner'
+import Script from 'next/script'
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -12,8 +13,6 @@ const fontSans = FontSans({
 
 const title = 'BNNGPT'
 const description = 'Elevate Your Search Experience with AI.'
-
-
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://bnngpt.com'),
@@ -44,20 +43,50 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={cn('font-sans antialiased bg-secondary', fontSans.variable)}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
+    <>
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-NFW7H1G22S"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-NFW7H1G22S');
+        `}
+      </Script>
+      <Script
+        id="clarity-js"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "mfuyx7jlww");
+          `
+        }}
+      />
+      <html lang="en" suppressHydrationWarning>
+        <body
+          className={cn(
+            'font-sans antialiased bg-secondary',
+            fontSans.variable
+          )}
         >
-          {children}
-          <Toaster />
-        </ThemeProvider>
-      </body>
-    </html>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+            <Toaster />
+          </ThemeProvider>
+        </body>
+      </html>
+    </>
   )
 }
