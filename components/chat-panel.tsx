@@ -147,9 +147,7 @@ export function ChatPanel({ messages }: ChatPanelProps) {
           >
             <ArrowRight size={20} />
           </Button>
-          <div className='bg-red-200 absolute text-sm text-white'>
-            <h2>Experimental</h2>
-          </div>
+         
         </div>
         <EmptyScreen
           submitMessage={message => {
