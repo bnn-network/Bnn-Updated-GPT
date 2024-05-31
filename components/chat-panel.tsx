@@ -50,7 +50,8 @@ export function ChatPanel({ messages }: ChatPanelProps) {
     setMessages(currentMessages => [...currentMessages, responseMessage])
   }
   useEffect(() => {
-    if (params.get('prequery') !== undefined) {
+  
+    if (params.get('prequery') !== null) {
       const input = params.get('prequery') as string
       setInput(input)
       setShouldSubmit(true)
