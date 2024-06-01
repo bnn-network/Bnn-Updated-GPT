@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/sonner'
 import Script from 'next/script'
+import OgImage from './opengraph-image.png'
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -20,13 +21,27 @@ export const metadata: Metadata = {
   description,
   openGraph: {
     title,
-    description
+    description,
+    images: [
+      {
+        url: OgImage.src,
+        width: OgImage.width,
+        height: OgImage.height
+      }
+    ]
   },
   twitter: {
     title,
     description,
     card: 'summary_large_image', // Use a valid card type here
-    creator: 'BNNGPT'
+    creator: 'BNNGPT',
+    images: [
+      {
+        url: OgImage.src,
+        width: OgImage.width,
+        height: OgImage.height
+      }
+    ]
   }
 }
 
