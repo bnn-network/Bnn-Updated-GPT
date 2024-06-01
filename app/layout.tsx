@@ -16,9 +16,9 @@ const title = 'BNNGPT'
 const description = 'Elevate Your Search Experience with AI.'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://bnngpt.com'),
   title,
   description,
+  metadataBase: new URL('https://bnngpt.com'),
   openGraph: {
     title,
     description,
