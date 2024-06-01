@@ -4,6 +4,10 @@ export { auth as middlewarefun } from '@/auth'
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
+
+  if (pathname === '/parameter') {
+    return NextResponse.redirect('/')
+  }
   if (pathname.includes('parameter') && pathname !== '/parameter') {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/getparamquery`,
