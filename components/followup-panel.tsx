@@ -7,11 +7,13 @@ import { useActions, useUIState } from 'ai/rsc'
 import type { AI } from '@/app/actions'
 import { UserMessage } from './user-message'
 import { ArrowRight } from 'lucide-react'
+import useModel from '@/store/useModel'
 
 export function FollowupPanel() {
   const [input, setInput] = useState('')
   const { submit } = useActions()
   const [, setMessages] = useUIState<typeof AI>()
+  const {selectedModel} = useModel()
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -23,7 +25,7 @@ export function FollowupPanel() {
       component: <UserMessage message={input} />
     }
 
-    const responseMessage = await submit(formData)
+    const responseMessage = await submit(formData,selectedModel)
     setMessages(currentMessages => [
       ...currentMessages,
       userMessage,

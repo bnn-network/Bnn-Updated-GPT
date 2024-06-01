@@ -12,6 +12,7 @@ import {
 import { AI } from '@/app/actions'
 import { UserMessage } from './user-message'
 import { PartialRelated } from '@/lib/schema/related'
+import useModel from '@/store/useModel'
 
 export interface SearchRelatedProps {
   relatedQueries: PartialRelated
@@ -24,6 +25,7 @@ export const SearchRelated: React.FC<SearchRelatedProps> = ({
   const [, setMessages] = useUIState<typeof AI>()
   const [data, error, pending] =
     useStreamableValue<PartialRelated>(relatedQueries)
+  const { selectedModel } = useModel()
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -43,7 +45,7 @@ export const SearchRelated: React.FC<SearchRelatedProps> = ({
       component: <UserMessage message={query} />
     }
 
-    const responseMessage = await submit(formData)
+    const responseMessage = await submit(formData, selectedModel)
     setMessages(currentMessages => [
       ...currentMessages,
       userMessage,

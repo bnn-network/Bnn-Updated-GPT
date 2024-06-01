@@ -10,6 +10,7 @@ import { ArrowRight, Check, FastForward, Sparkles } from 'lucide-react'
 import { useActions, useStreamableValue, useUIState } from 'ai/rsc'
 import type { AI } from '@/app/actions'
 import { IconLogo } from './ui/icons'
+import useModel from '@/store/useModel'
 
 export type CopilotProps = {
   inquiry?: PartialInquiry
@@ -26,6 +27,7 @@ export const Copilot: React.FC<CopilotProps> = ({ inquiry }: CopilotProps) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
   const [, setMessages] = useUIState<typeof AI>()
   const { submit } = useActions()
+  const {selectedModel} = useModel()
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value)
@@ -72,7 +74,7 @@ export const Copilot: React.FC<CopilotProps> = ({ inquiry }: CopilotProps) => {
       ? undefined
       : new FormData(e.target as HTMLFormElement)
 
-    const response = await submit(formData, skip)
+    const response = await submit(formData,selectedModel, skip)
     setMessages(currentMessages => [...currentMessages, response])
   }
 

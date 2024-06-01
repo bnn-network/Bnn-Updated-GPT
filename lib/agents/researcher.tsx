@@ -8,12 +8,13 @@ import {
 import { Section } from '@/components/section'
 import { BotMessage } from '@/components/message'
 import { getTools } from './tools'
-import { getModel, groqModel } from '../utils'
+import { openAIInstance } from '../utils'
 
 export async function researcher(
   uiStream: ReturnType<typeof createStreamableUI>,
   streamText: ReturnType<typeof createStreamableValue<string>>,
   messages: CoreMessage[],
+  selectedModel: string,
   useSpecificModel?: boolean
 ) {
   let fullResponse = ''
@@ -26,7 +27,7 @@ export async function researcher(
 
   const currentDate = new Date().toLocaleString()
   const result = await nonexperimental_streamText({
-    model: getModel(),
+    model: openAIInstance(selectedModel),
     maxTokens: 2500,
     system: `As a professional search expert, you possess the ability to search for any information on the web.
     or any information on the web.

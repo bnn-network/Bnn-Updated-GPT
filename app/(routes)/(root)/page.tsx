@@ -19,7 +19,6 @@ export default async function Page() {
             </div>
           </main>
         </div>
-    
       </AI>
     </>
   )

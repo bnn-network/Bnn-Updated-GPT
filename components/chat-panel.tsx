@@ -11,6 +11,7 @@ import { ArrowRight, Plus } from 'lucide-react'
 import { EmptyScreen } from './empty-screen'
 import Textarea from 'react-textarea-autosize'
 import { nanoid } from 'ai'
+import useModel from '@/store/useModel'
 
 interface ChatPanelProps {
   messages: UIState
@@ -25,6 +26,7 @@ export function ChatPanel({ messages }: ChatPanelProps) {
   const [shouldSubmit, setShouldSubmit] = useState(false)
   const router = useRouter()
   const params = useSearchParams()
+  const {selectedModel} = useModel()
 
   const handleSubmit = async (e?: React.FormEvent<HTMLFormElement>) => {
     e?.preventDefault()
@@ -41,10 +43,10 @@ export function ChatPanel({ messages }: ChatPanelProps) {
 
     // Submit and get response message
     if (!e) {
-      responseMessage = await submit(null, false, input)
+      responseMessage = await submit(null,selectedModel, false, input)
     } else {
       formData = new FormData(e?.currentTarget)
-      responseMessage = await submit(formData)
+      responseMessage = await submit(formData,selectedModel)
     }
 
     setMessages(currentMessages => [...currentMessages, responseMessage])

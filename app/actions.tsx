@@ -26,6 +26,7 @@ import { auth } from '@/auth'
 
 async function submit(
   formData?: FormData,
+  selectedModel?: string,
   skip?: boolean,
   directInput?: string
 ) {
@@ -102,11 +103,20 @@ async function submit(
   async function processEvents() {
     let action = { object: { next: 'proceed' } }
     // If the user skips the task, we proceed to the search
-    if (!skip) action = (await taskManager(messages)) ?? action
+    if (!skip)
+      action =
+        (await taskManager(
+          messages,
+          selectedModel ? selectedModel : 'gpt-4o'
+        )) ?? action
 
     if (action.object.next === 'inquire') {
       // Generate inquiry
-      const inquiry = await inquire(uiStream, messages)
+      const inquiry = await inquire(
+        uiStream,
+        messages,
+        selectedModel ? selectedModel : 'gpt-4o'
+      )
       uiStream.done()
       isGenerating.done()
       isCollapsed.done(false)
@@ -146,6 +156,7 @@ async function submit(
         uiStream,
         streamText,
         messages,
+        selectedModel ? selectedModel : 'gpt-4o',
         useSpecificAPI
       )
       answer = fullResponse
@@ -188,7 +199,8 @@ async function submit(
       const { response, hasError } = await writer(
         uiStream,
         streamText,
-        latestMessages
+        latestMessages,
+        selectedModel ? selectedModel : 'gpt-4o'
       )
       answer = response
       errorOccurred = hasError
@@ -198,7 +210,11 @@ async function submit(
 
     if (!errorOccurred) {
       // Generate related queries
-      const relatedQueries = await querySuggestor(uiStream, messages)
+      const relatedQueries = await querySuggestor(
+        uiStream,
+        messages,
+        selectedModel ? selectedModel : 'gpt-4o'
+      )
       // Add follow-up panel
       uiStream.append(
         <Section title="Follow-up">
