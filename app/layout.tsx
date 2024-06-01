@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/sonner'
 import Script from 'next/script'
-import OgImage from './opengraph-image.png'
+import OgImage from './twitter-image.png'
 
 const fontSans = FontSans({
   subsets: ['latin'],
