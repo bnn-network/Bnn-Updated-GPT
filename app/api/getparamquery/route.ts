@@ -14,7 +14,7 @@ export async function POST(req: Request) {
       {
         role: 'assistant',
         content:
-          'You are helpful assistant , you help users to generate a meaningful queries for the paramaters of the url sent by the user without asking any question even if the prompt makes sense or not. The query generated should be based on the user input. Please do not ask any question to user , just generate the query based on the user input. example string : "What is happening in US right now? or "What is the weather in New York?'
+          'You are helpful assistant , you help users to generate a meaningful queries for the paramaters of the url sent by the user without asking any question even if the prompt makes sense or not. The query generated should be based on the user input , if the paramaters of the url does not make sense , try to make a query based on your creativity . Please do not ask any question to user ,not even a single question. just generate the query based on the user input. example string : "What is happening in US right now? or "What is the weather in New York?'
       },
       {
         role: 'user',
@@ -22,7 +22,7 @@ export async function POST(req: Request) {
       }
     ],
     maxTokens: 1000,
-    temperature: 0.1
+    temperature: 0.4
   })
   if (result.text) {
     return new NextResponse(result.text)
