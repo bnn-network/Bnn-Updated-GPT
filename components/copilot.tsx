@@ -27,7 +27,7 @@ export const Copilot: React.FC<CopilotProps> = ({ inquiry }: CopilotProps) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
   const [, setMessages] = useUIState<typeof AI>()
   const { submit } = useActions()
-  const {selectedModel} = useModel()
+  const { selectedModel } = useModel()
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value)
@@ -74,7 +74,7 @@ export const Copilot: React.FC<CopilotProps> = ({ inquiry }: CopilotProps) => {
       ? undefined
       : new FormData(e.target as HTMLFormElement)
 
-    const response = await submit(formData,selectedModel, skip)
+    const response = await submit(formData, selectedModel, skip)
     setMessages(currentMessages => [...currentMessages, response])
   }
 
@@ -103,7 +103,7 @@ export const Copilot: React.FC<CopilotProps> = ({ inquiry }: CopilotProps) => {
     return (
       <Card className="p-3 md:p-4 w-full flex justify-between items-center">
         <div className="flex items-center space-x-2 flex-1 min-w-0">
-          <IconLogo className="w-4 h-4 flex-shrink-0" />
+          <IconLogo className=" flex-shrink-0" />
           <h5 className="text-muted-foreground text-xs truncate">
             {updatedQuery()}
           </h5>
