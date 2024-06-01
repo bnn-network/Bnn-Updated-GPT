@@ -10,6 +10,7 @@ export async function querySuggestor(
   messages: CoreMessage[],
   selectedModel: string
 ) {
+ 
   const objectStream = createStreamableValue<PartialRelated>()
   uiStream.append(
     <Section title="Related" separator={true}>
@@ -19,7 +20,7 @@ export async function querySuggestor(
 
   let finalRelatedQueries: PartialRelated = {}
   await streamObject({
-    model: openAIInstance(selectedModel),
+    model: openAIInstance('gpt-4o'),
     system: `As a professional web researcher, your task is to generate a set of three queries that explore the subject matter more deeply, building upon the initial query and the information uncovered in its search results.
 
     For instance, if the original query was "Starship's third test flight key milestones", your output should follow this format:
