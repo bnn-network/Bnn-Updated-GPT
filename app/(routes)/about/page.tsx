@@ -22,7 +22,7 @@ export default function Page() {
           content="Learn how BNNGPT redefines search with AI, delivering precise, human-like responses to your queries."
         />
         <meta property="og:url" content="https://www.bnngpt.com/about" />
-        <meta property="og:image" content="https://www.bnngpt.com/logo.jpg" />
+        <meta property="og:image" content="https://www.bnngpt.com/opengraph-image.jpg" />
         <meta property="og:site_name" content="BNNGPT" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@rashadphz" />
