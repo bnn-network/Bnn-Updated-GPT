@@ -1,8 +1,10 @@
+import Footer from '@/components/footer'
 import '../../styles.css' // This should be the correct relative path
 import Head from 'next/head'
 
 export default function Page() {
   return (
+    <>
     <div className="inner_page">
       {/* Head component for SEO enhancements */}
       <Head>
@@ -114,5 +116,7 @@ export default function Page() {
         smarter, faster, and more intuitive.
       </p>
     </div>
+     <Footer />
+     </>
   )
 }

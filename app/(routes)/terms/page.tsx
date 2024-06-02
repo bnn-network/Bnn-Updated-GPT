@@ -1,8 +1,10 @@
+import Footer from '@/components/footer'
 import '../../styles.css' // This should be the correct relative path
 import Head from 'next/head'
 
 export default function Page() {
   return (
+    <>
     <div className="inner_page">
       <Head>
         <title>
@@ -213,5 +215,7 @@ export default function Page() {
         <a href="mailto:support@bnngpt.com">support@bnngpt.com</a>.
       </p>
     </div>
+    <Footer/>
+    </>
   )
 }

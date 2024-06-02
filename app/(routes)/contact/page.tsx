@@ -1,8 +1,10 @@
+import Footer from '@/components/footer'
 import '../../styles.css' // This should be the correct relative path
 import Head from 'next/head'
 
 export default function Page() {
   return (
+    <>
     <div className="inner_page bg-secondary">
       <Head>
         <title>
@@ -40,5 +42,7 @@ export default function Page() {
       <h2>Contact Us</h2>
       <iframe src="https://forms.zohopublic.in/vijendersingh/form/BNNGPT/formperma/BHAVU_QZ00PzHO8Wfnx5gYJ_pZIRndsBaHZxTkN679w"></iframe>
     </div>
+    <Footer/>
+    </>
   )
 }

@@ -1,12 +1,18 @@
+'use client'
 import React from 'react'
 import Link from 'next/link'
 import { SiInstagram, SiLinkedin, SiFacebook, SiX } from 'react-icons/si'
-import { Button } from './ui/button'
+import { Button } from '@/components/ui/button'
+import { useUIState } from 'ai/rsc'
+import { AI } from '@/app/actions'
 
-const Footer: React.FC = () => {
+const FooterAI: React.FC = () => {
+  const [messages, setMessages] = useUIState<typeof AI>()
   return (
     <footer
-      className={`w-full  flex fixed -bottom-6 right-3  flex-col lg:flex-row lg:justify-between  p-4 z-50 bg-secondary text-primary border-0top border-gray-600 items-center`}
+      className={`${
+        messages.length > 0 ? 'hidden' : ''
+      }  w-full  flex fixed bottom-0 right-3  flex-col lg:flex-row lg:justify-between  p-4 z-50 bg-secondary text-primary border-0top border-gray-600 items-center`}
     >
       <div className="menu_header  text-center ml-5 mb-4">
         <ul className="flex  justify-center md:space-x-6 m-0 p-0">
@@ -81,4 +87,4 @@ const Footer: React.FC = () => {
   )
 }
 
-export default Footer
+export default FooterAI
