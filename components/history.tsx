@@ -15,7 +15,6 @@ import { auth } from '@/auth'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
-
 type HistoryProps = {
   location: 'sidebar' | 'header'
 }
@@ -50,11 +49,11 @@ export async function History({ location }: HistoryProps) {
             </Suspense>
           ) : (
             <div className="flex h-full items-center flex-col space-y-2 justify-center">
-              <p className='text-sm animate-pulse'>Authenticate to save your chat history..</p>
+              <p className="text-sm animate-pulse">
+                Authenticate to save your chat history..
+              </p>
               <Link href="/login">
-                <Button variant="outline" >
-                  Login
-                </Button>
+                <Button variant="outline">Login</Button>
               </Link>
             </div>
           )}

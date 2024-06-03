@@ -1,0 +1,173 @@
+'use server'
+
+import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
+import { type Chat } from '@/lib/types'
+import { Redis } from '@upstash/redis'
+import { auth } from '@/auth'
+
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL || '',
+  token: process.env.UPSTASH_REDIS_REST_TOKEN || ''
+})
+
+export async function getChats(userId: string) {
+  if (!userId) {
+    return [];
+  }
+
+  const cacheKey = `user:chats:${userId}`;
+  const cachedChats = await getCache(cacheKey);
+
+  if (cachedChats) {
+    return cachedChats;
+  }
+
+  try {
+    const pipeline = redis.pipeline();
+    const chats:string[] = await redis.zrange(`user:chat:${userId}`, 0, -1, { rev: true });
+
+    for (const chat of chats) {
+      pipeline.hgetall(chat);
+    }
+
+    const results = await pipeline.exec();
+    const chatsData = results as Chat[];
+
+    // Set cache
+    await setCache(cacheKey, chatsData);
+
+    return chatsData;
+  } catch (error) {
+    return [];
+  }
+}
+
+export async function getChat(id: string) {
+  const cacheKey = `chat:${id}`;
+  const cachedChat = await getCache(cacheKey);
+
+  if (cachedChat) {
+    return cachedChat;
+  }
+
+  const chat = await redis.hgetall<Chat>(`chat:${id}`);
+
+  if (!chat) {
+    return null;
+  }
+
+  // Set cache
+  await setCache(cacheKey, chat);
+
+  return chat;
+}
+
+export async function clearChats() {
+  const session = await auth();
+  const userId = session?.user?.id || 'anonymous';
+  const chats = await redis.zrange(`user:chat:${userId}`, 0, -1);
+
+  if (!chats.length) {
+    return { error: 'No chats to clear' };
+  }
+
+  const pipeline = redis.pipeline();
+
+  for (const chat of chats) {
+    pipeline.del(chat as string);
+    pipeline.zrem(`user:chat:${userId}`, chat as string);
+    // Invalidate cache for each chat
+    await invalidateCache(`chat:${chat}`);
+  }
+
+  await pipeline.exec();
+
+  // Invalidate user chats cache
+  await invalidateCache(`user:chats:${userId}`);
+
+  revalidatePath('/');
+  redirect('/');
+}
+
+export async function saveChat(chat: Chat) {
+  const pipeline = redis.pipeline();
+  pipeline.hmset(`chat:${chat.id}`, chat);
+  pipeline.zadd(`user:chat:${chat.userId}`, {
+    score: Date.now(),
+    member: `chat:${chat.id}`
+  });
+  await pipeline.exec();
+
+  // Invalidate caches
+  await invalidateCache(`chat:${chat.id}`);
+  await invalidateCache(`user:chats:${chat.userId}`);
+}
+
+export async function getSharedChat(id: string) {
+  const cacheKey = `sharedChat:${id}`;
+  const cachedChat = await getCache(cacheKey);
+
+  if (cachedChat) {
+    return cachedChat;
+  }
+
+  const chat = await redis.hgetall<Chat>(`chat:${id}`);
+
+  if (!chat || !chat.sharePath) {
+    return null;
+  }
+
+  // Set cache
+  await setCache(cacheKey, chat);
+
+  return chat;
+}
+
+export async function shareChat(id: string) {
+  const session = await auth();
+  const userId = session?.user?.id || 'anonymous';
+  const chat = await redis.hgetall<Chat>(`chat:${id}`);
+
+  if (!chat || chat.userId !== userId) {
+    return null;
+  }
+
+  const payload = {
+    ...chat,
+    sharePath: `/share/${id}`
+  };
+
+  await redis.hmset(`chat:${id}`, payload);
+
+  // Invalidate cache
+  await invalidateCache(`chat:${id}`);
+
+  return payload;
+}
+
+async function getCache(key: string) {
+  try {
+    const cachedData = await redis.get(key)
+    return cachedData ? JSON.parse(cachedData as string) : null
+  } catch (error) {
+    console.error('Error getting cache:', error)
+    return null
+  }
+}
+
+async function setCache(key: string, value: any, ttl: number = 60) {
+  try {
+    await redis.set(key, JSON.stringify(value), { ex: ttl })
+  } catch (error) {
+    console.error('Error setting cache:', error)
+  }
+}
+
+async function invalidateCache(key: string) {
+  try {
+    await redis.del(key)
+  } catch (error) {
+    console.error('Error invalidating cache:', error)
+  }
+}

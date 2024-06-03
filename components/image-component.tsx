@@ -15,22 +15,20 @@ const ImageComponent = () => {
     ? '/images/logo-white.png'
     : '/images/logo-black.png'
   return (
-
     <div className="pl-2 pt-2">
       <a href="/">
-      <NoSsr>
-        <Image
-          src={conditionForTheme}
-          className={cn('w-24 h-11')}
-          alt="Logo"
-          width={96}
-          height={55}
-        />
-          </NoSsr>
+        <NoSsr>
+          <Image
+            src={conditionForTheme}
+            className={cn('w-24 h-11')}
+            alt="Logo"
+            width={96}
+            height={55}
+          />
+        </NoSsr>
         <span className="sr-only">BNNGPT</span>
       </a>
     </div>
-  
   )
 }
 

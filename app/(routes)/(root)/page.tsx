@@ -1,7 +1,6 @@
 import { Chat } from '@/components/chat'
 import { nanoid } from 'ai'
 import { AI } from '../../actions'
-import Footer from '@/components/footer'
 import FooterAI from '@/components/ui/footerAi'
 
 export const maxDuration = 60

@@ -78,7 +78,6 @@ async function submit(
     : formData?.has('related_query')
     ? 'input_related'
     : 'inquiry'
-  console.log('type', type)
 
   // Add the user message to the state
   if (content) {
