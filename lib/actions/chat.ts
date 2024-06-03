@@ -3,19 +3,13 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { type Chat } from '@/lib/types'
-import { Redis } from '@upstash/redis'
+import { redis } from '../utils/redis'
 import { auth } from '@/auth'
-
-const redis = new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL || '',
-  token: process.env.UPSTASH_REDIS_REST_TOKEN || ''
-})
 
 export async function getChats(userId?: string | null) {
   if (!userId) {
     return []
   }
-
   try {
     const pipeline = redis.pipeline()
     const chats: string[] = await redis.zrange(`user:chat:${userId}`, 0, -1, {
