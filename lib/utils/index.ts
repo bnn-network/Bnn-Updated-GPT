@@ -14,14 +14,14 @@ export function cn(...inputs: ClassValue[]) {
 //   })
 //   return openai(process.env.OPENAI_API_MODEL || 'gpt-4o')
 // }
-// export function groq8bModel() {
-//   const groq = createOpenAI({
-//     baseURL: 'https://api.groq.com/openai/v1',
-//     apiKey: process.env.GROQ_API_KEY
-//   })
+export function groq8bModel() {
+  const groq = createOpenAI({
+    baseURL: 'https://api.groq.com/openai/v1',
+    apiKey: process.env.GROQ_API_KEY
+  })
 
-//   return groq('llama3-8b-8192')
-// }
+  return groq('llama3-8b-8192')
+}
 // export function gptturboModel() {
 //   const openai = createOpenAI({
 //     baseUrl: process.env.OPENAI_API_BASE,
