@@ -59,15 +59,13 @@ export async function clearChats() {
 }
 
 export async function saveChat(chat: Chat) {
-  const session = await auth()
-  const userId = session?.user?.id || 'anonymous'
-
+  // const session = await auth()
+  // const userId = session?.user?.id || 'anonymous'
   const pipeline = redis.pipeline()
-
   pipeline.hmset(`chat:${chat.id}`, chat)
-  if (userId == 'anonymous') {
-    pipeline.expire(`chat:${chat.id}`, 60 * 60)
-  }
+  // if (userId == 'anonymous') {
+  //   pipeline.expire(`chat:${chat.id}`, 60 * 60)
+  // }
   pipeline.zadd(`user:chat:${chat.userId}`, {
     score: Date.now(),
     member: `chat:${chat.id}`

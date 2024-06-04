@@ -403,7 +403,6 @@ export const getUIStateFromAIState = async (aiState: Chat) => {
               return {
                 id,
                 component: (
-                  //@ts-ignore
                   <Section title="Related" separator={true}>
                     <SearchRelated relatedQueries={relatedQueries.value} />
                   </Section>
