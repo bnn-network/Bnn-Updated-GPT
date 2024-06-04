@@ -21,6 +21,7 @@ import { SearchSection } from '@/components/search-section'
 import SearchRelated from '@/components/search-related'
 import { CopilotDisplay } from '@/components/copilot-display'
 import RetrieveSection from '@/components/retrieve-section'
+import { VideoSearchSection } from '@/components/video-search-section'
 import { auth } from '@/auth'
 
 export const maxDuration = 300

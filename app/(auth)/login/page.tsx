@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import {
   CardTitle,
   CardDescription,
@@ -9,34 +9,53 @@ import {
 import { Button } from '@/components/ui/button'
 import GithubOauthLogin from '@/actions/github'
 import GoogleOauthLogin from '@/actions/google'
+import { FacebookIcon } from 'lucide-react'
+import FacebookOauthLogin from '@/actions/facebook'
 // import { FacebookIcon } from 'lucide-react'
 
 export default function Component() {
   return (
     <>
-    <Card className="w-full max-w-sm bg-primary-foreground text-primary">
-      <CardHeader>
-        <CardTitle className="text-2xl">Login</CardTitle>
-        <CardDescription className="text-primary">
-          Choose an option to login to your account.
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="grid gap-4">
-        <Button onClick={async()=>{await GithubOauthLogin()}} className="w-full text-primary" variant="outline">
-          <GithubIcon className="mr-2 h-6 w-6 font-bold " />
-          Login with GitHub
-        </Button>
-        <Button onClick={async()=>{await GoogleOauthLogin()}} className="w-full text-primary" variant="outline">
-          <ChromeIcon className="mr-2 h-6 w-6 font-bold " />
-          Login with Google
-        </Button>
-        {/* <Button className="w-full text-primary" variant="outline">
-          <FacebookIcon className="mr-2 h-6 w-6 font-bold " />
-          Login with Facebook
-        </Button> */}
-      </CardContent>
-    </Card>
-   
+      <Card className="w-full max-w-sm bg-primary-foreground text-primary">
+        <CardHeader>
+          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardDescription className="text-primary">
+            Choose an option to login to your account.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="grid gap-4">
+          <Button
+            onClick={async () => {
+              await GithubOauthLogin()
+            }}
+            className="w-full text-primary"
+            variant="outline"
+          >
+            <GithubIcon className="mr-2 h-6 w-6 font-bold " />
+            Login with GitHub
+          </Button>
+          <Button
+            onClick={async () => {
+              await GoogleOauthLogin()
+            }}
+            className="w-full text-primary"
+            variant="outline"
+          >
+            <ChromeIcon className="mr-2 h-6 w-6 font-bold " />
+            Login with Google
+          </Button>
+          <Button
+            onClick={async () => {
+              await FacebookOauthLogin()
+            }}
+            className="w-full text-primary"
+            variant="outline"
+          >
+            <FacebookIcon className="mr-2 h-6 w-6 font-bold " />
+            Login with Facebook
+          </Button>
+        </CardContent>
+      </Card>
     </>
   )
 }
