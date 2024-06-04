@@ -8,5 +8,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     logo: '/images/logo-dark.png'
   },
   providers: [Google, Github],
-  adapter: PrismaAdapter(prisma)
+  adapter: PrismaAdapter(prisma),
+  callbacks: {
+    session({ session, user }) {
+      session.user.id = user.id
+      return session
+    }
+  }
 })
