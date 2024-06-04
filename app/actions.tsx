@@ -6,7 +6,7 @@ import {
   getAIState,
   getMutableAIState
 } from 'ai/rsc'
-import { CoreMessage, nanoid, ToolResultPart } from 'ai'
+import { CoreMessage, DeepPartial, nanoid, ToolResultPart } from 'ai'
 import { Spinner } from '@/components/ui/spinner'
 import { Section } from '@/components/section'
 import { FollowupPanel } from '@/components/followup-panel'
@@ -23,6 +23,7 @@ import { CopilotDisplay } from '@/components/copilot-display'
 import RetrieveSection from '@/components/retrieve-section'
 import { VideoSearchSection } from '@/components/video-search-section'
 import { auth } from '@/auth'
+import { PartialRelated } from '@/lib/schema/related'
 
 export const maxDuration = 300
 
@@ -352,7 +353,6 @@ export const getUIStateFromAIState = async (aiState: Chat) => {
   return aiState.messages
     .map((message, index) => {
       const { role, content, id, type, name } = message
-
       if (
         !type ||
         type === 'end' ||
@@ -397,7 +397,7 @@ export const getUIStateFromAIState = async (aiState: Chat) => {
                 )
               }
             case 'related':
-              const relatedQueries = createStreamableValue()
+              const relatedQueries = createStreamableValue() 
               relatedQueries.done(JSON.parse(content))
               return {
                 id,
