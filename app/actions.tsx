@@ -404,7 +404,13 @@ export const getUIStateFromAIState = async (aiState: Chat) => {
                 id,
                 component: (
                   <Section title="Related" separator={true}>
-                    <SearchRelated relatedQueries={relatedQueries.value} />
+                    <SearchRelated
+                      relatedQueries={
+                        relatedQueries.value as Partial<{
+                          items: { query: string }[]
+                        }>
+                      }
+                    />
                   </Section>
                 )
               }

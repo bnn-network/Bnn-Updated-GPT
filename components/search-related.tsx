@@ -15,7 +15,7 @@ import { PartialRelated } from '@/lib/schema/related'
 import useModel from '@/store/useModel'
 
 export interface SearchRelatedProps {
-  relatedQueries: PartialRelated
+  relatedQueries: PartialRelated 
 }
 
 export const SearchRelated: React.FC<SearchRelatedProps> = ({
