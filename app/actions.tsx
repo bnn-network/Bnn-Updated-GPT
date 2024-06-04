@@ -403,10 +403,9 @@ export const getUIStateFromAIState = async (aiState: Chat) => {
               return {
                 id,
                 component: (
+                  //@ts-ignore
                   <Section title="Related" separator={true}>
-                    <SearchRelated
-                      relatedQueries={relatedQueries.value}
-                    />
+                    <SearchRelated relatedQueries={relatedQueries.value} />
                   </Section>
                 )
               }
@@ -428,11 +427,10 @@ export const getUIStateFromAIState = async (aiState: Chat) => {
             const searchResults = createStreamableValue()
             searchResults.done(JSON.stringify(toolOutput))
             switch (name) {
-              
               case 'search':
                 return {
                   id,
-                  //@ts-ignore
+
                   component: <SearchSection result={searchResults.value} />,
                   isCollapsed: isCollapsed.value
                 }
