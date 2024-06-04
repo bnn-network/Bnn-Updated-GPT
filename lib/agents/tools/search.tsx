@@ -4,9 +4,9 @@ import { searchSchema } from '@/lib/schema/search'
 import { Card } from '@/components/ui/card'
 import { SearchSection } from '@/components/search-section'
 import { ToolProps } from '.'
-import { redis } from '@/lib/utils/redis'
-import { Ratelimit } from '@upstash/ratelimit'
-import { headers } from 'next/headers'
+// import { redis } from '@/lib/utils/redis'
+// import { Ratelimit } from '@upstash/ratelimit'
+// import { headers } from 'next/headers'
 
 // const rateLimit = new Ratelimit({
 //   redis,

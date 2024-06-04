@@ -10,8 +10,8 @@ import { BotMessage } from '@/components/message'
 import { getTools } from './tools'
 import { openAIInstance } from '../utils'
 import { Ratelimit } from '@upstash/ratelimit'
-import { redis } from '../utils/redis'
-import { headers } from 'next/headers'
+// import { redis } from '../utils/redis'
+// import { headers } from 'next/headers'
 
 // const ratelimit = new Ratelimit({
 //   redis,
