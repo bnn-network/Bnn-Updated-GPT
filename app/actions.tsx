@@ -360,7 +360,6 @@ export const getUIStateFromAIState = async (aiState: Chat) => {
         (isSharePage && type === 'followup')
       )
         return null
-
       switch (role) {
         case 'user':
           switch (type) {
@@ -429,7 +428,6 @@ export const getUIStateFromAIState = async (aiState: Chat) => {
               case 'search':
                 return {
                   id,
-
                   component: <SearchSection result={searchResults.value} />,
                   isCollapsed: isCollapsed.value
                 }
