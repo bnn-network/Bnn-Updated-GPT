@@ -44,7 +44,7 @@ export default function Component() {
             <ChromeIcon className="mr-2 h-6 w-6 font-bold " />
             Login with Google
           </Button>
-          <Button
+          {/* <Button
             onClick={async () => {
               await FacebookOauthLogin()
             }}
@@ -53,7 +53,7 @@ export default function Component() {
           >
             <FacebookIcon className="mr-2 h-6 w-6 font-bold " />
             Login with Facebook
-          </Button>
+          </Button> */}
         </CardContent>
       </Card>
     </>
