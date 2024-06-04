@@ -8,5 +8,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     logo: '/images/logo-dark.png'
   },
   providers: [Google, Github],
-  adapter: PrismaAdapter(prisma) 
+  adapter: PrismaAdapter(prisma)
 })
