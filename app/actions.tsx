@@ -428,9 +428,11 @@ export const getUIStateFromAIState = async (aiState: Chat) => {
             const searchResults = createStreamableValue()
             searchResults.done(JSON.stringify(toolOutput))
             switch (name) {
+              
               case 'search':
                 return {
                   id,
+                  //@ts-ignore
                   component: <SearchSection result={searchResults.value} />,
                   isCollapsed: isCollapsed.value
                 }
