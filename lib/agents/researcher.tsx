@@ -9,7 +9,15 @@ import { Section } from '@/components/section'
 import { BotMessage } from '@/components/message'
 import { getTools } from './tools'
 import { openAIInstance } from '../utils'
+import { Ratelimit } from '@upstash/ratelimit'
+import { redis } from '@/lib/utils/redis'
+import { headers } from 'next/headers'
 
+const ratelimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(10, '300s'),
+  prefix: 'researcher-search'
+})
 
 export async function researcher(
   uiStream: ReturnType<typeof createStreamableUI>,
@@ -18,9 +26,6 @@ export async function researcher(
   selectedModel: string,
   useSpecificModel?: boolean
 ) {
-
-  
-
   let fullResponse = ''
   let hasError = false
   const answerSection = (
@@ -28,8 +33,19 @@ export async function researcher(
       <BotMessage content={streamText.value} />
     </Section>
   )
-
-
+  const ip = headers().get('x-forwarded-for')
+  const { success } = await ratelimit.limit(ip!)
+  if (!success) {
+    streamText.update(
+      'You have reached the rate limit. Please try again later.'
+    )
+    return {
+      result: null,
+      fullResponse: 'Rate limit reached',
+      hasError: true,
+      toolResponses: []
+    }
+  }
   const currentDate = new Date().toLocaleString()
   const result = await nonexperimental_streamText({
     model: openAIInstance(selectedModel),
