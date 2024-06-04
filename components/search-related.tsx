@@ -7,7 +7,6 @@ import {
   useActions,
   useStreamableValue,
   useUIState,
-  readStreamableValue
 } from 'ai/rsc'
 import { AI } from '@/app/actions'
 import { UserMessage } from './user-message'
