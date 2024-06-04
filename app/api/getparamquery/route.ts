@@ -2,6 +2,8 @@ import { createOpenAI } from '@ai-sdk/openai'
 import { generateText } from 'ai'
 import { NextResponse } from 'next/server'
 
+export const maxDuration = 300
+
 export async function POST(req: Request) {
   const { path } = await req.json()
   const openai = createOpenAI({

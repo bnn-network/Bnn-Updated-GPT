@@ -24,6 +24,8 @@ import RetrieveSection from '@/components/retrieve-section'
 import { VideoSearchSection } from '@/components/video-search-section'
 import { auth } from '@/auth'
 
+export const maxDuration = 300
+
 async function submit(
   formData?: FormData,
   selectedModel?: string,

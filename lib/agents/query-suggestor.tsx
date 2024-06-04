@@ -5,6 +5,8 @@ import { Section } from '@/components/section'
 import SearchRelated from '@/components/search-related'
 import { openAIInstance } from '../utils'
 
+
+
 export async function querySuggestor(
   uiStream: ReturnType<typeof createStreamableUI>,
   messages: CoreMessage[],
