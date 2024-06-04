@@ -13,7 +13,7 @@ import { headers } from 'next/headers'
 //   limiter: Ratelimit.slidingWindow(10, '300s'),
 //   prefix: 'tavily-search'
 // })
-
+// const ip = headers().get('x-forwarded-for')
 export const searchTool = ({ uiStream, fullResponse }: ToolProps) => ({
   description: 'Search the web for information',
   parameters: searchSchema,
@@ -26,7 +26,6 @@ export const searchTool = ({ uiStream, fullResponse }: ToolProps) => ({
     max_results: number
     search_depth: 'basic' | 'advanced'
   }) => {
-    // const ip = headers().get('x-forwarded-for')
     // const { success } = await rateLimit.limit(ip!)
     // if (!success) {
     //   fullResponse += `\nRate limit exceeded. Please try again later.`

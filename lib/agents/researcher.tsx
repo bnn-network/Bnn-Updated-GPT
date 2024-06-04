@@ -9,16 +9,16 @@ import { Section } from '@/components/section'
 import { BotMessage } from '@/components/message'
 import { getTools } from './tools'
 import { openAIInstance } from '../utils'
-// import { Ratelimit } from '@upstash/ratelimit'
-// import { redis } from '../utils/redis'
-// import { headers } from 'next/headers'
+import { Ratelimit } from '@upstash/ratelimit'
+import { redis } from '../utils/redis'
+import { headers } from 'next/headers'
 
 // const ratelimit = new Ratelimit({
 //   redis,
 //   limiter: Ratelimit.slidingWindow(10, '300s'),
 //   prefix: 'researcher-search'
 // })
-
+// const ip = headers().get('x-forwarded-for')
 export async function researcher(
   uiStream: ReturnType<typeof createStreamableUI>,
   streamText: ReturnType<typeof createStreamableValue<string>>,
@@ -26,7 +26,7 @@ export async function researcher(
   selectedModel: string,
   useSpecificModel?: boolean
 ) {
-  // const ip = headers().get('x-forwarded-for')
+
   // const { success } = await ratelimit.limit(ip!)
 
   let fullResponse = ''

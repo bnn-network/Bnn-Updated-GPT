@@ -10,7 +10,6 @@ export async function querySuggestor(
   messages: CoreMessage[],
   selectedModel: string
 ) {
- 
   const objectStream = createStreamableValue<PartialRelated>()
   uiStream.append(
     <Section title="Related" separator={true}>
