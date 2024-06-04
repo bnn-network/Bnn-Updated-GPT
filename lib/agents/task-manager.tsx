@@ -7,9 +7,7 @@ export async function taskManager(
   messages: CoreMessage[],
   selectedModel: string
 ) {
-
   try {
-    
     const result = await generateObject({
       model: openAIInstance('gpt-4o'),
       system: `As a professional web researcher, your primary objective is to fully comprehend the user's query, conduct thorough web searches to gather the necessary information, and provide an appropriate response.

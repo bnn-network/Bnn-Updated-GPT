@@ -4,6 +4,15 @@ import { searchSchema } from '@/lib/schema/search'
 import { Card } from '@/components/ui/card'
 import { SearchSection } from '@/components/search-section'
 import { ToolProps } from '.'
+import { redis } from '@/lib/utils/redis'
+import { Ratelimit } from '@upstash/ratelimit'
+import { headers } from 'next/headers'
+
+const rateLimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(10, '300s'),
+  prefix: 'tavily-search'
+})
 
 export const searchTool = ({ uiStream, fullResponse }: ToolProps) => ({
   description: 'Search the web for information',
@@ -17,6 +26,17 @@ export const searchTool = ({ uiStream, fullResponse }: ToolProps) => ({
     max_results: number
     search_depth: 'basic' | 'advanced'
   }) => {
+    const ip = headers().get('x-forwarded-for')
+    const { success } = await rateLimit.limit(ip!)
+    if (!success) {
+      fullResponse += `\nRate limit exceeded. Please try again later.`
+      uiStream.update(
+        <Card className="p-4 mt-2 text-sm">
+          {`Rate limit exceeded. Please try again later.`}
+        </Card>
+      )
+      return
+    }
     let hasError = false
     // Append the search section
     const streamResults = createStreamableValue<string>()
