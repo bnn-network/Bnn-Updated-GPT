@@ -6,10 +6,10 @@ import { Button } from './ui/button'
 const Footer: React.FC = () => {
   return (
     <footer
-      className={`w-full  flex fixed -bottom-6 right-3  flex-col lg:flex-row lg:justify-between  p-4 z-50 bg-secondary text-primary border-0top border-gray-600 items-center`}
+      className={`w-full  flex fixed -bottom-6 right-3  flex-col lg:flex-row lg:justify-between  p-4  bg-secondary text-primary border-0 top border-gray-600 items-center`}
     >
       <div className="menu_header  text-center ml-5 mb-4">
-        <ul className="flex  justify-center md:space-x-6 m-0 p-0">
+        <ul className="flex  justify-center md:space-x-6 space-x-10 m-0 p-0">
           <li className="list-none inline-block px-4">
             <a
               href="/"
