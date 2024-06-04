@@ -1,7 +1,6 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { createOpenAI } from '@ai-sdk/openai'
-import Groq from 'groq-sdk'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -37,17 +36,17 @@ export function openAIInstance(selectedModel: string) {
   return openai(selectedModel)
 }
 
-export function groqInstance() {
-  const groq = new Groq({
-    apiKey: process.env.GROQ_API_KEY
-  })
-  return groq
-}
+// export function groqInstance() {
+//   const groq = new Groq({
+//     apiKey: process.env.GROQ_API_KEY
+//   })
+//   return groq
+// }
 
-export function groq7bModel(){
+export function groq7bModel() {
   const groq = createOpenAI({
-    baseURL:'https://api.groq.com/openai/v1',
-    apiKey:process.env.GROQ_API_KEY
+    baseURL: 'https://api.groq.com/openai/v1',
+    apiKey: process.env.GROQ_API_KEY
   })
   return groq('llama3-70b-8192')
 }

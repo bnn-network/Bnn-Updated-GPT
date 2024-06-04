@@ -9,15 +9,15 @@ import { Section } from '@/components/section'
 import { BotMessage } from '@/components/message'
 import { getTools } from './tools'
 import { openAIInstance } from '../utils'
-import { Ratelimit } from '@upstash/ratelimit'
-import { redis } from '../utils/redis'
-import { headers } from 'next/headers'
+// import { Ratelimit } from '@upstash/ratelimit'
+// import { redis } from '../utils/redis'
+// import { headers } from 'next/headers'
 
-const ratelimit = new Ratelimit({
-  redis,
-  limiter: Ratelimit.slidingWindow(10, '300s'),
-  prefix: 'researcher-search'
-})
+// const ratelimit = new Ratelimit({
+//   redis,
+//   limiter: Ratelimit.slidingWindow(10, '300s'),
+//   prefix: 'researcher-search'
+// })
 
 export async function researcher(
   uiStream: ReturnType<typeof createStreamableUI>,
@@ -26,8 +26,8 @@ export async function researcher(
   selectedModel: string,
   useSpecificModel?: boolean
 ) {
-  const ip = headers().get('x-forwarded-for')
-  const { success } = await ratelimit.limit(ip!)
+  // const ip = headers().get('x-forwarded-for')
+  // const { success } = await ratelimit.limit(ip!)
 
   let fullResponse = ''
   let hasError = false
@@ -36,11 +36,11 @@ export async function researcher(
       <BotMessage content={streamText.value} />
     </Section>
   )
-  if (!success) {
-    hasError = true
-    streamText.update('Rate limit exceeded. Please try again later.')
-    return { result: null, fullResponse, hasError, toolResponses: [] }
-  }
+  // if (!success) {
+  //   hasError = true
+  //   streamText.update('Rate limit exceeded. Please try again later.')
+  //   return { result: null, fullResponse, hasError, toolResponses: [] }
+  // }
 
   const currentDate = new Date().toLocaleString()
   const result = await nonexperimental_streamText({
