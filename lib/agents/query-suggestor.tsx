@@ -6,7 +6,7 @@ import SearchRelated from '@/components/search-related'
 import { openAIInstance } from '../utils'
 
 
-
+export const maxDuration = 60
 export async function querySuggestor(
   uiStream: ReturnType<typeof createStreamableUI>,
   messages: CoreMessage[],
