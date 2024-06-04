@@ -3,7 +3,7 @@ import { nanoid } from 'ai'
 import { AI } from '../../actions'
 import FooterAI from '@/components/ui/footerAi'
 
-export const maxDuration = 60
+export const maxDuration = 300
 
 export default async function Page() {
   const id = nanoid()
