@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import type { AI, UIState } from '@/app/actions'
 import { useUIState, useActions } from 'ai/rsc'
@@ -26,33 +26,36 @@ export function ChatPanel({ messages }: ChatPanelProps) {
   const [shouldSubmit, setShouldSubmit] = useState(false)
   const router = useRouter()
   const params = useSearchParams()
-  const {selectedModel} = useModel()
+  const { selectedModel } = useModel()
 
-  const handleSubmit = async (e?: React.FormEvent<HTMLFormElement>) => {
-    e?.preventDefault()
-    let formData
-    let responseMessage: any
-    // Add user message to UI state
-    setMessages(currentMessages => [
-      ...currentMessages,
-      {
-        id: nanoid(),
-        component: <UserMessage message={input} />
+  const handleSubmit = useCallback(
+    async (e?: React.FormEvent<HTMLFormElement>) => {
+      e?.preventDefault()
+      let formData
+      let responseMessage: any
+      // Add user message to UI state
+      setMessages(currentMessages => [
+        ...currentMessages,
+        {
+          id: nanoid(),
+          component: <UserMessage message={input} />
+        }
+      ])
+
+      // Submit and get response message
+      if (!e) {
+        responseMessage = await submit(null, selectedModel, false, input)
+      } else {
+        formData = new FormData(e?.currentTarget)
+        responseMessage = await submit(formData, selectedModel)
       }
-    ])
 
-    // Submit and get response message
-    if (!e) {
-      responseMessage = await submit(null,selectedModel, false, input)
-    } else {
-      formData = new FormData(e?.currentTarget)
-      responseMessage = await submit(formData,selectedModel)
-    }
+      setMessages(currentMessages => [...currentMessages, responseMessage])
+    },
+    [input, setMessages, submit, selectedModel]
+  )
 
-    setMessages(currentMessages => [...currentMessages, responseMessage])
-  }
   useEffect(() => {
-  
     if (params.get('prequery') !== null) {
       const input = params.get('prequery') as string
       setInput(input)
@@ -68,7 +71,7 @@ export function ChatPanel({ messages }: ChatPanelProps) {
       handleSubmit()
       setShouldSubmit(false)
     }
-  }, [shouldSubmit,handleSubmit])
+  }, [shouldSubmit, handleSubmit])
 
   useEffect(() => {
     inputRef.current?.focus()
