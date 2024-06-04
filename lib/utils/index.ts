@@ -44,10 +44,10 @@ export function groqInstance() {
   return groq
 }
 
-// export function groq7bModel(){
-//   const groq = createOpenAI({
-//     baseURL:'https://api.groq.com/openai/v1',
-//     apiKey:process.env.GROQ_API_KEY
-//   })
-//   return groq('llama3-7b-8192')
-// }
+export function groq7bModel(){
+  const groq = createOpenAI({
+    baseURL:'https://api.groq.com/openai/v1',
+    apiKey:process.env.GROQ_API_KEY
+  })
+  return groq('llama3-70b-8192')
+}
