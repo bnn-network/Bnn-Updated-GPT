@@ -63,7 +63,7 @@ export async function saveChat(chat: Chat) {
   pipeline.hmset(`chat:${chat.id}`, chat)
   pipeline.zadd(`user:chat:${chat.userId}`, {
     score: Date.now(),
-    member: `chat:${chat.id}`
+    member: `chat:${chat.id}`,
   })
   await pipeline.exec()
 }

@@ -9,6 +9,7 @@ import {
 import { Button } from '@/components/ui/button'
 import GithubOauthLogin from '@/actions/github'
 import GoogleOauthLogin from '@/actions/google'
+// import { FacebookIcon } from 'lucide-react'
 
 export default function Component() {
   return (
@@ -29,6 +30,10 @@ export default function Component() {
           <ChromeIcon className="mr-2 h-6 w-6 font-bold " />
           Login with Google
         </Button>
+        {/* <Button className="w-full text-primary" variant="outline">
+          <FacebookIcon className="mr-2 h-6 w-6 font-bold " />
+          Login with Facebook
+        </Button> */}
       </CardContent>
     </Card>
    
