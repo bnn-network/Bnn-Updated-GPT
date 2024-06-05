@@ -1,13 +1,13 @@
 import { createStreamableValue } from 'ai/rsc'
 import Exa from 'exa-js'
-import { searchSchema, searXNGsearchSchema } from '@/lib/schema/search'
+import { searchSchema } from '@/lib/schema/search'
 import { Card } from '@/components/ui/card'
 import { SearchSection } from '@/components/search-section'
 import { ToolProps } from '.'
 
 export const searchTool = ({ uiStream, fullResponse }: ToolProps) => ({
   description: 'Search the web for information',
-  parameters: searXNGsearchSchema,
+  parameters: searchSchema,
   execute: async ({
     query,
     max_results,
@@ -17,6 +17,7 @@ export const searchTool = ({ uiStream, fullResponse }: ToolProps) => ({
     max_results: number
     search_depth: 'basic' | 'advanced'
   }) => {
+ 
     let hasError = false
     // Append the search section
     const streamResults = createStreamableValue<string>()
@@ -26,12 +27,12 @@ export const searchTool = ({ uiStream, fullResponse }: ToolProps) => ({
     const filledQuery =
       query.length < 5 ? query + ' '.repeat(5 - query.length) : query
     let searchResult
-    const searchAPI: 'tavily' | 'searX' = 'searX'
+    const searchAPI: 'tavily' | 'exa' = 'tavily'
     try {
       searchResult =
-        searchAPI === 'searX'
-          ? await searXNG(filledQuery)
-          : await tavilySearch(filledQuery, max_results, search_depth)
+        searchAPI === 'tavily'
+          ? await tavilySearch(filledQuery, max_results, search_depth)
+          : await exaSearch(query)
     } catch (error) {
       console.error('Search API error:', error)
       hasError = true
@@ -52,23 +53,6 @@ export const searchTool = ({ uiStream, fullResponse }: ToolProps) => ({
     return searchResult
   }
 })
-
-async function searXNG(query: string) {
-  const response = await fetch('http://127.0.0.1:8000/search', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      input: query
-    })
-  })
-  if (!response.ok) {
-    throw new Error(`Error: ${response.status}`)
-  }
-  const data = await response.json()
-  return data
-}
 
 async function tavilySearch(
   query: string,

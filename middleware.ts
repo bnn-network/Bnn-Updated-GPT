@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
 
-  if (pathname.length === 6) {
+  if (pathname.length === 6 && pathname !== '/login') {
     const res = await fetch(
       `https://check.bnngpt.com/get_archived_title?url=https://tr.im/${pathname}`
     )
