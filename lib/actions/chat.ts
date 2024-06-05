@@ -65,9 +65,6 @@ export async function saveChat(chat: Chat) {
   const pipeline = redis.pipeline()
   
   pipeline.hmset(`chat:${chat.id}`, chat)
-  if(userId == 'anonymous') {
-    pipeline.expire(`chat:${chat.id}`, 60 * 60 * 24)
-  }
   pipeline.zadd(`user:chat:${chat.userId}`, {
     score: Date.now(),
     member: `chat:${chat.id}`

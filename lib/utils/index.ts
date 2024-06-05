@@ -43,6 +43,14 @@ export function openAIInstance(selectedModel: string) {
 //   return groq
 // }
 
+export function fireworks70bModel() {
+  const fireworks = createOpenAI({
+    apiKey: process.env.FIREWORKS_API_KEY,
+    baseURL: 'https://api.fireworks.ai/inference/v1'
+  })
+  return fireworks('accounts/fireworks/models/llama-v3-70b-instruct')
+}
+
 export function groq7bModel() {
   const groq = createOpenAI({
     baseURL: 'https://api.groq.com/openai/v1',

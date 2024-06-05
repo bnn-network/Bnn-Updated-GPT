@@ -8,7 +8,7 @@ import {
 import { Section } from '@/components/section'
 import { BotMessage } from '@/components/message'
 import { getTools } from './tools'
-import { openAIInstance } from '../utils'
+import { fireworks70bModel, openAIInstance } from '../utils'
 import { Ratelimit } from '@upstash/ratelimit'
 import { redis } from '@/lib/utils/redis'
 import { headers } from 'next/headers'
@@ -48,7 +48,7 @@ export async function researcher(
   }
   const currentDate = new Date().toLocaleString()
   const result = await nonexperimental_streamText({
-    model: openAIInstance(selectedModel),
+    model: openAIInstance('gpt-4o'),
     maxTokens: 2500,
     system: `As a professional search expert, you possess the ability to search for any information on the web.
     or any information on the web.
