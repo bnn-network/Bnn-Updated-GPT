@@ -1,8 +1,9 @@
 'use server'
 
-import { signIn } from "@/auth"
-export const runtime = 'nodejs'
+import { signIn } from '@/auth'
 
-export default async function GithubOauthLogin(){
-    await signIn('github',{redirect:true, redirectTo:'/'})
+
+
+export default async function GithubOauthLogin() {
+  await signIn('github', { redirect: true, redirectTo: '/' })
 }
