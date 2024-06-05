@@ -81,7 +81,8 @@ export async function researcher(
     7. Cite sources using the following format, placing the citations inline within the response text:
        - Citation format: [[number]](url)
        - Example: [[1]](https://en.wikipedia.org/wiki/Artificial_intelligence)
-       - Use consecutive numbers for each citation.
+       - Use consecutive numbers for each citation, starting from 1 and incrementing up to the total number of sources being used.
+       - If a piece of content is referenced by multiple sources, include all relevant citation markers, like this: [[1,3]](url1) [[1,3]](url3)
     8. Adapt the language and tone of your response to match the user's language and preferences:
        - Assess the user's level of expertise and adjust the complexity of the language accordingly.
        - Maintain a professional, objective tone while engaging the user and fostering a sense of dialogue.
