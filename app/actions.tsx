@@ -397,7 +397,7 @@ export const getUIStateFromAIState = async (aiState: Chat) => {
                 )
               }
             case 'related':
-              const relatedQueries = createStreamableValue() 
+              const relatedQueries = createStreamableValue()
               relatedQueries.done(JSON.parse(content))
               return {
                 id,

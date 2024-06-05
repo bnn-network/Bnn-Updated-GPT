@@ -27,7 +27,6 @@ export default async function SearchPage({ params }: SearchPageProps) {
   if (!chat) {
     redirect('/')
   }
-  
 
   if (chat?.userId !== userId) {
     notFound()

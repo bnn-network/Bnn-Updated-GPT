@@ -51,6 +51,14 @@ export function fireworks70bModel() {
   return fireworks('accounts/fireworks/models/llama-v3-70b-instruct')
 }
 
+export function deepinfra70bModel() {
+  const deepinfra = createOpenAI({
+    apiKey: process.env.DEEPINFRA_API_KEY,
+    baseURL: 'https://api.deepinfra.com/v1/openai'
+  })
+  return deepinfra('meta-llama/Meta-Llama-3-8B-Instruct')
+}
+
 export function groq7bModel() {
   const groq = createOpenAI({
     baseURL: 'https://api.groq.com/openai/v1',
