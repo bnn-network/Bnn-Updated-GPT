@@ -4,6 +4,19 @@ export type SearchResults = {
   query: string
 }
 
+export type searXNGSearchResults = {
+  response:[
+    {
+      title: string
+      url: string
+      content: string
+    }
+  ]
+  thumbnails: string[]
+  text: string
+
+}
+
 export type ExaSearchResults = {
   results: ExaSearchResultItem[]
 }

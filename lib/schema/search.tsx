@@ -15,3 +15,8 @@ export const searchSchema = z.object({
 })
 
 export type PartialInquiry = DeepPartial<typeof searchSchema>
+
+export const searXNGsearchSchema = z.object({
+  query: z.string().describe('The query to search for')
+})
+export type PartialSearXNGInquiry = DeepPartial<typeof searXNGsearchSchema>
