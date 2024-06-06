@@ -4,7 +4,7 @@ import { Section } from '@/components/section'
 import { BotMessage } from '@/components/message'
 import {
   deepinfra8bModel,
-  fireworksMistral8Model,
+  fireworksMistral8x22Model,
   groq7bModel,
   groq8bModel,
   openAIInstance
