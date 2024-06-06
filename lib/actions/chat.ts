@@ -3,7 +3,7 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { type Chat } from '@/lib/types'
 
-import { auth } from '@/auth'
+import { auth } from '@clerk/nextjs/server'
 import { redis } from '@/lib/utils/redis'
 
 export async function getChats(userId?: string | null) {
@@ -39,9 +39,9 @@ export async function getChat(id: string) {
 }
 
 export async function clearChats() {
-  const session = await auth()
-  const userId = session?.user?.id || 'anonymous'
-  const chats: string[] = await redis.zrange(`user:chat:${userId}`, 0, -1)
+  const { userId } = auth()
+  const user = userId ? userId : 'anonymous'
+  const chats: string[] = await redis.zrange(`user:chat:${user}`, 0, -1)
   if (!chats.length) {
     return { error: 'No chats to clear' }
   }
@@ -49,7 +49,7 @@ export async function clearChats() {
 
   for (const chat of chats) {
     pipeline.del(chat)
-    pipeline.zrem(`user:chat:${userId}`, chat)
+    pipeline.zrem(`user:chat:${user}`, chat)
   }
 
   await pipeline.exec()
@@ -59,11 +59,8 @@ export async function clearChats() {
 }
 
 export async function saveChat(chat: Chat) {
-  const session = await auth()
-  const userId = session?.user?.id || 'anonymous'
-
   const pipeline = redis.pipeline()
-  
+
   pipeline.hmset(`chat:${chat.id}`, chat)
   pipeline.zadd(`user:chat:${chat.userId}`, {
     score: Date.now(),
@@ -83,11 +80,11 @@ export async function getSharedChat(id: string) {
 }
 
 export async function shareChat(id: string) {
-  const session = await auth()
-  const userId = session?.user?.id || 'anonymous'
+  const { userId } = auth()
+  const user = userId ? userId : 'anonymous'
   const chat = await redis.hgetall<Chat>(`chat:${id}`)
 
-  if (!chat || chat.userId !== userId) {
+  if (!chat || chat.userId !== user) {
     return null
   }
 

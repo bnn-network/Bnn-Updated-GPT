@@ -11,7 +11,7 @@ import { History as HistoryIcon } from 'lucide-react'
 import { HistoryList } from './history-list'
 import { Suspense } from 'react'
 import { HistorySkeleton } from './history-skelton'
-import { auth } from '@/auth'
+import { auth } from '@clerk/nextjs/server'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
@@ -20,8 +20,8 @@ type HistoryProps = {
 }
 
 export async function History({ location }: HistoryProps) {
-  const session = await auth()
-  const userId = session?.user?.id || 'anonymous'
+  const { userId } = auth()
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -43,7 +43,7 @@ export async function History({ location }: HistoryProps) {
           </SheetTitle>
         </SheetHeader>
         <div className="my-2 h-full pb-12 md:pb-10">
-          {session?.user?.id ? (
+          {userId ? (
             <Suspense fallback={<HistorySkeleton />}>
               <HistoryList userId={userId} />
             </Suspense>

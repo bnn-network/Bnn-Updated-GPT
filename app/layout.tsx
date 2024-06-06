@@ -6,6 +6,7 @@ import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/sonner'
 import Script from 'next/script'
 import OgImage from './twitter-image.png'
+import { ClerkProvider } from '@clerk/nextjs'
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -59,6 +60,7 @@ export default function RootLayout({
 }>) {
   return (
     <>
+    <ClerkProvider>
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-NFW7H1G22S"
         strategy="afterInteractive"
@@ -102,6 +104,7 @@ export default function RootLayout({
           </ThemeProvider>
         </body>
       </html>
+      </ClerkProvider>
     </>
   )
 }

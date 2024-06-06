@@ -1,10 +1,10 @@
-import { auth } from '@/auth'
+import { auth } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
 import React from 'react'
 
 const AuthLayout = async ({ children }: { children: React.ReactNode }) => {
-  const session = await auth()
-  if (session?.user?.email) {
+  const { userId } = auth()
+  if (userId) {
     redirect('/')
   }
   return (

@@ -10,11 +10,12 @@ import {
 import { Button } from './ui/button'
 import { KeyRound, LogOut, User } from 'lucide-react'
 import Link from 'next/link'
-import { auth, signOut } from '@/auth'
+import { auth, currentUser } from '@clerk/nextjs/server'
+import { SignOutButton } from '@clerk/nextjs'
 
 const AuthButton = async () => {
-  const session = await auth()
-
+  const { userId } = auth()
+  const user = await currentUser()
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="z-10" asChild>
@@ -24,23 +25,19 @@ const AuthButton = async () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="mr-6 mb-2">
         <DropdownMenuLabel>
-          {session?.user?.email ? session.user.email : 'Authentication'}
+          {userId ? `Hi , ${user?.firstName}!` : 'Authentication'}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          {session?.user?.email ? (
-            <form
-              action={async () => {
-                'use server'
-                await signOut({ redirect: true, redirectTo: '/' })
-              }}
-              className="flex w-full px-1 items-center"
-            >
-              <LogOut className="w-4 h-4 mr-3" />
-              <button type="submit">Logout</button>
-            </form>
+          {userId ? (
+            <SignOutButton>
+              <div className="flex w-full px-1 items-center">
+                <LogOut className="w-4 h-4 mr-3" />
+                <button type="submit">Logout</button>
+              </div>
+            </SignOutButton>
           ) : (
-            <Link href={'/login'} className="flex w-full px-1 items-center ">
+            <Link href={'/sign-in'} className="flex w-full px-1 items-center ">
               <KeyRound className="w-4 h-4   mr-3" />
               <h2 className="">Login</h2>
             </Link>
