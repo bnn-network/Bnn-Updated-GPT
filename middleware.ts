@@ -2,12 +2,19 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
-
-  if (pathname.length === 6 && pathname !== '/login') {
+  if (pathname.length === 16) {
+    const segments = pathname.split('/').filter(segment => segment !== '')
+    const firstSegment = segments[0]
+    if (firstSegment.length !== 5) {
+      return NextResponse.redirect(process.env.NEXT_PUBLIC_BASE_URL as string)
+    }
     const res = await fetch(
-      `https://check.bnngpt.com/get_archived_title?url=https://tr.im/${pathname}`
+      `https://check.bnngpt.com/get_archived_title?url=https://tr.im/${firstSegment}`
     )
     const data = await res.json()
+    if (data.title === null || !data.title) {
+      return NextResponse.redirect(process.env.NEXT_PUBLIC_BASE_URL as string)
+    }
     const res2 = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/getparamquery`,
       {
@@ -24,7 +31,7 @@ export async function middleware(req: NextRequest) {
         `${process.env.NEXT_PUBLIC_BASE_URL}?prequery=${resText}`
       )
     }
-    return NextResponse.next()
+    return NextResponse.redirect(process.env.NEXT_PUBLIC_BASE_URL as string)
   }
 
   if (pathname.length === 10) {
