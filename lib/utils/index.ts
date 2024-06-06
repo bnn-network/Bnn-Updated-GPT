@@ -51,7 +51,23 @@ export function fireworks70bModel() {
   return fireworks('accounts/fireworks/models/llama-v3-70b-instruct')
 }
 
-export function deepinfra70bModel() {
+export function fireworksMistral8x22Model() {
+  const fireworks = createOpenAI({
+    apiKey: process.env.FIREWORKS_API_KEY,
+    baseURL: 'https://api.fireworks.ai/inference/v1'
+  })
+  return fireworks('accounts/fireworks/models/mixtral-8x22b-instruct')
+}
+
+export function fireworksMistral8x7bModel() {
+  const fireworks = createOpenAI({
+    apiKey: process.env.FIREWORKS_API_KEY,
+    baseURL: 'https://api.fireworks.ai/inference/v1'
+  })
+  return fireworks('accounts/fireworks/models/mixtral-8x7b-instruct')
+}
+
+export function deepinfra8bModel() {
   const deepinfra = createOpenAI({
     apiKey: process.env.DEEPINFRA_API_KEY,
     baseURL: 'https://api.deepinfra.com/v1/openai'

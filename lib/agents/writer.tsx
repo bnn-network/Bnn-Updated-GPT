@@ -2,7 +2,13 @@ import { createStreamableUI, createStreamableValue } from 'ai/rsc'
 import { CoreMessage, streamText as nonexperimental_streamText } from 'ai'
 import { Section } from '@/components/section'
 import { BotMessage } from '@/components/message'
-import { groq7bModel, groq8bModel, openAIInstance } from '../utils'
+import {
+  deepinfra8bModel,
+  fireworksMistral8Model,
+  groq7bModel,
+  groq8bModel,
+  openAIInstance
+} from '../utils'
 
 export async function writer(
   uiStream: ReturnType<typeof createStreamableUI>,
