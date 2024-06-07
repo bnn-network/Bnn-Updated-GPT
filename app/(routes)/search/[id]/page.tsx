@@ -20,7 +20,13 @@ export async function generateMetadata({ params }: SearchPageProps) {
 }
 
 export default async function SearchPage({ params }: SearchPageProps) {
-  const { userId = 'anonymous' } = auth()
+  let userId
+  const { userId: userid } = auth()
+  if (!userid) {
+    userId = 'anonymous'
+  } else {
+    userId = userid
+  }
   const chat = await getChat(params.id)
 
   if (!chat) {

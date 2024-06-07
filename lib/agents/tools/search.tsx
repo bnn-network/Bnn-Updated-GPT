@@ -33,6 +33,7 @@ export const searchTool = ({ uiStream, fullResponse }: ToolProps) => ({
         searchAPI === 'tavily'
           ? await tavilySearch(filledQuery, max_results, search_depth)
           : await exaSearch(query)
+          console.log(searchResult, "searchResult")
     } catch (error) {
       console.error('Search API error:', error)
       hasError = true
@@ -53,6 +54,8 @@ export const searchTool = ({ uiStream, fullResponse }: ToolProps) => ({
     return searchResult
   }
 })
+
+
 
 async function tavilySearch(
   query: string,
