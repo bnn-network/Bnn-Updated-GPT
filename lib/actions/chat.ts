@@ -2,7 +2,6 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { type Chat } from '@/lib/types'
-
 import { auth } from '@clerk/nextjs/server'
 import { redis } from '@/lib/utils/redis'
 

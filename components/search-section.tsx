@@ -25,7 +25,7 @@ export function SearchSection({ result }: SearchSectionProps) {
       {!pending && data ? (
         <>
           <Section size="sm" className="pt-2 pb-0">
-            <ToolBadge tool="search">{`${''}`}</ToolBadge>
+            <ToolBadge tool="search">{searchResults.input}</ToolBadge>
           </Section>
           {searchResults.thumbnails && searchResults.thumbnails.length > 0 && (
             <Section title="Images">

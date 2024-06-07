@@ -99,11 +99,11 @@ async function tavilySearch(
   return data
 }
 
-async function exaSearch(query: string, maxResults: number = 10): Promise<any> {
-  const apiKey = process.env.EXA_API_KEY
-  const exa = new Exa(apiKey)
-  return exa.searchAndContents(query, {
-    highlights: true,
-    numResults: maxResults
-  })
-}
+// async function exaSearch(query: string, maxResults: number = 10): Promise<any> {
+//   const apiKey = process.env.EXA_API_KEY
+//   const exa = new Exa(apiKey)
+//   return exa.searchAndContents(query, {
+//     highlights: true,
+//     numResults: maxResults
+//   })
+// }

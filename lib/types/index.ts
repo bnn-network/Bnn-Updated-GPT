@@ -13,7 +13,7 @@ export type searXNGSearchResults = {
     }
   ]
   thumbnails: string[]
-  text: string
+  input:string
 
 }
 
