@@ -54,7 +54,7 @@ export const searchTool = ({ uiStream, fullResponse }: ToolProps) => ({
 })
 
 async function searXNG(query: string) {
-  const response = await fetch('https://api.bnngpt.com/search', {
+  const response = await fetch('https://api.bnngpt.com/search/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
