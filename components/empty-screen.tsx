@@ -3,8 +3,8 @@ import { ArrowRight } from 'lucide-react'
 
 const exampleMessages = [
   {
-    heading: 'What causes inflation?',
-    message: 'What causes inflation?'
+    heading: "What's the latest in AI news?",
+    message: "What's the latest in AI news?"
   },
   {
     heading: 'What is the latest news in Gaza?',
@@ -15,8 +15,8 @@ const exampleMessages = [
     message: 'Can you recommend a Mr Beast video?'
   },
   {
-    heading: 'What is gpt-4o?',
-    message: 'What is gpt-4o?'
+    heading: "What's New to Stream This Weekend?",
+    message: "What's New to Stream This Weekend?"
   }
 ]
 
