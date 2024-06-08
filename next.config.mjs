@@ -2,6 +2,14 @@
 const nextConfig = {
     typescript:{
         ignoreBuildErrors: true
+    },
+    async rewrites() {
+        return [
+            {
+                source: '/sitemaps/:filename*',
+                destination: '/api/sitemaps/:filename*',
+            },
+        ];
     }
 };
 
