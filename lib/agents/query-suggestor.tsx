@@ -5,7 +5,6 @@ import { Section } from '@/components/section'
 import SearchRelated from '@/components/search-related'
 import { openAIInstance } from '../utils'
 
-
 export const maxDuration = 60
 export async function querySuggestor(
   uiStream: ReturnType<typeof createStreamableUI>,
@@ -46,6 +45,15 @@ export async function querySuggestor(
           finalRelatedQueries = obj
         }
       }
+    })
+    .catch(async error => {
+      console.error('Error in querySuggestor:', error)
+      const rescursiveResult: any = await querySuggestor(
+        uiStream,
+        messages,
+        selectedModel
+      )
+      return rescursiveResult
     })
     .finally(() => {
       objectStream.done()

@@ -6,7 +6,7 @@ import { openAIInstance } from '../utils'
 export async function taskManager(
   messages: CoreMessage[],
   selectedModel: string
-) {
+): Promise<any> {
   try {
     const result = await generateObject({
       model: openAIInstance('gpt-4o'),
@@ -25,7 +25,7 @@ export async function taskManager(
 
     return result
   } catch (error) {
-    console.error(error)
-    return null
+    const recursiveResult: any = await taskManager(messages, selectedModel)
+    return recursiveResult
   }
 }

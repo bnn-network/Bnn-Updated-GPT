@@ -1,6 +1,5 @@
 import { createStreamableValue } from 'ai/rsc'
-import Exa from 'exa-js'
-import { searchSchema, searXNGsearchSchema } from '@/lib/schema/search'
+import { searXNGsearchSchema } from '@/lib/schema/search'
 import { Card } from '@/components/ui/card'
 import { SearchSection } from '@/components/search-section'
 import { ToolProps } from '.'

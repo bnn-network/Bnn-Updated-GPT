@@ -128,6 +128,9 @@ export async function researcher(
   const toolCalls: ToolCallPart[] = []
   const toolResponses: ToolResultPart[] = []
   for await (const delta of result.fullStream) {
+    if(delta.type === 'text-delta'){
+      console.log(delta)
+    }
     switch (delta.type) {
       case 'text-delta':
         if (delta.textDelta) {

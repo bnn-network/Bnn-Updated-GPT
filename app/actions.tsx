@@ -72,7 +72,6 @@ async function submit(
     : directInput
     ? JSON.stringify({ input: directInput })
     : undefined
-  console.log('content', content)
   const type = skip
     ? undefined
     : formData?.has('input') || directInput
