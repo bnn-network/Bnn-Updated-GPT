@@ -67,7 +67,7 @@ export async function writer(
 
     Remember, your ultimate goal is to provide users with a clear, informative, and engaging response that directly addresses their question, leaves them with a deeper understanding of the topic, and offers a compelling and user-friendly experience. By combining well-structured content, effective UI/UX practices, and appropriate styling, you can create a world-class output that rivals the best in the industry.
   
-    Always answer in Markdown format. Links and images must follow the correct format:
+    Always answer in Markdown format. Links and thumbnails must follow the correct format:
     - Link format: [link text](url)
     - Image format: ![alt text](url)
   `,

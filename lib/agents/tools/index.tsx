@@ -6,6 +6,8 @@ import { videoSearchTool } from './video-search'
 export interface ToolProps {
   uiStream: ReturnType<typeof createStreamableUI>
   fullResponse: string
+  url?: string
+  query?: string
 }
 
 export const getTools = ({ uiStream, fullResponse }: ToolProps) => {

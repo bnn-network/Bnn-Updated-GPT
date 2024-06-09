@@ -22,6 +22,7 @@ export async function taskManager(
       messages,
       schema: nextActionSchema
     })
+    
 
     return result
   } catch (error) {

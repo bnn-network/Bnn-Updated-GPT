@@ -24,7 +24,7 @@ export const retrieveTool = ({ uiStream, fullResponse }: ToolProps) => ({
       })
       const json = await response.json()
       if (!json.data || json.data.length === 0) {
-        hasError = true
+        hasError = true     
       } else {
         results = {
           results: [

@@ -1,56 +1,53 @@
-import { createStreamableValue } from 'ai/rsc'
+import { createStreamableUI, createStreamableValue } from 'ai/rsc'
 import { searXNGsearchSchema } from '@/lib/schema/search'
 import { Card } from '@/components/ui/card'
 import { SearchSection } from '@/components/search-section'
-import { ToolProps } from '.'
+import { ToolProps } from '../tools'
 
-export const searchTool = ({ uiStream, fullResponse, }: ToolProps) => ({
-  description: 'Search the web for information',
-  parameters: searXNGsearchSchema,
-  execute: async ({
-    query,
-    max_results,
-    search_depth
-  }: {
-    query: string
-    max_results: number
-    search_depth: 'basic' | 'advanced'
-  }) => {
-    let hasError = false
-    // Append the search section
-    const streamResults = createStreamableValue<string>()
-    uiStream.append(<SearchSection result={streamResults.value} />)
+export const search2Tool = async (
+  query: string,
+  uiStream: ReturnType<typeof createStreamableUI>,
+  fullResponse: string,
+  max_results?: number,
+  search_depth?: 'basic' | 'advanced'
+) => {
+  let hasError = false
+  console.log('search2Tool', query)
+  // Append the search section
+  const streamResults = createStreamableValue<string>()
+  uiStream.update(null)
+  uiStream.append(<SearchSection result={streamResults.value} />)
 
-    // Tavily API requires a minimum of 5 characters in the query
-    const filledQuery =
-      query.length < 5 ? query + ' '.repeat(5 - query.length) : query
-    let searchResult
-    const searchAPI: 'tavily' | 'searX' = 'searX'
-    try {
-      searchResult =
-        searchAPI === 'searX'
-          ? await searXNG(filledQuery)
-          : await tavilySearch(filledQuery, max_results, search_depth)
-    } catch (error) {
-      console.error('Search API error:', error)
-      hasError = true
-    }
-
-    if (hasError) {
-      fullResponse += `\nAn error occurred while searching for "${query}.`
-      uiStream.update(
-        <Card className="p-4 mt-2 text-sm">
-          {`An error occurred while searching for "${query}".`}
-        </Card>
-      )
-      return searchResult
-    }
-
-    streamResults.done(JSON.stringify(searchResult))
-
+  let searchResult
+  const searchAPI: 'tavily' | 'searX' = 'searX'
+  try {
+    searchResult =
+      searchAPI === 'searX'
+        ? await searXNG(query)
+        : await tavilySearch(
+            query,
+            max_results ? max_results : 5,
+            search_depth ? search_depth : 'basic'
+          )
+  } catch (error) {
+    console.error('Search API error:', error)
+    hasError = true
+  }
+  if (hasError) {
+    fullResponse += `\nAn error occurred while searching for "${query}.`
+    uiStream.update(
+      <Card className="p-4 mt-2 text-sm">
+        {`An error occurred while searching for "${query}".`}
+      </Card>
+    )
     return searchResult
   }
-})
+  console.log('searchResult', searchResult)
+
+  streamResults.done(JSON.stringify(searchResult))
+
+  return searchResult
+}
 
 async function searXNG(query: string) {
   const response = await fetch('https://api.bnngpt.com/search/', {
