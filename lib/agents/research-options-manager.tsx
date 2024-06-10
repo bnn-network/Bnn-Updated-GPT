@@ -1,5 +1,4 @@
 import { CoreMessage, generateObject } from 'ai'
-import { nextActionSchema } from '../schema/next-action'
 import { openAIInstance } from '../utils'
 import { nextResearchSchema } from '../schema/next-research'
 
