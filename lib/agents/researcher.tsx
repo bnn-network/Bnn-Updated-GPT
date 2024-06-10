@@ -8,11 +8,10 @@ import {
 } from 'ai'
 import { Section } from '@/components/section'
 import { BotMessage } from '@/components/message'
-import { fireworks70bModel, openAIInstance } from '../utils'
+import { fireworks70bModel} from '../utils'
 import { Ratelimit } from '@upstash/ratelimit'
 import { redis } from '@/lib/utils/redis'
 import { headers } from 'next/headers'
-import { nextResearchSchema } from '../schema/next-research'
 import { retrieve2Tool } from './toolsfunction/retrievefunc'
 import { search2Tool } from './toolsfunction/searchfun'
 import { researchOptionsManager } from './research-options-manager'
@@ -188,9 +187,7 @@ export async function researcher(
          - Incorporate relevant images from ${
            searchToAnsweer.thumbnails
          } in markdown format to visually support your response:
-           - Select high-quality, informative images that directly relate to the topic.
-           - Properly attribute images to their sources and provide appropriate captions.
-           - Ensure images enhance the response without distracting from the main content.
+           - Ensure images comes lower down in the response section and take any 4 of them.
       
       5. Cite the correct sources from ${searchToAnsweer.response.map(
         (item: any) => item.url
@@ -220,7 +217,7 @@ export async function researcher(
            - Use bullet points or numbered lists to present information in a clear and scannable format.
            - Align text and images consistently to maintain a clean and organized appearance.
          - Visual Elements:
-           - Use appropriate styling to enhance the visual appeal and readability of the response:
+           - Use appropriate styling to enhance the visual appeal and readability of the response in markdown:
              - Format important text, key points, or actionable items in **bold** to draw the reader's attention.
              - Use *italics* for quotes, emphasis, or to highlight specific terms or phrases.
              - Break up long paragraphs into shorter, more manageable chunks to improve readability and visual appeal.

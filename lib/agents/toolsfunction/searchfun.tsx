@@ -1,8 +1,7 @@
 import { createStreamableUI, createStreamableValue } from 'ai/rsc'
-import { searXNGsearchSchema } from '@/lib/schema/search'
 import { Card } from '@/components/ui/card'
 import { SearchSection } from '@/components/search-section'
-import { ToolProps } from '../tools'
+
 
 export const search2Tool = async (
   query: string,
@@ -12,7 +11,6 @@ export const search2Tool = async (
   search_depth?: 'basic' | 'advanced'
 ) => {
   let hasError = false
-  console.log('search2Tool', query)
   // Append the search section
   const streamResults = createStreamableValue<string>()
   uiStream.update(null)
@@ -42,7 +40,6 @@ export const search2Tool = async (
     )
     return searchResult
   }
-  console.log('searchResult', searchResult)
 
   streamResults.done(JSON.stringify(searchResult))
 
