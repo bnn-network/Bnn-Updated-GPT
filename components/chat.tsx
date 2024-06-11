@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { ChatPanel } from './chat-panel'
 import { ChatMessages } from './chat-messages'
 import { useUIState, useAIState } from 'ai/rsc'
+import TrendingSearches from './TrendingSearches'
 
 type ChatProps = {
   id?: string

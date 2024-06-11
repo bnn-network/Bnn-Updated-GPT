@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
+import TrendingSearches from './TrendingSearches'
 
 const exampleMessages = [
   {
@@ -29,9 +30,10 @@ export function EmptyScreen({
 }) {
   return (
     <div className={`mx-auto w-full transition-all ${className}`}>
-      <div className=" p-2">
-        <div className="mt-4 flex flex-col items-start space-y-2 mb-4">
-          {exampleMessages.map((message, index) => (
+      <div className="pt-4">
+        <div className="mt-4  flex flex-col items-start space-y-2 mb-4">
+          <TrendingSearches />
+          {/* {exampleMessages.map((message, index) => (
             <Button
               key={index}
               variant="link"
@@ -44,7 +46,7 @@ export function EmptyScreen({
               <ArrowRight size={16} className="mr-2 text-muted-foreground" />
               {message.heading}
             </Button>
-          ))}
+          ))} */}
         </div>
       </div>
     </div>
