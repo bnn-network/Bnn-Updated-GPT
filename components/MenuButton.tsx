@@ -11,27 +11,28 @@ import { auth, currentUser } from '@clerk/nextjs/server'
 import { SignOutButton } from '@clerk/nextjs'
 import { Bars2Icon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
-import { SunIcon, UserIcon } from '@/assets/icons/icons'
+import { LogoutIcon, SunIcon, UserIcon } from '@/assets/icons/icons'
+import { useTheme } from 'next-themes'
+import { ModeToggle } from './mode-toggle'
 
 
 const MenuButton = async () => {
+
     const { userId } = auth()
     const user = await currentUser()
+
+
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger className="z-10" asChild>
-                <Button variant="ghost" className="z-10" size={'icon'}>
+                <Button variant="ghost" size={'icon'} className="z-10 w-8 h-8">
                     <Bars2Icon className='size-5' />
                 </Button>
             </DropdownMenuTrigger>
 
             <DropdownMenuContent className="mr-6 mb-2 border-none min-w-52">
-                <DropdownMenuItem>
-                    <div className="flex w-full px-1 items-center gap-2 text-sm text-accent-foreground">
-                        <Image src={SunIcon} alt='light mode' />
-                        <button>Switch theme</button>
-                    </div>
-                </DropdownMenuItem>
+                <ModeToggle />
 
                 <DropdownMenuSeparator />
 
@@ -39,8 +40,8 @@ const MenuButton = async () => {
                     {userId ? (
                         <SignOutButton>
                             <div className="flex w-full px-1 items-center gap-2 text-accent-foreground">
-                                <Image src={UserIcon} alt='user account' />
-                                <LogOut className="w-4 h-4 mr-3" />
+                                <Image src={LogoutIcon} alt='logout' />
+                                {/* <LogOut className="w-4 h-4 mr-3" /> */}
                                 <button type="submit">Logout</button>
                             </div>
                         </SignOutButton>

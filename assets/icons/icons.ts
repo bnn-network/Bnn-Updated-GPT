@@ -7,6 +7,7 @@ import GlobeIcon from './globe.svg';
 import MusicIcon from './music.svg';
 import TravelIcon from './travel.svg';
 import ChipIcon from './chip.svg';
+import LogoutIcon from './logout.svg';
 
 export {
     SunIcon,
@@ -17,5 +18,6 @@ export {
     GlobeIcon,
     MusicIcon,
     TravelIcon,
-    ChipIcon
+    ChipIcon,
+    LogoutIcon
 };
