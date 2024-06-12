@@ -63,8 +63,8 @@ export const Section: React.FC<SectionProps> = ({
         )}
       >
         {title && (
-          <h2 className="flex items-center text-lg leading-none py-2">
-            {icon}
+          <h2 className="flex items-center text-lg font-semibold text-muted-foreground leading-none py-4">
+            {/* {icon} */}
             {title}
           </h2>
         )}

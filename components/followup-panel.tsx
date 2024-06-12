@@ -13,7 +13,7 @@ export function FollowupPanel() {
   const [input, setInput] = useState('')
   const { submit } = useActions()
   const [, setMessages] = useUIState<typeof AI>()
-  const {selectedModel} = useModel()
+  const { selectedModel } = useModel()
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -25,7 +25,7 @@ export function FollowupPanel() {
       component: <UserMessage message={input} />
     }
 
-    const responseMessage = await submit(formData,selectedModel)
+    const responseMessage = await submit(formData, selectedModel)
     setMessages(currentMessages => [
       ...currentMessages,
       userMessage,
@@ -45,7 +45,7 @@ export function FollowupPanel() {
         name="input"
         placeholder="Ask a follow-up question..."
         value={input}
-        className="pr-14 h-12"
+        className="pr-14 h-12 bg-muted rounded-2xl"
         onChange={e => setInput(e.target.value)}
       />
       <Button
