@@ -90,6 +90,10 @@ export async function writer(
       - Citation format: [[number]](url)
       - Example: [[1]](https://en.wikipedia.org/wiki/Artificial_intelligence)
       - Multiple citations: [[1]](url1) [[3]](url3)
+
+    8. Add Images in the response:
+    - Include relevant images minimum 3 of them to visually support the response, enhance user engagement, and provide additional context or explanations in markdown format.
+    example: ![alt text](url)
  
     8. Additional Guidelines:
     - Provide a comprehensive and self-contained answer that eliminates the need to direct users to any external sources, including news sites, blogs, Wikipedia, or other websites, for more detailed information. Your response should be thorough and address the user's query effectively without suggesting they seek additional information elsewhere or follow live coverage on other platforms.
