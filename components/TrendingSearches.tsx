@@ -2,6 +2,7 @@ import React from 'react'
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
 import { ChipIcon, GlobeIcon, GraphIcon, HealthIcon, MusicIcon, TravelIcon } from '@/assets/icons/icons'
 import Image from 'next/image'
+import TrendingItem from './TrendingItem'
 
 
 const trendingTopics = [{
@@ -29,54 +30,19 @@ const trendingTopics = [{
 
 function TrendingSearches() {
     return (
-        <div className='flex gap-4 text-xs w-full'>
+        <div className='absolute flex gap-4 text-xs w-full'>
 
             <div className='w-full flex flex-col gap-4'>
                 {trendingTopics.slice(0, 3).map(topic => (
-                    <div key={topic.name} className='p-3 rounded-xl bg-muted'>
-                        {/* header */}
-                        <div className='flex items-center justify-between'>
-                            <div className='flex items-center gap-2'>
-                                <Image
-                                    src={topic.icon}
-                                    alt={topic.name}
-                                />
-                                <h2>
-                                    {topic.name}
-                                </h2>
-                            </div>
-                            <button>
-                                <ChevronDownIcon className='size-4 -rotate-90' />
-                            </button>
-                        </div>
-                    </div>
+                    <TrendingItem name={topic.name} icon={topic.icon} />
                 ))}
-
             </div>
 
 
             <div className='w-full flex flex-col gap-4'>
-
                 {trendingTopics.slice(3, 6).map(topic => (
-                    <div key={topic.name} className='p-3 rounded-xl bg-muted'>
-                        {/* header */}
-                        <div className='flex items-center justify-between'>
-                            <div className='flex items-center gap-2'>
-                                <Image
-                                    src={topic.icon}
-                                    alt={topic.name}
-                                />
-                                <h2>
-                                    {topic.name}
-                                </h2>
-                            </div>
-                            <button>
-                                <ChevronDownIcon className='size-4 -rotate-90' />
-                            </button>
-                        </div>
-                    </div>
+                    <TrendingItem name={topic.name} icon={topic.icon} />
                 ))}
-
             </div>
 
         </div>

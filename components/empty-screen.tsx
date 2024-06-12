@@ -31,7 +31,7 @@ export function EmptyScreen({
   return (
     <div className={`mx-auto w-full transition-all ${className}`}>
       <div className="pt-4">
-        <div className="mt-4  flex flex-col items-start space-y-2 mb-4">
+        <div className="mt-4 relative flex flex-col items-start space-y-2 mb-4">
           <TrendingSearches />
           {/* {exampleMessages.map((message, index) => (
             <Button
