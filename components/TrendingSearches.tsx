@@ -34,14 +34,14 @@ function TrendingSearches() {
 
             <div className='w-full flex flex-col gap-4'>
                 {trendingTopics.slice(0, 3).map(topic => (
-                    <TrendingItem name={topic.name} icon={topic.icon} />
+                    <TrendingItem key={topic.name} name={topic.name} icon={topic.icon} />
                 ))}
             </div>
 
 
             <div className='w-full flex flex-col gap-4'>
                 {trendingTopics.slice(3, 6).map(topic => (
-                    <TrendingItem name={topic.name} icon={topic.icon} />
+                    <TrendingItem key={topic.name} name={topic.name} icon={topic.icon} />
                 ))}
             </div>
 
