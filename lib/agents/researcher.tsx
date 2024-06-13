@@ -151,18 +151,18 @@ export async function researcher(
 
       Guidelines:
       1. Citations:
+      - Ensure that the text you are writing is properly attributed to the correct citation.
       - Cite your sources using the provided citation format, placing the citations inline within the response text.
       - Citation format: [[number]](url)
         - Example: [[1]](https://en.wikipedia.org/wiki/Artificial_intelligence)
-        - Multiple citations: [[1]](url1) [[3]](url3)
-      - Each citation used must correspond to the actual URL originated from the following list:
+      - Each citation must correspond to the actual URL originated from:
         ${searchToAnsweer.responses
           .map((res: any) => `- ${res.url}`)
           .join('\n')}
-      - Ensure that the text you are writing is properly attributed to the correct citation.
       - Use consecutive numbers for each unique citation, starting from 1 and incrementing up to the total number of sources being used.
       - If a piece of content is referenced by multiple sources, include all relevant citation markers.
-      - Use Markdown formatting to create an ordered list of references at the end of your response, with the article title, source name, and hyperlink for each citation used.
+        - Multiple citations: [[1]](url1) [[3]](url3)
+      - Use Markdown formatting to create a list of references, with article title, source, and hyperlink for each citation.
 
       2. Search Result Analysis and Synthesis: Prioritize recent, relevant, and credible sources to formulate your answer.
 
