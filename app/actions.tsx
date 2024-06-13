@@ -212,7 +212,7 @@ async function submit(
       // Generate related queries
       const relatedQueries = await querySuggestor(
         uiStream,
-        messages,
+        type === 'inquiry' ? messages : content,
         selectedModel ? selectedModel : 'gpt-4o'
       )
       // Add follow-up panel

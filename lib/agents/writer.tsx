@@ -26,7 +26,7 @@ export async function writer(
   uiStream.append(answerSection)
   const date = new Date().toLocaleString()
   await nonexperimental_streamText({
-    model: openAIInstance(selectedModel),
+    model: openAIInstance('gpt-4o'),
     maxTokens: 2500,
     system: `As an expert writer, your primary goal is to provide highly accurate, comprehensive, and insightful responses to user queries by utilizing advanced search techniques and leveraging extensive online information sources provided by the web search tool.
     When crafting your response, focus on the most essential aspects of the topic and deliver a concise initial answer of up to 400 words, or less if the subject allows.

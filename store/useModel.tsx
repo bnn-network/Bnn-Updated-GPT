@@ -6,7 +6,7 @@ interface ModelStore {
 }
 
 const useModel = create<ModelStore>(set => ({
-  selectedModel: 'gpt-4o',
+  selectedModel: 'gpt-3.5-turbo',
   setSelectedModel: model => set({ selectedModel: model })
 }))
 

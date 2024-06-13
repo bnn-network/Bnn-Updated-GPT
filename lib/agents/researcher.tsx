@@ -48,7 +48,7 @@ export async function researcher(
   }
   const currentDate = new Date().toLocaleString()
   const result = await nonexperimental_streamText({
-    model: openAIInstance(selectedModel),
+    model: openAIInstance('gpt-4o'),
     maxTokens: 2500,
     system: `As an advanced AI search assistant named BNNGPT, your primary goal is to provide users with highly accurate, comprehensive, and insightful responses to their queries by leveraging cutting-edge search techniques and vast online information sources.
 

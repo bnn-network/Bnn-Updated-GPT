@@ -66,7 +66,6 @@ async function searXNG(query: string) {
     throw new Error(`Error: ${response.status}`)
   }
   const data = await response.json()
-  console.log("Scrape data: ", data)
   return data
 }
 

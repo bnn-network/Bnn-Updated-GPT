@@ -8,7 +8,7 @@ import { openAIInstance } from '../utils'
 export const maxDuration = 60
 export async function querySuggestor(
   uiStream: ReturnType<typeof createStreamableUI>,
-  messages: CoreMessage[],
+  input: string | CoreMessage[] | undefined,
   selectedModel: string
 ) {
   const objectStream = createStreamableValue<PartialRelated>()
@@ -17,11 +17,17 @@ export async function querySuggestor(
       <SearchRelated relatedQueries={objectStream.value} />
     </Section>
   )
+  let messagesInput: CoreMessage[] = []
+  if (typeof input === 'string') {
+    messagesInput = [{ role: 'user', content: input }]
+  }
+
+  console.log(input, 'input')
 
   let finalRelatedQueries: PartialRelated = {}
   try {
     await streamObject({
-      model: openAIInstance('gpt-3.5-turbo'),
+      model: openAIInstance(selectedModel),
       system: `As a professional web researcher, your task is to generate a set of three queries that explore the subject matter more deeply, building upon the initial query and the information uncovered in its search results.
 
     For instance, if the original query was "Starship's third test flight key milestones", your output should follow this format:
@@ -36,7 +42,7 @@ export async function querySuggestor(
 
     Aim to create queries that progressively delve into more specific aspects, implications, or adjacent topics related to the initial query. The goal is to anticipate the user's potential information needs and guide them towards a more comprehensive understanding of the subject matter.
     Please match the language of the response to the user's language.`,
-      messages,
+      messages: typeof input === 'string' ? messagesInput : input,
       schema: relatedSchema
     })
       .then(async result => {
@@ -51,8 +57,8 @@ export async function querySuggestor(
         console.error('Error in querySuggestor:', error)
         const rescursiveResult: any = await querySuggestor(
           uiStream,
-          messages,
-          selectedModel
+          input,
+          'gpt-4o'
         )
         return rescursiveResult
       })
