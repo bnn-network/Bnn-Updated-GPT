@@ -151,18 +151,29 @@ export async function researcher(
 
       Guidelines:
       1. Citations:
-      - Ensure that the text you are writing is properly attributed to the correct citation.
-      - Cite your sources using the provided citation format, placing the citations inline within the response text.
-      - Citation format: [[number]](url)
-        - Example: [[1]](https://en.wikipedia.org/wiki/Artificial_intelligence)
-      - Each citation must correspond to the actual URL originated from:
+      - Ensure that the information you include in your response is properly attributed to the correct source.
+      - Cite your sources using the provided citation format, placing the citations inline within the response text immediately after the relevant information.
+      - Citation format: [[number]](url "Article Title")
+        - Example: [[1]](https://en.wikipedia.org/wiki/Artificial_intelligence "Artificial Intelligence")
+      - Each citation number must correspond to a unique article from which the information originated. The available articles for citation are:
         ${searchToAnsweer.responses
-          .map((res: any) => `- ${res.url}`)
+          .map((res: any) => `- ${res.title} (${res.url})`)
           .join('\n')}
-      - Use consecutive numbers for each unique citation, starting from 1 and incrementing up to the total number of sources being used.
-      - If a piece of content is referenced by multiple sources, include all relevant citation markers.
-        - Multiple citations: [[1]](url1) [[3]](url3)
-      - Use Markdown formatting to create a list of references, with article title, source, and hyperlink for each citation.
+      - If an article is cited multiple times throughout your response, use the same citation number for all instances of that article.
+      - Use consecutive numbers for each unique article, starting from 1 and incrementing up to the total number of unique articles being used.
+      - If a piece of information is supported by multiple articles, include all relevant citation markers directly after the information.
+        - Example of multiple citations: The sky is blue [[1]](url1 "Article Title 1") [[3]](url3 "Article Title 3").
+      - At the end of your response, use Markdown formatting to create a "References" section with a list of all unique articles used. Each reference should include the citation number, the article title, the author (if available), the publication date, and a hyperlink to the URL.
+        - Example of References section:
+          ## References
+          1. [Article Title 1](url1) - Author 1, Publication Date 1
+          2. [Article Title 2](url2) - Author 2, Publication Date 2
+          3. [Article Title 3](url3) - Author 3, Publication Date 3
+      - If you are unable to find a relevant citation for a piece of information, consider rephrasing or omitting that information to ensure all content is properly attributed.
+      - After completing your response, carefully review the citation markers and the References section to ensure that:
+        - Each unique article is listed only once in the References section.
+        - All citation markers in the response text correspond to the correct citation numbers in the References section.
+        - The article titles, authors, and publication dates are included in the correct format in the References section.
 
       2. Search Result Analysis and Synthesis: Prioritize recent, relevant, and credible sources to formulate your answer.
 
