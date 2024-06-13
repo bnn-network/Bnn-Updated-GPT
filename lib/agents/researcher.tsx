@@ -165,7 +165,7 @@ export async function researcher(
           .map((res: any) => `- ${res.url}`)
           .join('\n')}
       - Ensure that the text you are writing is properly attributed to the correct citation.
-      - Use consecutive numbers for each citation, starting from 1 and incrementing up to the total number of sources being used.
+      - Use consecutive numbers for each unique citation, starting from 1 and incrementing up to the total number of sources being used.
       - If a piece of content is referenced by multiple sources, include all relevant citation markers.
       - Use Markdown formatting to create an ordered list of references at the end of your response, with the article title, source name, and hyperlink for each citation used.
 
