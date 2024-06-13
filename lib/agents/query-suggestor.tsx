@@ -8,7 +8,6 @@ import { openAIInstance } from '../utils'
 export const maxDuration = 60
 export async function querySuggestor(
   uiStream: ReturnType<typeof createStreamableUI>,
-  messages: CoreMessage[],
   selectedModel: string,
   answer: string
 ) {
@@ -69,7 +68,6 @@ export async function querySuggestor(
         console.error('Error in querySuggestor:', error)
         const rescursiveResult: any = await querySuggestor(
           uiStream,
-          messages,
           'gpt-4o',
           answer
         )

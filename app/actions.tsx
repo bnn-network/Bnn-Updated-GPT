@@ -212,7 +212,6 @@ async function submit(
       // Generate related queries
       const relatedQueries = await querySuggestor(
         uiStream,
-        messages,
         selectedModel ? selectedModel : 'gpt-4o',
         answer
       )

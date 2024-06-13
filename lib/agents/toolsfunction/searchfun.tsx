@@ -15,7 +15,6 @@ export const search2Tool = async (
   const streamResults = createStreamableValue<string>()
   uiStream.update(null)
   uiStream.append(<SearchSection result={streamResults.value} />)
-
   let searchResult
   const searchAPI: 'tavily' | 'searX' = 'searX'
   try {
@@ -47,13 +46,13 @@ export const search2Tool = async (
 }
 
 async function searXNG(query: string) {
-  const response = await fetch('https://api.bnngpt.com/search/', {
+  const response = await fetch('http://54.95.57.249:9098/api/v1/scrape/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      input: query
+      query
     })
   })
   if (!response.ok) {
