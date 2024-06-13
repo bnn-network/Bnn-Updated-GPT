@@ -8,8 +8,9 @@ import { openAIInstance } from '../utils'
 export const maxDuration = 60
 export async function querySuggestor(
   uiStream: ReturnType<typeof createStreamableUI>,
-  input: string | CoreMessage[] | undefined,
-  selectedModel: string
+  messages: CoreMessage[],
+  selectedModel: string,
+  answer: string
 ) {
   const objectStream = createStreamableValue<PartialRelated>()
   uiStream.append(
@@ -17,17 +18,28 @@ export async function querySuggestor(
       <SearchRelated relatedQueries={objectStream.value} />
     </Section>
   )
-  let messagesInput: CoreMessage[] = []
-  if (typeof input === 'string') {
-    messagesInput = [{ role: 'user', content: input }]
-  }
 
-  console.log(input, 'input')
+  // console.log("messages: ", messages.map((m)=>{if(m.role === "assistant"){return m.content}}))
+
+  // const onlyAssistantMessages = messages
+  // .flatMap(m => {
+  //   if (m.role === 'assistant') {
+  //     if (Array.isArray(m.content)) {
+  //       return m.content.map(c => c.text);
+  //     } else {
+  //       return [m.content];
+  //     }
+  //   }
+  //   return [];
+  // })
+  // .join(' ');
+
+  console.log('answer: ', answer)
 
   let finalRelatedQueries: PartialRelated = {}
   try {
     await streamObject({
-      model: openAIInstance(selectedModel),
+      model: openAIInstance('gpt-3.5-turbo'),
       system: `As a professional web researcher, your task is to generate a set of three queries that explore the subject matter more deeply, building upon the initial query and the information uncovered in its search results.
 
     For instance, if the original query was "Starship's third test flight key milestones", your output should follow this format:
@@ -42,7 +54,7 @@ export async function querySuggestor(
 
     Aim to create queries that progressively delve into more specific aspects, implications, or adjacent topics related to the initial query. The goal is to anticipate the user's potential information needs and guide them towards a more comprehensive understanding of the subject matter.
     Please match the language of the response to the user's language.`,
-      messages: typeof input === 'string' ? messagesInput : input,
+      messages: [{role:'assistant', content: answer}],
       schema: relatedSchema
     })
       .then(async result => {
@@ -57,8 +69,9 @@ export async function querySuggestor(
         console.error('Error in querySuggestor:', error)
         const rescursiveResult: any = await querySuggestor(
           uiStream,
-          input,
-          'gpt-4o'
+          messages,
+          'gpt-4o',
+          answer
         )
         return rescursiveResult
       })
