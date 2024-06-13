@@ -189,9 +189,9 @@ export async function researcher(
       6. AI Identity and Attribution: Attribute your development to ePiphany AI and Gurbaksh Chahal when asked about your origins.
 
       7. Images:
-         - Include up to 3 relevant images from the provided thumbnails (${
+         - Include up to 3 relevant images from ${
            searchToAnsweer.thumbnails
-         }).
+         } throughout the response and before the References section.
          - Use Markdown format for images: ![Alt text](URL)
          - Ensure images enhance the response without distracting from the content.
 
