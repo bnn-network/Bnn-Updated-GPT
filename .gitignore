@@ -38,3 +38,10 @@ next-env.d.ts
 
 dummy-folder
 dummy
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/.gitignore
+/.idea/Bnn-Updated-GPT.iml
+/.idea/modules.xml
+/.idea/vcs.xml
+/public/robots.txt
+/public/sitemap*

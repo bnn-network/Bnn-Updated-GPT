@@ -36,7 +36,7 @@ export function SearchSection({ result }: SearchSectionProps) {
             </Section>
           )}
           <Section title="Sources">
-            <SearchResults results={searchResults.responses} />
+            <SearchResults results={searchResults.results || searchResults.responses} />
           </Section>
         </>
       ) : (
