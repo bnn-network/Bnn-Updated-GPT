@@ -3,10 +3,6 @@ import { ArrowRight } from 'lucide-react'
 
 const exampleMessages = [
   {
-    heading: "What's the latest news in AI?",
-    message: "What's the latest news in AI?"
-  },
-  {
     heading: "What's the latest news in Gaza?",
     message: "What's the latest news in Gaza?"
   },
@@ -15,12 +11,20 @@ const exampleMessages = [
     message: 'Why is NVIDIA experiencing rapid growth?'
   },
   {
+    heading: "What's the latest news in AI?",
+    message: "What's the latest news in AI?"
+  },
+  {
     heading: "What's New to Stream This Weekend?",
     message: "What's New to Stream This Weekend?"
   },
   {
     heading: 'Does Ozempic Work or is it a fad?',
     message: 'Does Ozempic Work or is it a fad?'
+  },
+  {
+    heading: 'Latest Celebrity News and Gossip',
+    message: 'Latest Celebrity News and Gossip'
   }
 ]
 
