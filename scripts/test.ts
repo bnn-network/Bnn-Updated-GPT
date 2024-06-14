@@ -1,49 +1,34 @@
+import { ChatFireworks } from '@langchain/community/chat_models/fireworks'
 import { z } from 'zod'
-import { OpenAI } from '@langchain/openai'
 import { RunnableSequence } from '@langchain/core/runnables'
-import { StructuredOutputParser } from 'langchain/output_parsers'
-import { ChatPromptTemplate, HumanMessagePromptTemplate, PromptTemplate, SystemMessagePromptTemplate } from '@langchain/core/prompts'
+import { StructuredOutputParser } from '@langchain/core/output_parsers'
+import { ChatPromptTemplate } from '@langchain/core/prompts'
 import dotenv from 'dotenv'
-import { CoreMessage } from 'ai'
 dotenv.config()
+const model = new ChatFireworks({
+  model: 'accounts/fireworks/models/llama-v3-70b-instruct',
+  apiKey: process.env.FIREWORKS_API_KEY,
+  temperature: 0.1
+})
 ;(async () => {
-  const messages: CoreMessage[] = [
-    {
-      role: 'assistant',
-      content: 'I can help you with that. What is your question?'
-    },
-    {
-      role: 'user',
-      content: 'What is the capital of France?'
-    }
-  ] 
-  const promptTemplate = ChatPromptTemplate.fromPromptMessages([
-    SystemMessagePromptTemplate.fromTemplate(systemTemplate),
-    ...messages.map(message => {
-      if (message.role === 'user') {
-        return HumanMessagePromptTemplate.fromTemplate(message.content);
-      } else {
-        return SystemMessagePromptTemplate.fromTemplate(message.content);
-      }
-    })
-  ]);
-  // We can use zod to define a schema for the output using the `fromZodSchema` method of `StructuredOutputParser`.
-  const parser = StructuredOutputParser.fromZodSchema(
-    z.object({
-      answer: z.string().describe("answer to the user's question"),
-      sources: z
-        .array(z.string().url())
-        .describe('sources used to answer the question, should be websites.')
-    })
-  )
+  const zodSchema = z.object({
+    answer: z.string().describe("answer to the user's question"),
+    source: z
+      .string()
+      .describe(
+        "source used to answer the user's question, should be a website."
+      )
+  })
+
+  const parser = StructuredOutputParser.fromZodSchema(zodSchema)
 
   const chain = RunnableSequence.from([
-    messages,
-    new OpenAI({ temperature: 0 }),
+    ChatPromptTemplate.fromTemplate(
+      'Answer the users question as best as possible.\n{format_instructions}\n{question}'
+    ),
+    model,
     parser
   ])
-
-  console.log(parser.getFormatInstructions())
 
   const response = await chain.invoke({
     question: 'What is the capital of France?',
