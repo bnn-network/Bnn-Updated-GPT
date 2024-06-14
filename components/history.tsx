@@ -52,7 +52,7 @@ export async function History({ location }: HistoryProps) {
               <p className="text-sm animate-pulse">
                 Authenticate to save your chat history..
               </p>
-              <Link href="/login">
+              <Link href="/sign-in">
                 <Button variant="outline">Login</Button>
               </Link>
             </div>
