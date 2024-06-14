@@ -18,21 +18,6 @@ export async function querySuggestor(
     </Section>
   )
 
-  // console.log("messages: ", messages.map((m)=>{if(m.role === "assistant"){return m.content}}))
-
-  // const onlyAssistantMessages = messages
-  // .flatMap(m => {
-  //   if (m.role === 'assistant') {
-  //     if (Array.isArray(m.content)) {
-  //       return m.content.map(c => c.text);
-  //     } else {
-  //       return [m.content];
-  //     }
-  //   }
-  //   return [];
-  // })
-  // .join(' ');
-
   let finalRelatedQueries: PartialRelated = {}
   try {
     await streamObject({

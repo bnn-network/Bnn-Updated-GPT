@@ -101,7 +101,8 @@ async function submit(
   }
 
   async function processEvents() {
-    let action = { object: { next: 'proceed' } }
+    let action = { next: 'proceed' }
+
     // If the user skips the task, we proceed to the search
     if (!skip)
       action =
@@ -110,7 +111,7 @@ async function submit(
           selectedModel ? selectedModel : 'gpt-4o'
         )) ?? action
 
-    if (action.object.next === 'inquire') {
+    if (action.next === 'inquire') {
       // Generate inquiry
       const inquiry = await inquire(
         uiStream,

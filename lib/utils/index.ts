@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { createOpenAI } from '@ai-sdk/openai'
+import { ChatFireworks } from '@langchain/community/chat_models/fireworks'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -49,6 +50,15 @@ export function fireworks70bModel() {
     baseURL: 'https://api.fireworks.ai/inference/v1'
   })
   return fireworks('accounts/fireworks/models/llama-v3-70b-instruct')
+}
+
+export function fireworks70bLangchainModel() {
+  const fireworks = new ChatFireworks({
+    apiKey: process.env.FIREWORKS_API_KEY,
+    model: 'accounts/fireworks/models/llama-v3-70b-instruct',
+    temperature: 0.1
+  })
+  return fireworks
 }
 
 export function fireworksMistral8x22Model() {

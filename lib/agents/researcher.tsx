@@ -148,7 +148,6 @@ export async function researcher(
       return { searchToAnsweer, fullResponse, hasError, toolResponses }
     }
     const date = new Date().toLocaleString()
-    console.log(searchToAnsweer, 'searchToAnsweer')
     const searchStream = await nonexperimental_streamText({
       model: fireworks70bModel(),
       maxTokens: 4000,
