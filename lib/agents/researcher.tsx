@@ -3,7 +3,6 @@ import {
   CoreMessage,
   ToolCallPart,
   ToolResultPart,
-  generateObject,
   streamText as nonexperimental_streamText
 } from 'ai'
 import { Section } from '@/components/section'
