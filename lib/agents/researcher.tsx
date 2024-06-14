@@ -9,7 +9,6 @@ import {
 import { Section } from '@/components/section'
 import { BotMessage } from '@/components/message'
 import { fireworks70bModel } from '../utils'
-import { Capybara } from '../utils'
 import { Ratelimit } from '@upstash/ratelimit'
 import { redis } from '@/lib/utils/redis'
 import { headers } from 'next/headers'
