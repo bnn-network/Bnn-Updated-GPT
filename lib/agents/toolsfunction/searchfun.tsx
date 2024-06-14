@@ -1,8 +1,7 @@
 import { createStreamableUI, createStreamableValue } from 'ai/rsc'
-import { searXNGsearchSchema } from '@/lib/schema/search'
 import { Card } from '@/components/ui/card'
 import { SearchSection } from '@/components/search-section'
-import { ToolProps } from '../tools'
+
 
 export const search2Tool = async (
   query: string,
@@ -12,12 +11,10 @@ export const search2Tool = async (
   search_depth?: 'basic' | 'advanced'
 ) => {
   let hasError = false
-  console.log('search2Tool', query)
   // Append the search section
   const streamResults = createStreamableValue<string>()
   uiStream.update(null)
   uiStream.append(<SearchSection result={streamResults.value} />)
-
   let searchResult
   const searchAPI: 'tavily' | 'searX' = 'searX'
   try {
@@ -42,7 +39,6 @@ export const search2Tool = async (
     )
     return searchResult
   }
-  console.log('searchResult', searchResult)
 
   streamResults.done(JSON.stringify(searchResult))
 
@@ -50,13 +46,13 @@ export const search2Tool = async (
 }
 
 async function searXNG(query: string) {
-  const response = await fetch('https://api.bnngpt.com/search/', {
+  const response = await fetch('http://54.95.57.249:9098/api/v1/scrape/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      input: query
+      query
     })
   })
   if (!response.ok) {

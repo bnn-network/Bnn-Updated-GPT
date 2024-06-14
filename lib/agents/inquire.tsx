@@ -9,16 +9,16 @@ export async function inquire(
   messages: CoreMessage[],
   selectedModel: string
 ) {
-  if(selectedModel.includes('llama')){
+  if (selectedModel.includes('llama')) {
     selectedModel = 'gpt-4o'
   }
   const objectStream = createStreamableValue<PartialInquiry>()
   uiStream.update(<Copilot inquiry={objectStream.value} />)
-
   let finalInquiry: PartialInquiry = {}
-  await streamObject({
-    model: openAIInstance('gpt-4o'),
-    system: `As a professional web researcher, your role is to deepen your understanding of the user's input by conducting further inquiries when necessary.
+  try {
+    await streamObject({
+      model: openAIInstance('gpt-4o'),
+      system: `As a professional web researcher, your role is to deepen your understanding of the user's input by conducting further inquiries when necessary.
     After receiving an initial response from the user, carefully assess whether additional questions are absolutely essential to provide a comprehensive and accurate answer. Only proceed with further inquiries if the available information is insufficient or ambiguous.
 
     When crafting your inquiry, structure it as follows:
@@ -53,20 +53,24 @@ export async function inquire(
     Remember, your goal is to gather the necessary information to deliver a thorough and accurate response.
     Please match the language of the response to the user's language.
     `,
-    messages,
-    schema: inquirySchema
-  })
-    .then(async result => {
-      for await (const obj of result.partialObjectStream) {
-        if (obj) {
-          objectStream.update(obj)
-          finalInquiry = obj
+      messages,
+      schema: inquirySchema
+    })
+      .then(async result => {
+        for await (const obj of result.partialObjectStream) {
+          if (obj) {
+            objectStream.update(obj)
+            finalInquiry = obj
+          }
         }
-      }
-    })
-    .finally(() => {
-      objectStream.done()
-    })
+      })
+      .catch(() => {
+        const RecursiveInquire = inquire(uiStream, messages, selectedModel)
+        return RecursiveInquire
+      })
+  } finally {
+    objectStream.done()
+  }
 
   return finalInquiry
 }

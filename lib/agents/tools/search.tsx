@@ -53,13 +53,13 @@ export const searchTool = ({ uiStream, fullResponse, }: ToolProps) => ({
 })
 
 async function searXNG(query: string) {
-  const response = await fetch('https://api.bnngpt.com/search/', {
+  const response = await fetch('http://54.95.57.249:9098/api/v1/scrape/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      input: query
+      query
     })
   })
   if (!response.ok) {
@@ -75,7 +75,7 @@ async function tavilySearch(
   searchDepth: 'basic' | 'advanced' = 'basic'
 ): Promise<any> {
   const apiKey = process.env.TAVILY_API_KEY
-  const response = await fetch('https://api.tavily.com/search', {
+  const response = await fetch('http://54.95.57.249:9098/api/v1/scrape/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
