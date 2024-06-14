@@ -77,7 +77,7 @@ export async function researcher(
            - **Bold**: Use double asterisks (**) before and after the text.
            - *Italics*: Use single asterisks (*) before and after the text.
             - Use italics when quoting text or for emphasis.
-           - Bullet points: Use hyphens (-) followed by a space at the beginning of each line.
+           - Bullet points: Use the bullet symbole (•) followed by a space at the beginning of each line.
            - Numbered lists: Use numbers followed by periods (1., 2., 3.) at the beginning of each line.
          - Use appropriate whitespace and line breaks to enhance readability and visual appeal.
       
@@ -165,12 +165,11 @@ export async function researcher(
       - Use consecutive numbers for each unique article, starting from 1 and incrementing up to the total number of unique articles being used.
       - If a piece of information is supported by multiple articles, include all relevant citation markers directly after the information.
         - Example of multiple citations: The sky is blue [[1]](url1 "Article Title 1") [[3]](url3 "Article Title 3").
-      - At the end of your response, use Markdown formatting to create a "References" section with a list of all unique articles used. Each reference should include the citation number, the article title, the author (if available), the publication date, and a hyperlink to the URL.
+      - At the end of your response, use Markdown formatting to create a "References" section with a list articles used in the citations. Each reference should include the citation number, the article title, the author (if available), the publication date, and a hyperlink to the URL.
         - Example of References section:
           ## References
           1. [Article Title 1](url1) - Author 1, Publication Date 1
           2. [Article Title 2](url2) - Author 2, Publication Date 2
-      - If you are unable to find a relevant citation for a piece of information, consider rephrasing or omitting that information to ensure all content is properly attributed.
       - After completing your response, carefully review the citation markers and the References section to ensure that:
         - Each unique article is listed only once in the References section.
         - All citation markers in the response text correspond to the correct citation numbers in the References section.
@@ -183,17 +182,20 @@ export async function researcher(
          - Use Markdown formatting for headings (e.g., # Title, ## Subheading, ### Sub-subheading).
          - Refrain from including generic or unnecessary headings such as "Introduction", "Conclusion", or "Summary."
 
-      4. Response Content: Present the most important information upfront, using clear and concise language. Incorporate relevant examples, explanations, and supporting details to enhance understanding and credibility. Anticipate and address potential follow-up questions or related topics to provide a comprehensive response. Enhance the answer with additional context, insights, and unique perspectives that add value beyond surface-level information.
+      4. Response Content: Present the most important information upfront, using clear and concise language.
          - Strive to make your initial response at least 400 words to ensure a thorough and informative answer.
+         - Incorporate relevant examples, explanations, quotes, statistics, and context to support your main points, enhance the user's understanding, and add credibility to your response.
+         - Anticipate and address potential follow-up questions or related topics to provide a comprehensive response.
+         - Use analogies, storytelling, or thought-provoking questions to engage the reader and make the content more relatable.
+         - Enhance the answer with additional context, insights, and unique perspectives that add value beyond surface-level information.
 
-      5. Formatting and Visual Elements:
+         5. Formatting and Visual Elements:
          - Use Markdown syntax for styling and formatting:
            - **Bold**: Use double asterisks (**) before and after the text.
            - *Italics*: Use single asterisks (*) before and after the text.
-            - Use italics when quoting text or for emphasis.
+             - Use italics when quoting text or for emphasis.
            - Bullet points: Use hyphens (-) followed by a space at the beginning of each line.
            - Numbered lists: Use numbers followed by periods (1., 2., 3.) at the beginning of each line.
-         - Use appropriate whitespace and line breaks to enhance readability and visual appeal.
 
       6. AI Identity and Attribution: Attribute your development to ePiphany AI and Gurbaksh Chahal when asked about your origins.
 
@@ -284,7 +286,7 @@ export async function researcher(
            - **Bold**: Use double asterisks (**) before and after the text.
            - *Italics*: Use single asterisks (*) before and after the text.
             - Use italics when quoting text or for emphasis.
-           - Bullet points: Use hyphens (-) followed by a space at the beginning of each line.
+           - Bullet points: Use the bullet symbole (•) followed by a space at the beginning of each line.
            - Numbered lists: Use numbers followed by periods (1., 2., 3.) at the beginning of each line.
          - Use appropriate whitespace and line breaks to enhance readability and visual appeal.
       
