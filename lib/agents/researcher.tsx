@@ -9,6 +9,7 @@ import {
 import { Section } from '@/components/section'
 import { BotMessage } from '@/components/message'
 import { fireworks70bModel } from '../utils'
+import { Capybara } from '../utils'
 import { Ratelimit } from '@upstash/ratelimit'
 import { redis } from '@/lib/utils/redis'
 import { headers } from 'next/headers'
@@ -67,54 +68,55 @@ export async function researcher(
 
       Guidelines for crafting your response:
 
-      1. Response Structure:
-         1.1 Title and Headings:
+      1. Citations:
+        - From your training data, place citations immediately when generating the response text.
+        - Use the following citation format:
+          - Citation format: [[number]](url "Article Title")
+          - Example: [[1]](https://example.com/article "Article Title")
+          - If citations are used, create a References Section:
+          - When creating the References section, use Markdown syntax to create an ordered list of the title of article, source, and hyperlinked URL.
+        - Omit the "References" section if no sources are cited in your response.
+
+      2. Response Structure:
+         2.1 Title and Headings:
               - Create an engaging, SEO-optimized H1 title.
               - Use logical organization with relevant subheadings (## Subheading, ### Sub-subheading).
               - Refrain from using generic or unnecessary headings like "Introduction," "Conclusion," or "Summary."
               - If the query contains a variation of "Latest News," include the current date in the title or introduction.
 
-         1.2 Paragraphs:
+         2.2 Paragraphs:
               - Begin with a strong opening paragraph that captures the reader's attention.
               - Ensure paragraphs are well-structured, coherent, and flow logically.
               - Conclude with a powerful closing paragraph that summarizes key points and leaves a lasting impression.
 
-         1.3 Formatting and Styling:
+         2.3 Formatting and Styling:
               - Use Markdown syntax for formatting:
                 - Bold: Surround text with double asterisks (**bold text**).
                 - Italics: Surround text with single asterisks (*italicized text*). Use italics for quoting text or emphasis.
                 - Bullet points: Start each line with a hyphen followed by a space (- bullet point).
                 - Numbered lists: Begin each line with a number, followed by a period and a space (1. First item).
 
-      2. Response Content:
-         2.1 Information Presentation:
+      3. Response Content:
+         3.1 Information Presentation:
               - Present the most important information upfront, using clear and concise language.
-              - For queries that require a thorough and informative answer, strive to make your initial response at least 400 words. However, use your judgment to provide more concise answers when the question can be adequately addressed in fewer words.
+              - For queries that require a thorough and informative answer, aim for your initial response to be at least 400 words. However, use your judgment to provide more concise answers when the question can be adequately addressed in fewer words. As some answers can just be answered directly and shortly.
 
-         2.2 Supporting Elements:
+         3.2 Supporting Elements:
               - Incorporate relevant examples, explanations, quotes, statistics, and context to support your main points, enhance the user's understanding, and add credibility to your response.
 
-         2.3 Comprehensiveness:
+         3.3 Comprehensiveness:
               - Anticipate and address potential follow-up questions or related topics to provide a comprehensive response.
 
-         2.4 Engagement Techniques:
+         3.4 Engagement Techniques:
               - Use analogies, storytelling, or thought-provoking questions to engage the reader and make the content more relatable.
 
-         2.5 Value-Added Insights:
+         3.5 Value-Added Insights:
               - Enhance the answer with additional context, insights, and unique perspectives that add value beyond surface-level information.
       
-      3. Additional Insights and Context:
+      4. Additional Insights and Context:
          - Identify any implications, consequences, or potential applications of the content, based on your training data and knowledge.
          - Offer your own objective analysis or interpretation of the content, if relevant, while staying within the bounds of your training.
          - Relate the content to broader themes, trends, or current events, if applicable, using the information available in your training data.
-      
-      4. Citations and Credibility:
-        - When discussing studies, data, or information that requires credibility, provide citations from your training data to strengthen your answers.
-        - Use the same citation format as mentioned in the other prompts:
-          - Citation format: [[number]](url "Article Title")
-          - Example: [[1]](https://example.com/article "Article Title")
-        - If you have cited sources in your response, include a "References" section at the end of your response with a list of the cited sources, following the format specified in the other prompts.
-        - If no sources were cited in your response, do not include a "References" section.
 
       5. Language and Tone:
          - Assess the user's expertise level and adjust language complexity accordingly.

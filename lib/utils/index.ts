@@ -51,6 +51,22 @@ export function fireworks70bModel() {
   return fireworks('accounts/fireworks/models/llama-v3-70b-instruct')
 }
 
+export function fireworks72bModel() {
+  const fireworks = createOpenAI({
+    apiKey: process.env.FIREWORKS_API_KEY,
+    baseURL: 'https://api.fireworks.ai/inference/v1'
+  })
+  return fireworks('accounts/fireworks/models/qwen2-72b-instruct')
+}
+
+export function Capy() {
+  const fireworks = createOpenAI({
+    apiKey: process.env.FIREWORKS_API_KEY,
+    baseURL: 'https://api.fireworks.ai/inference/v1'
+  })
+  return fireworks('accounts/fireworks/models/yi-34b-200k-capybara')
+}
+
 export function fireworksMistral8x22Model() {
   const fireworks = createOpenAI({
     apiKey: process.env.FIREWORKS_API_KEY,
