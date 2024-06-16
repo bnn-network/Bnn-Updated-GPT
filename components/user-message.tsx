@@ -1,6 +1,5 @@
 import React from 'react'
 import { ChatShare } from './chat-share'
-import { auth } from '@clerk/nextjs/server'
 
 type UserMessageProps = {
   message: string
@@ -13,7 +12,6 @@ export const UserMessage: React.FC<UserMessageProps> = ({
   chatId,
   showShare = true
 }) => {
-  // const enableShare = process.env.ENABLE_SHARE === 'true'
 
   return (
     <div className="flex items-center w-full space-x-1 mt-2 min-h-10">

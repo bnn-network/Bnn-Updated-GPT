@@ -46,7 +46,7 @@ export const search2Tool = async (
 }
 
 async function searXNG(query: string) {
-  const response = await fetch('http://54.95.57.249:9098/api/v1/scrape/', {
+  const response = await fetch('http://54.95.57.249:9099/api/v1/scrape/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -58,7 +58,9 @@ async function searXNG(query: string) {
   if (!response.ok) {
     throw new Error(`Error: ${response.status}`)
   }
+ 
   const data = await response.json()
+  console.log('serper response', data)
   return data
 }
 
@@ -90,12 +92,3 @@ async function tavilySearch(
   const data = await response.json()
   return data
 }
-
-// async function exaSearch(query: string, maxResults: number = 10): Promise<any> {
-//   const apiKey = process.env.EXA_API_KEY
-//   const exa = new Exa(apiKey)
-//   return exa.searchAndContents(query, {
-//     highlights: true,
-//     numResults: maxResults
-//   })
-// }
