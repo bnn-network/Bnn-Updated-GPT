@@ -16,7 +16,6 @@ export const Header: React.FC = () => {
         {/* <LoginButton /> */}
 
         <MenuButton />
-
         <HistoryContainer location="header" />
       </div>
     </header>

@@ -64,7 +64,7 @@ export function ChatPanel({ messages }: ChatPanelProps) {
   }, [params])
   // Clear messages
   const handleClear = () => {
-    router.push('/')
+    window.location.replace('/')
   }
   useEffect(() => {
     if (shouldSubmit) {
@@ -84,7 +84,7 @@ export function ChatPanel({ messages }: ChatPanelProps) {
         <Button
           type="button"
           variant={'secondary'}
-          className="rounded-full bg-primary gap-2 text-white group hover:bg-primary transition-all hover:scale-105 pointer-events-auto"
+          className="rounded-full bg-primary gap-2 text-secondary group hover:bg-primary transition-all hover:scale-105 pointer-events-auto"
           onClick={() => handleClear()}
         >
           <Plus size={18} />
@@ -113,7 +113,7 @@ export function ChatPanel({ messages }: ChatPanelProps) {
             placeholder="Ask a question..."
             spellCheck={false}
             value={input}
-            className="resize-none font-medium placeholder:select-none w-full min-h-12 rounded-fill bg-muted pl-4 pr-10 pt-3.5 pb-1 text-sm outline-offset-muted dark:outline-offset-primary file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50'"
+            className="resize-none font-medium placeholder:select-none w-full min-h-12 rounded-fill bg-muted dark:bg-primary-foreground pl-4 pr-10 pt-3.5 pb-1 text-sm outline-offset-muted dark:outline-offset-primary file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50'"
             onChange={e => {
               setInput(e.target.value)
               setShowEmptyScreen(e.target.value.length === 0)

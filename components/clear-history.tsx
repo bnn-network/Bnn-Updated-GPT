@@ -28,10 +28,12 @@ export function ClearHistory({ empty }: ClearHistoryProps) {
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button variant="default" className="w-full rounded-full gap-2 flex items-center h-12"
-        // disabled={empty}
+        <Button
+          variant="default"
+          className="w-full rounded-full gap-2 flex items-center h-12"
+          // disabled={empty}
         >
-          <TrashIcon className='size-4.5' />
+          <TrashIcon className="size-4.5" />
           Clear History
         </Button>
       </AlertDialogTrigger>

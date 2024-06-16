@@ -10,7 +10,7 @@ export default async function Page() {
   return (
     <>
       <AI initialAIState={{ chatId: id, messages: [] }}>
-        <div className="flex  items-center  min-h-screen justify-center bg-secondary text-primary">
+        <div className="flex   items-center  min-h-screen justify-center bg-secondary text-primary">
           <main className="flex flex-col items-center justify-center flex-1 px-2 ">
             <h1 className="text-xl font-medium mb-8">Limitless Curiosity</h1>{' '}
             <div className="mt-0 w-full">
