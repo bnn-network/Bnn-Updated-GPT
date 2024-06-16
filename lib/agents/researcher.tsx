@@ -14,6 +14,7 @@ import { headers } from 'next/headers'
 import { retrieve2Tool } from './toolsfunction/retrievefunc'
 import { search2Tool } from './toolsfunction/searchfun'
 import { researchOptionsManager } from './research-options-manager'
+import { unstable_noStore as noStore } from 'next/cache'
 
 function random() {
   const rand = crypto.randomUUID().substring(0, 31)
@@ -59,6 +60,7 @@ export async function researcher(
 
   const action: any = await researchOptionsManager(messages)
   if (action.object.next === 'chat') {
+    noStore()
     const res = await nonexperimental_streamText({
       model: fireworks70bModel(),
       maxTokens: 2500,
@@ -138,6 +140,7 @@ export async function researcher(
       return { searchToAnsweer, fullResponse, hasError, toolResponses }
     }
     const date = new Date().toLocaleString()
+    noStore()
     const searchStream = await nonexperimental_streamText({
       model: fireworks70bModel(),
       maxTokens: 4000,
@@ -222,7 +225,7 @@ export async function researcher(
     if (!resultsToanswer) {
       return { resultsToanswer, fullResponse, hasError, toolResponses }
     }
-
+    noStore()
     const retrieveStream = await nonexperimental_streamText({
       model: fireworks70bModel(),
       maxTokens: 2500,
