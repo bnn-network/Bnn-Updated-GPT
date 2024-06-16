@@ -19,8 +19,8 @@ const exampleMessages = [
     message: "What's New to Stream This Weekend?"
   },
   {
-    heading: 'Does Ozempic Work or is it a fad?',
-    message: 'Does Ozempic Work or is it a fad?'
+    heading: 'Does Ozempic work or is it a fad?',
+    message: 'Does Ozempic work or is it a fad?'
   },
   {
     heading: 'Latest Celebrity News and Gossip',
