@@ -2,14 +2,7 @@
 'use client'
 
 import { Card, CardContent } from '@/components/ui/card'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger
-} from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import {
   Carousel,
   type CarouselApi,
@@ -92,10 +85,6 @@ export const SearchResultsImageSection: React.FC<
             </div>
           </DialogTrigger>
           <DialogContent className="sm:max-w-3xl bg-muted max-h-[80vh] overflow-visible p-0">
-            {/* <DialogHeader>
-              <DialogTitle>Search Images</DialogTitle>
-              <DialogDescription className="text-sm">{query}</DialogDescription>
-            </DialogHeader> */}
             <div className="">
               <Carousel
                 setApi={setApi}
@@ -110,8 +99,8 @@ export const SearchResultsImageSection: React.FC<
                           alt={`Image ${idx + 1}`}
                           className="h-auto w-full object-contain max-h-[60vh]"
                           onError={e =>
-                          (e.currentTarget.src =
-                            '/images/placeholder-image.png')
+                            (e.currentTarget.src =
+                              '/images/placeholder-image.png')
                           }
                         />
                       </div>
@@ -119,14 +108,12 @@ export const SearchResultsImageSection: React.FC<
                   ))}
                 </CarouselContent>
                 <div className="absolute -inset-12 z-20 flex items-center justify-between">
-
                   <CarouselPrevious className="w-14 h-14 border-none shadow-none rounded-full focus:outline-none">
                     <span className="sr-only">Previous</span>
                   </CarouselPrevious>
                   <CarouselNext className="w-14 h-14 rounded-full border-none focus:outline-none">
                     <span className="sr-only">Next</span>
                   </CarouselNext>
-
                 </div>
               </Carousel>
               {/* <div className="py-2 text-center text-sm text-muted-foreground">

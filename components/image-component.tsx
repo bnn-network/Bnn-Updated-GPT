@@ -20,10 +20,10 @@ const ImageComponent = () => {
         <NoSsr>
           <Image
             src={conditionForTheme}
-            className={cn('h-6 w-auto opacity-90')}
+            className={cn(' w-auto opacity-90')}
             alt="Logo"
-            width={96}
-            height={55}
+            width={66}
+            height={20}
           />
         </NoSsr>
         <span className="sr-only">BNNGPT</span>
