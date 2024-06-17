@@ -60,7 +60,7 @@ async function searXNG(query: string) {
   }
  
   const data = await response.json()
-  console.log('serper response', data)
+
   return data
 }
 
