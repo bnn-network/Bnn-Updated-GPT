@@ -58,16 +58,16 @@ export const SearchResultsImageSection: React.FC<
         <Dialog key={index}>
           <DialogTrigger asChild>
             <div
-              className="w-[calc(50%-0.5rem)] md:w-[calc(25%-0.5rem)] aspect-video cursor-pointer relative"
+              className="w-[calc(50%-0.5rem)] md:w-[calc(25%-0.5rem)]  aspect-video cursor-pointer relative"
               onClick={() => setSelectedIndex(index)}
             >
-              <Card className="flex-1 h-full">
-                <CardContent className="h-full w-full">
+              <Card className="flex-1 h-[90%]">
+                <CardContent className=" w-full h-full bg-primary-foreground">
                   {image ? (
                     <img
                       src={image}
                       alt={`Image ${index + 1}`}
-                      className="h-full w-full object-cover"
+                      className="h-full w-full object-cover object-center "
                       onError={e =>
                         (e.currentTarget.src = '/images/logo-white.png')
                       }
@@ -84,11 +84,11 @@ export const SearchResultsImageSection: React.FC<
               )}
             </div>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-3xl bg-muted max-h-[80vh] overflow-visible p-0">
+          <DialogContent className="sm:max-w-3xl w-[90%] bg-muted max-h-[80vh]  overflow-visible ">
             <div className="">
               <Carousel
                 setApi={setApi}
-                className="w-full bg-muted max-h-[60vh]"
+                className="lg:w-full  lg:bg-primary-foreground max-h-[60vh] lg:-z-10 lg:mt-5"
               >
                 <CarouselContent>
                   {images.map((img, idx) => (
@@ -107,18 +107,18 @@ export const SearchResultsImageSection: React.FC<
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                <div className="absolute -inset-12 z-20 flex items-center justify-between">
-                  <CarouselPrevious className="w-14 h-14 border-none shadow-none rounded-full focus:outline-none">
+                <div className="absolute inset-0 md:-inset-12 z-20 lg:px-0 px-10 flex items-center justify-between">
+                  <CarouselPrevious className="lg:w-14 lg:h-14 left-2 sm:left-0  w-7 h-7 border-none shadow-none rounded-full focus:outline-none">
                     <span className="sr-only">Previous</span>
                   </CarouselPrevious>
-                  <CarouselNext className="w-14 h-14 rounded-full border-none focus:outline-none">
+                  <CarouselNext className="lg:w-14 lg:h-14  right-2 sm:right-0 w-7 h-7 rounded-full border-none focus:outline-none">
                     <span className="sr-only">Next</span>
                   </CarouselNext>
                 </div>
               </Carousel>
-              {/* <div className="py-2 text-center text-sm text-muted-foreground">
+              <div className="py-2 text-center text-sm text-muted-foreground">
                 {current} of {count}
-              </div> */}
+              </div>
             </div>
           </DialogContent>
         </Dialog>
