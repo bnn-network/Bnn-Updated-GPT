@@ -31,7 +31,7 @@ export function Chat({ id }: ChatProps) {
   // }, [aiState,router])
 
   return (
-    <div className="px-8 sm:px-12 pt-0 md:pt-0 pb-14 md:pb-24 lg:max-w-3xl lg:mx-auto flex flex-col space-y-3 md:space-y-4 mb-15">
+    <div className="px-8 sm:px-12 pt-0 md:pt-0 pb-14 md:pb-24 lg:max-w-3xl  lg:mx-auto h- flex flex-col space-y-3 md:space-y-4 mb-15">
       <ChatMessages messages={messages} />
       <ChatPanel messages={messages} />
     </div>

@@ -13,7 +13,7 @@ export default async function Page() {
   return (
     <>
       <AI initialAIState={{ chatId: id, messages: [] }}>
-        <div className="flex   items-center  min-h-screen justify-center bg-secondary text-primary">
+        <div className="flex items-center lg:h-screen  min-h-[90vh] justify-center bg-secondary text-primary">
           <main className="flex flex-col items-center justify-center flex-1 px-2 ">
             <h1 className="text-2xl mb-24 lg:mb-16">Limitless Curiosity</h1>{' '}
             <div className="mt-8 w-full  ">
