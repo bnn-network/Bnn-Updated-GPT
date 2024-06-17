@@ -11,6 +11,7 @@ import { nextResearchSchema } from '../schema/next-research'
 export async function researchOptionsManager(
   messages: CoreMessage[]
 ): Promise<any> {
+  
   try {
     const res: any = await generateObject({
       model: openAIInstance('gpt-4o'),

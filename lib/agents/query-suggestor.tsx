@@ -1,9 +1,11 @@
-import { createStreamableUI, createStreamableValue } from 'ai/rsc'
-import { CoreMessage, streamObject } from 'ai'
+import { createStreamableUI, createStreamableValue } from 'ai/rsc'    
 import { PartialRelated, relatedSchema } from '@/lib/schema/related'
 import { Section } from '@/components/section'
 import SearchRelated from '@/components/search-related'
-import { openAIInstance } from '../utils'
+import { fireworks70bLangchainModel, openAIInstance } from '../utils'
+import { StructuredOutputParser } from '@langchain/core/output_parsers'
+import { RunnableSequence } from '@langchain/core/runnables'
+import { ChatPromptTemplate } from '@langchain/core/prompts'
 
 export const maxDuration = 60
 export async function querySuggestor(
@@ -19,28 +21,29 @@ export async function querySuggestor(
   )
 
   let finalRelatedQueries: PartialRelated = {}
-  try {
-    await streamObject({
-      model: openAIInstance('gpt-3.5-turbo'),
-      system: `As a professional web researcher, your task is to generate a set of three queries that explore the subject matter more deeply, building upon the initial query and the information uncovered in its search results.
+  const parser = StructuredOutputParser.fromZodSchema(relatedSchema)
+  const appendedPrompt = `
+        the assistant answer is {answer}
+    As a professional web researcher, your task is to generate a set of three queries that explore the subject matter more deeply, building upon the initial query and the information uncovered in its search results.
 
     For instance, if the original query was "Starship's third test flight key milestones", your output should follow this format:
-
-    "{
-      "related": [
-        "What were the primary objectives achieved during Starship's third test flight?",
-        "What factors contributed to the ultimate outcome of Starship's third test flight?",
-        "How will the results of the third test flight influence SpaceX's future development plans for Starship?"
-      ]
-    }"
+    {format_instructions}
 
     Aim to create queries that progressively delve into more specific aspects, implications, or adjacent topics related to the initial query. The goal is to anticipate the user's potential information needs and guide them towards a more comprehensive understanding of the subject matter.
-    `,
-      messages: [{role:'assistant', content: answer}],
-      schema: relatedSchema
-    })
+    `
+  const chain = RunnableSequence.from([
+    ChatPromptTemplate.fromTemplate(appendedPrompt),
+    fireworks70bLangchainModel(),
+    parser
+  ])
+  try {
+    await chain
+      .stream({
+        answer:answer,
+        format_instructions: parser.getFormatInstructions()
+      })
       .then(async result => {
-        for await (const obj of result.partialObjectStream) {
+        for await (const obj of result) {
           if (obj.items) {
             objectStream.update(obj)
             finalRelatedQueries = obj
@@ -51,7 +54,7 @@ export async function querySuggestor(
         console.error('Error in querySuggestor:', error)
         const rescursiveResult: any = await querySuggestor(
           uiStream,
-          'gpt-4o',
+          selectedModel,
           answer
         )
         return rescursiveResult

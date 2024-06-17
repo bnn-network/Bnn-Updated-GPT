@@ -4,20 +4,28 @@ import TrendingSearches from './TrendingSearches'
 
 const exampleMessages = [
   {
-    heading: "What's the latest in AI news?",
-    message: "What's the latest in AI news?"
+    heading: "What's the latest news in Gaza?",
+    message: "What's the latest news in Gaza?"
   },
   {
-    heading: 'What is the latest news in Gaza?',
-    message: 'What is the latest news in Gaza?'
+    heading: 'Why is NVIDIA experiencing rapid growth?',
+    message: 'Why is NVIDIA experiencing rapid growth?'
   },
   {
-    heading: 'Can you recommend a Mr Beast video?',
-    message: 'Can you recommend a Mr Beast video?'
+    heading: "What's the latest news in AI?",
+    message: "What's the latest news in AI?"
   },
   {
     heading: "What's New to Stream This Weekend?",
     message: "What's New to Stream This Weekend?"
+  },
+  {
+    heading: 'Does Ozempic work or is it a fad?',
+    message: 'Does Ozempic work or is it a fad?'
+  },
+  {
+    heading: 'Latest Celebrity News and Gossip',
+    message: 'Latest Celebrity News and Gossip'
   }
 ]
 
