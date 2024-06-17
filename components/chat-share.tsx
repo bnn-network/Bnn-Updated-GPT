@@ -67,7 +67,7 @@ export function ChatShare({ chatId, className }: ChatShareProps) {
       >
         <DialogTrigger asChild>
           <Button
-            className="rounded-full"
+            className="rounded-full "
             size="icon"
             variant={'ghost'}
             onClick={() => setOpen(true)}
