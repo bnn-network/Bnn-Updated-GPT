@@ -53,19 +53,19 @@ function TrendingItem(topic: props) {
     {
       topic: 'Finance',
       queries: [
-        `What is the current impact of the Feds interest rates?`,
+        `Latest impact on Fed's interest rates`,
         'Top Tech Companies to Watch in 2024',
         'Why is NVIDIA experiencing rapid growth?',
-        'Current Trends in the Electric Vehicle Sector'
+        'Latest on Buy Now, Pay Later Regulation'
       ]
     },
     {
       topic: 'Technology',
       queries: [
         "What's the latest in AI news?",
-        'New Advancements in Space Exploration',
+        'How does Apple Intelligence work on iPhone?',
         'Top Trending Tech Gadgets for 2024',
-        'Innovations in Renewable Energy'
+        'New Advancements in Space Exploration'
       ]
     },
     {
@@ -89,10 +89,10 @@ function TrendingItem(topic: props) {
     {
       topic: 'LifeStyle',
       queries: [
+        'Does Ozempic work or is it a fad?',
         'Top Travel Destinations for Summer 2024',
         'Latest Fashion Trends for June 2024',
-        'Trending Home Decor Ideas',
-        'Does Ozempic Work or is it a fad?'
+        'Trending Home Decor Ideas'
       ]
     }
   ]
