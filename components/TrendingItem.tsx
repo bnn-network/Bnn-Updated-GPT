@@ -71,9 +71,9 @@ function TrendingItem(topic: props) {
     {
       topic: 'Health',
       queries: [
-        'Newest Advancements in Mental Health Treatment',
         'Top Health and Wellness Trends for 2024',
-        'Impact of AI on New Drug Research',
+        'New Advancements in Mental Health',
+        'Impact of AI on Drug Research',
         'Current Research on Longevity and Anti-Aging'
       ]
     },
