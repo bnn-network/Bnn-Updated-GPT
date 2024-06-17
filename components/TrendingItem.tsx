@@ -42,51 +42,57 @@ function TrendingItem(topic: props) {
 
   const TopicQueries = [
     {
-      topic: 'Trade and Economic',
+      topic: 'Breaking News',
       queries: [
-        'What is the latest news in the stock market?',
-        'What are the top 5 cryptocurrencies?',
-        'What are the top 5 trading platforms?'
+        "What's the latest news in Gaza?",
+        'Updates on the Russia-Ukraine Conflict',
+        'Global Economic Impact on China-US Relations',
+        'Climate Change and Natural Disasters Worldwide'
       ]
     },
     {
-      topic: 'Politics and Diplomacy',
+      topic: 'Finance and Business',
       queries: [
-        'What is the latest political news?',
-        'What are the recent diplomatic developments?',
-        'What are the major political events happening?'
+        `What is the current impact of the Feds interest rates?`,
+        'Top Tech Companies to Watch in 2024',
+        'Why is NVIDIA experiencing rapid growth?',
+        'Current Trends in the Electric Vehicle Sector'
       ]
     },
     {
       topic: 'Technology and Innovation',
       queries: [
         "What's the latest in AI news?",
-        'What are the recent technological advancements?',
-        'What are the new innovations in the tech industry?'
+        'New Advancements in Space Exploration',
+        'Top Trending Tech Gadgets for 2024',
+        'Innovations in Renewable Energy'
       ]
     },
     {
       topic: 'Health and Wellness',
       queries: [
-        'What are the latest health news?',
-        'Why are avocados so expensive?',
-        'What are the recent medical breakthroughs?'
+        'Newest Advancements in Mental Health Treatment',
+        'Top Health and Wellness Trends for 2024',
+        'Impact of AI on New Drug Research',
+        'Current Research on Longevity and Anti-Aging'
       ]
     },
     {
       topic: 'Arts and Entertainment',
       queries: [
-        'What are the latest entertainment news?',
-        'New Taylor Swift album release?',
-        'House of dragons release date?'
+        'Upcoming Summer Blockbuster Movies',
+        'Latest Celebrity News and Gossip',
+        'What to Stream This Weekend?',
+        'Top Trending TikTok Challenges'
       ]
     },
     {
-      topic: 'Travel and Exploration',
+      topic: 'LifeStyle and Fashion',
       queries: [
-        'What are the latest travel destinations?',
-        'Turkmensitan , the weirdest place on earth?',
-        'Largest waterfall in the world?'
+        'Top Travel Destinations for Summer 2024',
+        'Latest Fashion Trends for June 2024',
+        'Trending Home Decor Ideas',
+        'Does Ozempic Work or is it a fad?'
       ]
     }
   ]

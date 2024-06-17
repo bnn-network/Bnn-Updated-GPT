@@ -1,22 +1,21 @@
 import React from 'react'
-import { ChevronDownIcon } from '@heroicons/react/24/outline'
 import {
   ChipIcon,
   GlobeIcon,
   GraphIcon,
   HealthIcon,
   MusicIcon,
-  TravelIcon
+  MoonIcon
 } from '@/assets/icons/icons'
 import TrendingItem from './TrendingItem'
 
 const trendingTopics = [
   {
-    name: 'Trade and Economic',
+    name: 'Breaking News',
     icon: GraphIcon
   },
   {
-    name: 'Politics and Diplomacy',
+    name: 'Finance and Business',
     icon: GlobeIcon
   },
   {
@@ -34,8 +33,8 @@ const trendingTopics = [
     icon: ChipIcon
   },
   {
-    name: 'Travel and Exploration',
-    icon: TravelIcon
+    name: 'LifeStyle and Fashion',
+    icon: MoonIcon
   }
 ]
 
