@@ -80,9 +80,9 @@ function TrendingItem(topic: props) {
     {
       topic: 'Entertainment',
       queries: [
-        'Upcoming Summer Blockbuster Movies',
+        "What's New to Stream This Weekend?",
         'Latest Celebrity News and Gossip',
-        'What to Stream This Weekend?',
+        'Upcoming Summer Blockbuster Movies',
         'Top Trending TikTok Challenges'
       ]
     },
