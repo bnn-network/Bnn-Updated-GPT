@@ -15,25 +15,25 @@ const trendingTopics = [
     icon: GraphIcon
   },
   {
-    name: 'Finance and Business',
+    name: 'Finance',
     icon: GlobeIcon
   },
   {
-    name: 'Arts and Entertainment',
+    name: 'Entertainment',
     icon: MusicIcon
   },
 
   {
-    name: 'Health and Wellness',
+    name: 'Health',
     icon: HealthIcon
   },
 
   {
-    name: 'Technology and Innovation',
+    name: 'Technology',
     icon: ChipIcon
   },
   {
-    name: 'LifeStyle and Fashion',
+    name: 'LifeStyle',
     icon: MoonIcon
   }
 ]

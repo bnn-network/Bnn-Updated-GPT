@@ -51,7 +51,7 @@ function TrendingItem(topic: props) {
       ]
     },
     {
-      topic: 'Finance and Business',
+      topic: 'Finance',
       queries: [
         `What is the current impact of the Feds interest rates?`,
         'Top Tech Companies to Watch in 2024',
@@ -60,7 +60,7 @@ function TrendingItem(topic: props) {
       ]
     },
     {
-      topic: 'Technology and Innovation',
+      topic: 'Technology',
       queries: [
         "What's the latest in AI news?",
         'New Advancements in Space Exploration',
@@ -69,7 +69,7 @@ function TrendingItem(topic: props) {
       ]
     },
     {
-      topic: 'Health and Wellness',
+      topic: 'Health',
       queries: [
         'Newest Advancements in Mental Health Treatment',
         'Top Health and Wellness Trends for 2024',
@@ -78,7 +78,7 @@ function TrendingItem(topic: props) {
       ]
     },
     {
-      topic: 'Arts and Entertainment',
+      topic: 'Entertainment',
       queries: [
         'Upcoming Summer Blockbuster Movies',
         'Latest Celebrity News and Gossip',
@@ -87,7 +87,7 @@ function TrendingItem(topic: props) {
       ]
     },
     {
-      topic: 'LifeStyle and Fashion',
+      topic: 'LifeStyle',
       queries: [
         'Top Travel Destinations for Summer 2024',
         'Latest Fashion Trends for June 2024',

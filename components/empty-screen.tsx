@@ -15,20 +15,6 @@ export function EmptyScreen({
       <div className="pt-4">
         <div className="mt-4 relative flex flex-col items-start space-y-2 mb-4">
           <TrendingSearches />
-          {/* {exampleMessages.map((message, index) => (
-            <Button
-              key={index}
-              variant="link"
-              className="h-auto p-0 text-sm" // Apply text-sm class here
-              name={message.message}
-              onClick={async () => {
-                submitMessage(message.message)
-              }}
-            >
-              <ArrowRight size={16} className="mr-2 text-muted-foreground" />
-              {message.heading}
-            </Button>
-          ))} */}
         </div>
       </div>
     </div>
