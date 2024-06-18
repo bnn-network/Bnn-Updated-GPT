@@ -391,7 +391,7 @@ export const getUIStateFromAIState = async (aiState: Chat) => {
                 id,
                 component: (
                   <Section title="Answer">
-                    <BotMessage content={answer.value} />
+                    <BotMessage content={answer.value}  />
                   </Section>
                 )
               }

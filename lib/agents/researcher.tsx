@@ -115,6 +115,12 @@ export async function researcher(
     if (!searchToAnsweer) {
       return { searchToAnsweer, fullResponse, hasError, toolResponses }
     }
+    console.log(
+      searchToAnsweer.responses
+        .map((res: any) => `- ${res.title} (${res.url})`)
+        .join('\n'),
+      'citation'
+    )
     const date = new Date().toLocaleString()
     const searchStream = await nonexperimental_streamText({
       model: fireworks70bModel(),
@@ -135,13 +141,19 @@ export async function researcher(
          - Enhance the answer with unique insights and perspectives.
 
       2. Citations:
-         - Support your answer with the provided citations: ${searchToAnsweer.responses
-           .map((res: any) => `- ${res.title} (${res.url})`)
-           .join('\n')}
-         - Assign a unique, sequential number to each URL, starting from 1 for each distinct article, and use the same number for all occurrences of a previously cited article.
-         - Use the correct inline citation format: [[number]](url "title"). Example: [[1]](https://en.wikipedia.org/wiki/Artificial_intelligence "Artificial Intelligence")
-         - Place citations immediately after relevant information, and include all relevant citation numbers if multiple articles support a piece of information. Example: The sky is blue [[1]](https://example.com "Example 1") [[2]](https://example2.com "Example 2").
-         - **IMPORTANT: Always include the full format with the hyperlink. Do not use only [[number]]. DO NOT GENERATE References or list references at the end of the response.**
+   - Support your answer with the provided citations: ${searchToAnsweer.responses
+     .map((res: any) => `- ${res.title} (${res.url})`)
+     .join('\n')}
+    - Include the citations in the following format next to the relevant data, following the format [<number>]: <URL>.
+     Example:
+     [1]: https://example.com/source1
+     [2]: https://example.com/source2
+   - Assign a unique, sequential number to each URL, starting from 1 for each distinct article, and use the same number for all occurrences of a previously cited article.
+   - Use the correct inline citation format: [number]:url. Example: [1]:https://en.wikipedia.org/wiki/Artificial_intelligence
+
+    **IMPORTANT: DO NOT GENERATE References or citations references at the end of the response and also generate any sources at the end of the response, only use inline citations in the response**
+
+   ** NOTE : you will not generate sources and references citations at the end of the response otherwise it will be bad for the user , only generate inline citations everytime using the given citations **
 
       3. Visuals:
          - Select up to 3 relevant images from ${
@@ -155,7 +167,7 @@ export async function researcher(
          - Do not mention, refer to, or direct users to any external sources or references, including news sites, blogs, Wikipedia, or other websites, for additional information.
          - Maintain a confident, authoritative, and professional tone throughout the response.
 
-      Your ultimate aim is to provide the most helpful, informative, and satisfying user experience possible by leveraging your search expertise and information synthesis abilities.
+      Your ultimate aim is to provide the most helpful, informative, and satisfying user experience possible by leveraging your search expertise and information synthesis abilities with only using inline citations everytime citations are provided and not use any sources or references for citations at the end of the response.
 
       Always answer in Markdown format.`,
       messages
