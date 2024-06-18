@@ -6,7 +6,7 @@ import MenuButton from './MenuButton'
 
 export const Header: React.FC = () => {
   return (
-    <header className="fixed top-2 w-full  bg-secondary py-1 md:p-2 flex justify-between lg:pr-4 items-center  backdrop-blur md:backdrop-blur-none  md:bg-transparent md:z-10">
+    <header className="fixed top-0 w-full  bg-secondary py-1 md:p-2 flex justify-between lg:pr-4 items-center  backdrop-blur  md:backdrop-blur-none  md:bg-transparent md:z-10">
       <ImageComponent />
       <div className="flex gap-0.5 z-10 pr-2 lg:pr-0">
 
