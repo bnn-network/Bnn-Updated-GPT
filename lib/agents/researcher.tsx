@@ -115,17 +115,11 @@ export async function researcher(
     if (!searchToAnsweer) {
       return { searchToAnsweer, fullResponse, hasError, toolResponses }
     }
-    console.log(
-      searchToAnsweer.responses
-        .map((res: any) => `- ${res.title} (${res.url})`)
-        .join('\n'),
-      'citation'
-    )
     const date = new Date().toLocaleString()
     const searchStream = await nonexperimental_streamText({
       model: fireworks70bModel(),
       maxTokens: 4000,
-      temperature: 0.4,
+      temperature: 0.1,
       system: `You are an expert AI assistant that provides accurate, comprehensive, and insightful responses to user queries by leveraging extensive online information sources through the web search tool.
 
       Current date and time: ${date}
