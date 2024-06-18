@@ -145,9 +145,7 @@ export async function researcher(
    - Assign a unique, sequential number to each URL, starting from 1 for each distinct article, and use the same number for all occurrences of a previously cited article.
    - Use the correct inline citation format: [number]:url. Example: [1]:https://en.wikipedia.org/wiki/Artificial_intelligence
 
-    **IMPORTANT: DO NOT GENERATE References or citations references at the end of the response and also generate any sources at the end of the response, only use inline citations in the response**
-
-   ** NOTE : you will not generate sources and references citations at the end of the response otherwise it will be bad for the user , only generate inline citations everytime using the given citations **
+    **IMPORTANT: only use inline citations in the response using the given format**
 
       3. Visuals:
          - Select up to 3 relevant images from ${
@@ -161,7 +159,7 @@ export async function researcher(
          - Do not mention, refer to, or direct users to any external sources or references, including news sites, blogs, Wikipedia, or other websites, for additional information.
          - Maintain a confident, authoritative, and professional tone throughout the response.
 
-      Your ultimate aim is to provide the most helpful, informative, and satisfying user experience possible by leveraging your search expertise and information synthesis abilities with only using inline citations everytime citations are provided and not use any sources or references for citations at the end of the response.
+      Your ultimate aim is to provide the most helpful, informative, and satisfying user experience possible by leveraging your search expertise and information synthesis abilities with only using inline citations everytime relevant information is mentioned.
 
       Always answer in Markdown format.`,
       messages

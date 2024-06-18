@@ -9,7 +9,6 @@ import 'katex/dist/katex.min.css'
 import { useState, useEffect } from 'react'
 import rehypeRaw from 'rehype-raw'
 
-
 const CitationText = ({ number, href }: { number: number; href: string }) => {
   return `
     <button className="select-none no-underline">
@@ -27,7 +26,6 @@ export function BotMessage({ content }: { content: StreamableValue<string> }) {
   const [data, error, pending] = useStreamableValue(content)
   const [processedData, setProcessedData] = useState('')
 
-
   useEffect(() => {
     if (data) {
       let preprocessedData = preprocessLaTeX(data)
@@ -41,21 +39,32 @@ export function BotMessage({ content }: { content: StreamableValue<string> }) {
         const url = sourceMatch[2]
         sources[number] = url
       }
-      console.log(preprocessedData,'preprocessedData')
+      console.log(preprocessedData, 'preprocessedData')
 
-      preprocessedData = preprocessedData.replace(/References:\n*([\s\S]*)/i, '')
-      preprocessedData = preprocessedData.replace(/\*\*References\*\*\n*-+\n*([\s\S]*)/i, '');
-
+      preprocessedData = preprocessedData.replace(
+        /References:\n*([\s\S]*)/i,
+        ''
+      )
+      preprocessedData = preprocessedData.replace(
+        /\*\*References\*\*\n*-+\n*([\s\S]*)/i,
+        ''
+      )
 
       const citationRegex = /\[(\d+)\]:\s*(\S+)/g
-
-      const newData = preprocessedData.replace(
-        citationRegex,
-        (match, number) => {
+      const citationRegex2 = /\[(\d+)\]/g
+      let newData = preprocessedData
+      if (preprocessedData.match(citationRegex) !== null) {
+        newData = preprocessedData.replace(citationRegex, (match, number) => {
           const href = sources[parseInt(number)] || ''
           return CitationText({ number: parseInt(number), href })
-        }
-      )
+        })
+      }
+      if (newData.match(citationRegex2) !== null) {
+        newData = newData.replace(citationRegex2, (match, number) => {
+          const href = sources[parseInt(number)] || ''
+          return CitationText({ number: parseInt(number), href })
+        })
+      }
 
       const finalData = newData.replace(sourceRegex, '')
 
@@ -71,7 +80,7 @@ export function BotMessage({ content }: { content: StreamableValue<string> }) {
       rehypePlugins={[
         [rehypeExternalLinks, { target: '_blank' }],
         rehypeKatex,
-        [rehypeRaw, { allowDangerousHtml: true }],
+        [rehypeRaw, { allowDangerousHtml: true }]
       ]}
       remarkPlugins={[remarkGfm, remarkMath]}
       className="prose-sm prose-neutral prose-a:text-accent-foreground/50"
