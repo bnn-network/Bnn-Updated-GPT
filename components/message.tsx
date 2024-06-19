@@ -57,6 +57,10 @@ export function BotMessage({ content }: { content: StreamableValue<string> }) {
         /References:\n-+\n([\s\S]*?)\n-+/i,
         ''
       )
+      preprocessedData = preprocessedData.replace(
+        /\*\*References\*\*\s*([\s\S]*)/i,  
+        ''
+      )
 
       const citationRegex = /\[(\d+)\]:\s*(\S+)/g
       const citationRegex2 = /\[(\d+)\]/g
@@ -98,8 +102,6 @@ export function BotMessage({ content }: { content: StreamableValue<string> }) {
   )
 }
 
-// Preprocess LaTeX equations to be rendered by KaTeX
-// ref: https://github.com/remarkjs/react-markdown/issues/785
 const preprocessLaTeX = (content: string) => {
   const blockProcessedContent = content.replace(
     /\\\[([\s\S]*?)\\\]/g,
