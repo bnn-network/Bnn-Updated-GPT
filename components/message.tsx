@@ -53,6 +53,10 @@ export function BotMessage({ content }: { content: StreamableValue<string> }) {
         /\*\*References\*\*/i,
         ''
       )
+      preprocessedData = preprocessedData.replace(
+        /References:\n-+\n([\s\S]*?)\n-+/i,
+        ''
+      )
 
       const citationRegex = /\[(\d+)\]:\s*(\S+)/g
       const citationRegex2 = /\[(\d+)\]/g
