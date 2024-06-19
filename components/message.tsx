@@ -8,6 +8,9 @@ import rehypeKatex from 'rehype-katex'
 import 'katex/dist/katex.min.css'
 import { useState, useEffect } from 'react'
 import rehypeRaw from 'rehype-raw'
+import rehypeSanitize from 'rehype-sanitize'
+
+import remarkRehype from 'remark-rehype'
 
 const CitationText = ({ number, href }: { number: number; href: string }) => {
   return `
@@ -41,26 +44,23 @@ export function BotMessage({ content }: { content: StreamableValue<string> }) {
       }
       console.log(preprocessedData, 'preprocessedData')
 
-      preprocessedData = preprocessedData.replace(
+      const patterns = [
         /References:\n*([\s\S]*)/i,
-        ''
-      )
-      preprocessedData = preprocessedData.replace(
         /\*\*References\*\*\n*-+\n*([\s\S]*)/i,
-        ''
-      )
-      preprocessedData = preprocessedData.replace(
-        /\*\*References\*\*/i,
-        ''
-      )
-      preprocessedData = preprocessedData.replace(
+       
         /References:\n-+\n([\s\S]*?)\n-+/i,
-        ''
-      )
-      preprocessedData = preprocessedData.replace(
-        /\*\*References\*\*\s*([\s\S]*)/i,  
-        ''
-      )
+        /\*\*References\*\*\n*[\s\S]*$/i
+      ]
+
+      for (const pattern of patterns) {
+        const match = preprocessedData.match(pattern)
+
+        if (match) {
+          console.log(`Matched pattern: ${pattern}`)
+          preprocessedData = preprocessedData.replace(pattern, '')
+          console.log('References removed successfully.')
+        }
+      }
 
       const citationRegex = /\[(\d+)\]:\s*(\S+)/g
       const citationRegex2 = /\[(\d+)\]/g
