@@ -25,7 +25,6 @@ export async function researcher(
       <BotMessage content={streamText.value} />
     </Section>
   )
-  // Process the response
   const toolCalls: ToolCallPart[] = []
   const toolResponses: ToolResultPart[] = []
 
