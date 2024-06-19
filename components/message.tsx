@@ -80,7 +80,7 @@ export function BotMessage({ content }: { content: StreamableValue<string> }) {
       rehypePlugins={[
         [rehypeExternalLinks, { target: '_blank' }],
         rehypeKatex,
-        [rehypeRaw, { allowDangerousHtml: true }]
+        [rehypeRaw]
       ]}
       remarkPlugins={[remarkGfm, remarkMath]}
       className="prose-sm prose-neutral prose-a:text-accent-foreground/50"
