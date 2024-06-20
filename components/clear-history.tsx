@@ -16,6 +16,7 @@ import { Button } from '@/components/ui/button'
 import { clearChats } from '@/lib/actions/chat'
 import { toast } from 'sonner'
 import { Spinner } from './ui/spinner'
+import { TrashIcon } from '@heroicons/react/24/outline'
 
 type ClearHistoryProps = {
   empty: boolean
@@ -27,7 +28,12 @@ export function ClearHistory({ empty }: ClearHistoryProps) {
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button variant="outline" className="w-full" disabled={empty}>
+        <Button
+          variant="default"
+          className="w-full rounded-full gap-2 flex items-center h-12"
+          // disabled={empty}
+        >
+          <TrashIcon className="size-4.5" />
           Clear History
         </Button>
       </AlertDialogTrigger>

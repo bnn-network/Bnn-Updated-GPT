@@ -35,10 +35,10 @@ export async function History({ location }: HistoryProps) {
           {location === 'header' ? <Menu /> : <ChevronLeft size={18} />}
         </Button>
       </SheetTrigger>
-      <SheetContent className="w-64 rounded-tl-xl rounded-bl-xl">
+      <SheetContent side={'left'} className="w-80 rounded-tl-xl rounded-bl-xl">
         <SheetHeader>
-          <SheetTitle className="flex items-center gap-1 text-sm font-normal mb-2">
-            <HistoryIcon size={14} />
+          <SheetTitle className="flex text-primary items-center gap-1 text-sm font-medium mb-2">
+            <HistoryIcon size={16} />
             History
           </SheetTitle>
         </SheetHeader>
@@ -52,7 +52,7 @@ export async function History({ location }: HistoryProps) {
               <p className="text-sm animate-pulse">
                 Authenticate to save your chat history..
               </p>
-              <Link href="/login">
+              <Link href="/sign-in">
                 <Button variant="outline">Login</Button>
               </Link>
             </div>

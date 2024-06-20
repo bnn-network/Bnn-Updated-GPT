@@ -31,12 +31,14 @@ export function SearchSection({ result }: SearchSectionProps) {
             <Section title="Images">
               <SearchResultsImageSection
                 images={searchResults.thumbnails}
-                query={''}
+                query={searchResults.input}
               />
             </Section>
           )}
           <Section title="Sources">
-            <SearchResults results={searchResults.response} />
+            <SearchResults
+              results={searchResults.responses || searchResults.responses}
+            />
           </Section>
         </>
       ) : (

@@ -2,14 +2,7 @@
 'use client'
 
 import { Card, CardContent } from '@/components/ui/card'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger
-} from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import {
   Carousel,
   type CarouselApi,
@@ -65,16 +58,16 @@ export const SearchResultsImageSection: React.FC<
         <Dialog key={index}>
           <DialogTrigger asChild>
             <div
-              className="w-[calc(50%-0.5rem)] md:w-[calc(25%-0.5rem)] aspect-video cursor-pointer relative"
+              className="w-[calc(50%-0.5rem)] md:w-[calc(25%-0.5rem)]  aspect-video cursor-pointer relative"
               onClick={() => setSelectedIndex(index)}
             >
-              <Card className="flex-1 h-full">
-                <CardContent className="p-2 h-full w-full">
+              <Card className="flex-1 h-[90%]">
+                <CardContent className=" w-full h-full bg-primary-foreground">
                   {image ? (
                     <img
                       src={image}
                       alt={`Image ${index + 1}`}
-                      className="h-full w-full object-cover"
+                      className="h-full w-full object-cover object-center "
                       onError={e =>
                         (e.currentTarget.src = '/images/logo-white.png')
                       }
@@ -91,15 +84,11 @@ export const SearchResultsImageSection: React.FC<
               )}
             </div>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-3xl max-h-[80vh] overflow-auto">
-            <DialogHeader>
-              <DialogTitle>Search Images</DialogTitle>
-              <DialogDescription className="text-sm">{query}</DialogDescription>
-            </DialogHeader>
-            <div className="py-4">
+          <DialogContent className="sm:max-w-3xl w-[90%] bg-muted max-h-[80vh]  overflow-visible ">
+            <div className="">
               <Carousel
                 setApi={setApi}
-                className="w-full bg-muted max-h-[60vh]"
+                className="lg:w-full  lg:bg-primary-foreground max-h-[60vh] lg:-z-10 lg:mt-5"
               >
                 <CarouselContent>
                   {images.map((img, idx) => (
@@ -118,11 +107,11 @@ export const SearchResultsImageSection: React.FC<
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                <div className="absolute inset-8 flex items-center justify-between p-4">
-                  <CarouselPrevious className="w-10 h-10 rounded-full shadow focus:outline-none">
+                <div className="absolute inset-0 md:-inset-12 z-20 lg:px-0 px-10 flex items-center justify-between">
+                  <CarouselPrevious className="lg:w-14 lg:h-14 left-2 sm:left-0  w-7 h-7 border-none shadow-none rounded-full focus:outline-none">
                     <span className="sr-only">Previous</span>
                   </CarouselPrevious>
-                  <CarouselNext className="w-10 h-10 rounded-full shadow focus:outline-none">
+                  <CarouselNext className="lg:w-14 lg:h-14  right-2 sm:right-0 w-7 h-7 rounded-full border-none focus:outline-none">
                     <span className="sr-only">Next</span>
                   </CarouselNext>
                 </div>

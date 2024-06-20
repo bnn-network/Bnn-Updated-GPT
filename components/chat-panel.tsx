@@ -64,7 +64,7 @@ export function ChatPanel({ messages }: ChatPanelProps) {
   }, [params])
   // Clear messages
   const handleClear = () => {
-    router.push('/')
+    window.location.replace('/')
   }
   useEffect(() => {
     if (shouldSubmit) {
@@ -80,17 +80,17 @@ export function ChatPanel({ messages }: ChatPanelProps) {
   // If there are messages and the new button has not been pressed, display the new Button
   if (messages.length > 0) {
     return (
-      <div className="fixed bottom-2 md:bottom-8 left-0 right-0 flex justify-center items-center mx-auto pointer-events-none">
+      <div className="fixed right-4 bottom-2  md:bottom-8 flex justify-center items-center mx-auto pointer-events-none">
         <Button
           type="button"
           variant={'secondary'}
-          className="rounded-full bg-secondary/80 group transition-all hover:scale-105 pointer-events-auto"
+          className="rounded-full bg-primary gap-2 text-secondary group hover:bg-primary transition-all hover:scale-105 pointer-events-auto"
           onClick={() => handleClear()}
         >
-          <span className="text-sm mr-2 group-hover:block hidden animate-in fade-in duration-300">
-            New
+          <Plus size={18} />
+          <span className="text-sm mr-2 animate-in fade-in duration-300">
+            New chat
           </span>
-          <Plus size={18} className="group-hover:rotate-90 transition-all" />
         </Button>
       </div>
     )
@@ -99,7 +99,7 @@ export function ChatPanel({ messages }: ChatPanelProps) {
   return (
     <div
       className={
-        'fixed bottom-8 left-0 right-0 top-10 mx-auto h-screen flex flex-col items-center justify-center'
+        'fixed overflow-y-auto left-0 right-0 top-10 mx-auto h-[80vh] lg:h-[88vh] flex flex-col items-center justify-center'
       }
     >
       <form onSubmit={handleSubmit} className="max-w-2xl w-full px-6">
@@ -113,7 +113,7 @@ export function ChatPanel({ messages }: ChatPanelProps) {
             placeholder="Ask a question..."
             spellCheck={false}
             value={input}
-            className="resize-none w-full min-h-12 rounded-fill bg-muted border border-primary pl-4 pr-10 pt-3 pb-1 text-sm ring-offset-gray-400 dark:ring-offset-primary  file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50'"
+            className="resize-none font-medium placeholder:select-none w-full min-h-12 rounded-fill bg-muted dark:bg-primary-foreground pl-4 pr-10 pt-3.5 pb-1 text-sm outline-offset-muted dark:outline-offset-primary file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50'"
             onChange={e => {
               setInput(e.target.value)
               setShowEmptyScreen(e.target.value.length === 0)
@@ -169,7 +169,7 @@ export function ChatPanel({ messages }: ChatPanelProps) {
           submitMessage={message => {
             setInput(message)
           }}
-          className={cn(showEmptyScreen ? 'visible' : 'invisible')}
+        // className={cn(showEmptyScreen ? 'visible' : 'invisible')}
         />
       </form>
     </div>

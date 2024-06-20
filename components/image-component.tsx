@@ -12,18 +12,18 @@ const ImageComponent = () => {
       ? '/images/logo-white.png'
       : '/images/logo-black.png'
     : theme === 'dark'
-    ? '/images/logo-white.png'
-    : '/images/logo-black.png'
+      ? '/images/logo-white.png'
+      : '/images/logo-black.png'
   return (
     <div className="pl-2 pt-2">
       <a href="/">
         <NoSsr>
           <Image
             src={conditionForTheme}
-            className={cn('w-24 h-11')}
+            className={cn('h-8 lg:h-full w-auto opacity-90')}
             alt="Logo"
-            width={96}
-            height={55}
+            width={66}
+            height={20}
           />
         </NoSsr>
         <span className="sr-only">BNNGPT</span>

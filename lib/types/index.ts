@@ -5,7 +5,7 @@ export type SearchResults = {
 }
 
 export type searXNGSearchResults = {
-  response:[
+  responses:[
     {
       title: string
       url: string

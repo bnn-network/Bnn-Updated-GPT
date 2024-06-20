@@ -11,6 +11,7 @@ import { nextResearchSchema } from '../schema/next-research'
 export async function researchOptionsManager(
   messages: CoreMessage[]
 ): Promise<any> {
+  
   try {
     const res: any = await generateObject({
       model: openAIInstance('gpt-4o'),
@@ -28,7 +29,9 @@ export async function researchOptionsManager(
 
 3. "search":
    - Choose this option if you do not have enough information to answer the user's query and need to search the web for relevant information.
-   - You will need to provide a query string to search for information on the web.
+   - You will need to provide a query string to search for information on the web which should like an article title
+   example : "indian elections 2024" input can be converted to "What happened in the 2024 Indian elections?"
+   - do not give simple queries like "indian elections 2024" or "gaza news 2024" as they are too broad
    - This option is suitable when you lack information about the latest trends or updates on the topic and need to search the web to provide the user with accurate and up-to-date information.
    - When providing the search query, do not add any dates, assumptions, or modifications to the original user query. Use the user's query as-is without appending any additional parameters or dates like "October 2023."
 

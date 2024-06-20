@@ -6,7 +6,7 @@ import {
   getAIState,
   getMutableAIState
 } from 'ai/rsc'
-import { CoreMessage, DeepPartial, nanoid, ToolResultPart } from 'ai'
+import { CoreMessage,nanoid, ToolResultPart } from 'ai'
 import { Spinner } from '@/components/ui/spinner'
 import { Section } from '@/components/section'
 import { FollowupPanel } from '@/components/followup-panel'
@@ -101,7 +101,8 @@ async function submit(
   }
 
   async function processEvents() {
-    let action = { object: { next: 'proceed' } }
+    let action = { next: 'proceed' }
+
     // If the user skips the task, we proceed to the search
     if (!skip)
       action =
@@ -110,7 +111,7 @@ async function submit(
           selectedModel ? selectedModel : 'gpt-4o'
         )) ?? action
 
-    if (action.object.next === 'inquire') {
+    if (action.next === 'inquire') {
       // Generate inquiry
       const inquiry = await inquire(
         uiStream,
@@ -212,8 +213,8 @@ async function submit(
       // Generate related queries
       const relatedQueries = await querySuggestor(
         uiStream,
-        messages,
-        selectedModel ? selectedModel : 'gpt-4o'
+        selectedModel ? selectedModel : 'gpt-4o',
+        answer
       )
       // Add follow-up panel
       uiStream.append(
@@ -390,7 +391,7 @@ export const getUIStateFromAIState = async (aiState: Chat) => {
                 id,
                 component: (
                   <Section title="Answer">
-                    <BotMessage content={answer.value} />
+                    <BotMessage content={answer.value}  />
                   </Section>
                 )
               }

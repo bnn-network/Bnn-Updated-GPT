@@ -5,7 +5,6 @@ import { usePathname, useRouter } from 'next/navigation'
 import { ChatPanel } from './chat-panel'
 import { ChatMessages } from './chat-messages'
 import { useUIState, useAIState } from 'ai/rsc'
-
 type ChatProps = {
   id?: string
 }
@@ -22,15 +21,9 @@ export function Chat({ id }: ChatProps) {
     }
   }, [id, path, messages])
 
-  // useEffect(() => {
-  //   if (aiState.messages[aiState.messages.length - 1]?.type === 'followup') {
-  //     // Refresh the page to chat history updates
-  //     router.refresh()
-  //   }
-  // }, [aiState,router])
 
   return (
-    <div className="px-8 sm:px-12 pt-12  md:pt-14 pb-14 md:pb-24 lg:max-w-3xl lg:mx-auto flex flex-col space-y-3 md:space-y-4 mb-15">
+    <div className="px-8 sm:px-12 pt-0 md:pt-0 pb-14 md:pb-24 lg:max-w-3xl  lg:mx-auto mt-20  flex flex-col space-y-3 md:space-y-4 mb-15">
       <ChatMessages messages={messages} />
       <ChatPanel messages={messages} />
     </div>

@@ -60,50 +60,50 @@ export default function RootLayout({
 }>) {
   return (
     <>
-    <ClerkProvider>
-      <Script
-        src="https://www.googletagmanager.com/gtag/js?id=G-NFW7H1G22S"
-        strategy="afterInteractive"
-      />
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
+      <ClerkProvider>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-NFW7H1G22S"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', 'G-NFW7H1G22S');
         `}
-      </Script>
-      <Script
-        id="clarity-js"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
+        </Script>
+        <Script
+          id="clarity-js"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
             (function(c,l,a,r,i,t,y){
                 c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
                 t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
                 y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
             })(window, document, "clarity", "script", "mfuyx7jlww");
           `
-        }}
-      />
-      <html lang="en" suppressHydrationWarning>
-        <body
-          className={cn(
-            'font-sans antialiased bg-secondary',
-            fontSans.variable
-          )}
-        >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
+          }}
+        />
+        <html lang="en" suppressHydrationWarning>
+          <body
+            className={cn(
+              'font-sans antialiased bg-secondary',
+              fontSans.variable
+            )}
           >
-            {children}
-            <Toaster />
-          </ThemeProvider>
-        </body>
-      </html>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="light"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {children}
+              <Toaster />
+            </ThemeProvider>
+          </body>
+        </html>
       </ClerkProvider>
     </>
   )
