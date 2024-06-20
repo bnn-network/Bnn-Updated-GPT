@@ -95,7 +95,7 @@ export function BotMessage({ content }: { content: StreamableValue<string> }) {
         [rehypeRaw]
       ]}
       remarkPlugins={[remarkGfm, remarkMath]}
-      className="prose-sm prose-neutral prose-a:text-accent-foreground/50"
+      className="prose-sm prose-neutral prose-a:text-accent-foreground/50  "
     >
       {processedData}
     </MemoizedReactMarkdown>

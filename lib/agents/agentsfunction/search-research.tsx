@@ -33,7 +33,7 @@ export default async function SearchResearch({
   query
 }: SearchResearch) {
   const answerSection = (
-    <Section title="Answer">
+    <Section className="overflow-x-scroll" title="Answer">
       <BotMessage content={streamText.value} />
     </Section>
   )
