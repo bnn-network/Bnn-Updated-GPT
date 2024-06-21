@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "test": "tsx scripts/test.ts",
-    "rag": "tsx scripts/rag.ts"
+    "rag": "tsx scripts/rag.ts",
+    "chromarag": "tsx scripts/lang-rag.ts"
   },
   "dependencies": {
     "@ai-sdk/google": "^0.0.14",
@@ -37,6 +38,8 @@
     "@upstash/redis": "^1.30.0",
     "ai": "^3.1.22",
     "aws-sdk": "^2.1637.0",
+    "chromadb": "^1.8.1",
+    "chromadb-default-embed": "^2.13.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "dotenv": "^16.4.5",
