@@ -9,7 +9,6 @@ import 'katex/dist/katex.min.css'
 import { useState, useEffect } from 'react'
 import rehypeRaw from 'rehype-raw'
 import rehypeSanitize from 'rehype-sanitize'
-
 import remarkRehype from 'remark-rehype'
 
 const CitationText = ({ number, href }: { number: number; href: string }) => {
@@ -39,29 +38,22 @@ export function BotMessage({
     if (data) {
       let preprocessedData = preprocessLaTeX(data)
 
-      // Extract references for chat-research.tsx
-      const referenceRegex = /\[(\d+)\]:\s*(https?:\/\/\S+)/g
-      const references: { [key: number]: string } = {}
-      let referenceMatch
-      while (
-        (referenceMatch = referenceRegex.exec(preprocessedData)) !== null
-      ) {
-        references[parseInt(referenceMatch[1])] = referenceMatch[2]
-      }
+      // Handle special cases where HTML is mistakenly rendered
+      preprocessedData = preprocessedData.replace(
+        /<button class="select-none no-underline">[\s\S]*?<\/button>\(([^)]+)\)/g,
+        (match, url) => {
+          const numberMatch = match.match(/class="h-\[1rem\].*?">(\d+)<\/span>/)
+          if (numberMatch) {
+            const number = parseInt(numberMatch[1])
+            return `[${number}](${url})`
+          }
+          return match
+        }
+      )
 
       if (isChatResearch) {
-        // Process citations for chat-research.tsx
-        preprocessedData = preprocessedData.replace(
-          /(\S+)(\s*)(\[(\d+)\])/g,
-          (match, precedingWord, space, fullCitation, number) => {
-            const url = references[parseInt(number)] || ''
-            const citationBubble = CitationText({
-              number: parseInt(number),
-              href: url
-            })
-            return `${precedingWord}${citationBubble}${space}`
-          }
-        )
+        // For chat-research, keep the original [1] references intact
+        // No processing needed
       } else {
         // Process citations for search-research.tsx
         const citationRegex =
@@ -90,26 +82,28 @@ export function BotMessage({
         )
       }
 
-      // Remove references section
-      const patterns = [
-        /References:\n*([\s\S]*)/i,
-        /\*\*References\*\*\n*-+\n*([\s\S]*)/i,
-        /References:\n-+\n([\s\S]*?)\n-+/i,
-        /\*\*References\*\*\n*[\s\S]*$/i
-      ]
+      // Remove references section only for search-research
+      if (!isChatResearch) {
+        const patterns = [
+          /References:\n*([\s\S]*)/i,
+          /\*\*References\*\*\n*-+\n*([\s\S]*)/i,
+          /References:\n-+\n([\s\S]*?)\n-+/i,
+          /\*\*References\*\*\n*[\s\S]*$/i
+        ]
 
-      for (const pattern of patterns) {
-        const match = preprocessedData.match(pattern)
-        if (match) {
-          preprocessedData = preprocessedData.replace(pattern, '')
+        for (const pattern of patterns) {
+          const match = preprocessedData.match(pattern)
+          if (match) {
+            preprocessedData = preprocessedData.replace(pattern, '')
+          }
         }
-      }
 
-      // Remove any remaining [number]: url patterns
-      preprocessedData = preprocessedData.replace(
-        /\[\d+\]:\s*https?:\/\/\S+/g,
-        ''
-      )
+        // Remove any remaining [number]: url patterns for search-research
+        preprocessedData = preprocessedData.replace(
+          /\[\d+\]:\s*https?:\/\/\S+/g,
+          ''
+        )
+      }
 
       setProcessedData(preprocessedData)
     }

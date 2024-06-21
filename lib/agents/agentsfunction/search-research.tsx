@@ -103,7 +103,7 @@ export default async function SearchResearch({
 
     4. Additional Guidelines:
     - Adapt language to user's expertise level.
-    - Don't refer to ANY external sites for additional information, latest news, or more context.
+    - Do not include any sections or references to external sites for additional information, latest news, updates, or context.
     - Maintain a confident, authoritative tone.
     - Use source attributions like (e.g., "CNN reports," "According to The New York Times") sparingly to maintain an authoritative tone.
     - Place references at the end of the response if needed.
