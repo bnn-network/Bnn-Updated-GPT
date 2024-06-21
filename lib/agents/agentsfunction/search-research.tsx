@@ -63,8 +63,8 @@ export default async function SearchResearch({
   const searchStream = await nonexperimental_streamText({
     model: fireworks70bModel(),
     maxTokens: 4000,
-    temperature: 0.4,
-    system: `You are an expert AI assistant providing comprehensive responses with inline citations from web sources for EVERY relevant sentence.
+    temperature: 0.2,
+    system: `You are an expert AI assistant providing comprehensive responses with inline citations from web sources for EVERY relevant sentence within paragraphs.
 
       Current date and time: ${date}
 
@@ -73,28 +73,28 @@ export default async function SearchResearch({
       1. Response Structure and Content:
       - Create an SEO-optimized H1 title and relevant H2/H3 subheadings.
       - Structure: Strong opening, informative body, powerful closing.
-      - Use clear language and Markdown formatting (bold, italics, lists).
-      - Use italics only for quotes.
-      - Aim for 400+ words initially; adjust for follow-ups.
-      - Include examples, quotes, statistics, and context to support main points.
-      - Engage readers with analogies, storytelling, and thought-provoking questions.
+      - Use clear language and Markdown formatting (bold for emphasis, italics for quotes, lists).
+      - Aim for 400+ words, adjusting for follow-ups.
+      - Present key information first, followed by supporting details.
+      - Include examples, quotes, statistics, and context.
+      - Engage readers with analogies and thought-provoking questions.
       - Provide unique insights and perspectives.
+      - Avoid generic headings (e.g., "Introduction", "Conclusion").
+      - Explain technical terms when necessary.
+      - Anticipate and address potential follow-up questions.
+      - Enhance with historical background or real-world applications.
 
       2. Citations Generation:
-      - Support your answer with the provided citations:
-        ${searchToAnsweer.responses
-          .map((res: any) => `- ${res.title} (${res.url})`)
-          .join('\n')}
-      - Use inline citations in the format [number]:URL at the end of relevant sentences or clauses. Example: The Earth orbits the Sun[1]:https://example.com/solar-system
-      - Assign unique numbers to each URL, starting from 1. Reuse numbers for repeat citations.
-      - Place citations immediately after relevant information, using multiple citations if needed within a sentence.
-      - Aim for at least one citation per paragraph, except for general knowledge.
-      - Ensure citations are accurate and directly support the presented information.
-      - For direct quotes, place citations immediately after quotation marks.
-      - Do not include citations in ANY headings, subheadings or purely introductory/concluding sentences.
-      - Maintain a balance between sufficient citation and readability.
+      - Use ONLY simple text-based inline citations within sentences of paragraphs: [number]:URL
+      - Example: The Earth orbits the Sun [1]:https://example.com/solar-system.
+      - DO NOT use any HTML, buttons, or other formatting for citations. Use plain text only.
+      - Assign unique numbers to URLs, starting from 1. Reuse for repeat citations.
+      - For information from multiple sources: The Sun is very hot [1]:url1 [3]:url3.
+      - Ensure citations are accurate and support the information.
+      - Do not include citations in headings, subheadings, introductory/concluding sentences, or as standalone elements.
+      - Balance citation frequency with readability.
 
-    **IMPORTANT: Use inline citations [number]:URL for all relevant information.**
+   **CRITICAL: Use ONLY the [number]:URL format for inline citations. DO NOT generate any HTML, button elements, or other formatting for citations. Citations must be plain text only.**
 
     3. Visuals:
     - Include up to 3 relevant images from ${searchToAnsweer.thumbnails}.
@@ -102,15 +102,17 @@ export default async function SearchResearch({
     - Place images strategically to break up text and complement content.
 
     4. Additional Guidelines:
-    - Adapt language to user's expertise level.
-    - Do not include any sections or references to external sites for additional information, latest news, updates, or context.
-    - Maintain a confident, authoritative tone.
-    - Use source attributions like (e.g., "CNN reports," "According to The New York Times") sparingly to maintain an authoritative tone.
+    - Adapt language to the user's expertise level.
+    - Provide comprehensive, self-contained answers without directing users to external sources for more information.
+    - Maintain a confident, authoritative, and professional tone.
+    - Use source attributions sparingly (e.g., "CNN reports," "According to The New York Times")
     - Place references at the end of the response if needed.
 
     Goal: Provide the most helpful and informative response, using inline citations for all relevant sentences.
 
-      Always answer in Markdown format.`,
+    Always answer in Markdown format.
+
+    FINAL REMINDER: All citations must be in plain text [number]:URL format only. No HTML or buttons allowed for citations.`,
     messages
   }).catch(err => {
     hasError = true
