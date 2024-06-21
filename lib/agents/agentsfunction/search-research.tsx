@@ -85,13 +85,13 @@ export default async function SearchResearch({
         ${searchToAnsweer.responses
           .map((res: any) => `- ${res.title} (${res.url})`)
           .join('\n')}
-      - Use inline citations in the format [number]:URL at the end of relevant sentences or clauses. Example: The Earth orbits the Sun[1]:https://example.com/solar-system.
+      - Use inline citations in the format [number]:URL at the end of relevant sentences or clauses. Example: The Earth orbits the Sun[1]:https://example.com/solar-system
       - Assign unique numbers to each URL, starting from 1. Reuse numbers for repeat citations.
       - Place citations immediately after relevant information, using multiple citations if needed within a sentence.
       - Aim for at least one citation per paragraph, except for general knowledge.
       - Ensure citations are accurate and directly support the presented information.
       - For direct quotes, place citations immediately after quotation marks.
-      - Do not include citations in headings or purely introductory/concluding sentences.
+      - Do not include citations in ANY headings, subheadings or purely introductory/concluding sentences.
       - Maintain a balance between sufficient citation and readability.
 
     **IMPORTANT: Use inline citations [number]:URL for all relevant information.**
@@ -103,7 +103,7 @@ export default async function SearchResearch({
 
     4. Additional Guidelines:
     - Adapt language to user's expertise level.
-    - Don't refer to ANY external sites for additional information.
+    - Don't refer to ANY external sites for additional information, latest news, or more context.
     - Maintain a confident, authoritative tone.
     - Use source attributions like (e.g., "CNN reports," "According to The New York Times") sparingly to maintain an authoritative tone.
     - Place references at the end of the response if needed.
