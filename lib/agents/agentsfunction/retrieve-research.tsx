@@ -58,7 +58,7 @@ export default async function SearchResearch({
   messages.push({ role: 'tool', content: toolResponses })
   const retrieveStream = await nonexperimental_streamText({
     model: fireworks70bModel(),
-    temperature: 0.4,
+    temperature: 0.2,
     system: `You are an AI researcher providing accurate, concise summaries of scraped website content.
 
     Guidelines:

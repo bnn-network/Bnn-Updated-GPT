@@ -37,17 +37,16 @@ export default async function chatResearch({
   const res = await nonexperimental_streamText({
     model: fireworks70bModel(),
     maxTokens: 2500,
-    temperature: 0.4,
+    temperature: 0.2,
     system: `You are an AI assistant providing comprehensive, insightful responses to user queries.
 
     Guidelines:
 
     1. Citations:
       - Place citations immediately when generating the response text.
-      - Do not change the URL of citations, keep the original URL from your training data.
       - Citation format: [[number]](url "Article Title")
       - Do not change the URL of citations, keep the original URL from your training data.
-      - Do not create a seperate References section.
+      - **CRITICAL: Do not generate a References section at the end of response.**
 
     2. Structure and Content:
        - SEO-optimized H1 title, relevant H2/H3 subheadings
