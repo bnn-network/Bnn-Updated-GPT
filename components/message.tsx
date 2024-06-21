@@ -11,10 +11,10 @@ import rehypeRaw from 'rehype-raw'
 import rehypeSanitize from 'rehype-sanitize'
 import remarkRehype from 'remark-rehype'
 
-const CitationText = ({ number, href }: { number: number; href: string }) => {
+const CitationBubble = ({ number, href }: { number: number; href: string }) => {
   return `
     <button class="select-none no-underline">
-      <a class="" href="${href}" target="_blank">
+      <a href="${href}" target="_blank" rel="noopener noreferrer">
         <span class="relative -top-[0rem] inline-flex">
           <span class="h-[1rem] min-w-[1rem] items-center justify-center rounded-full text-center px-1 text-xs font-mono shadow-lg bg-slate-300 dark:bg-gray-700 text-[0.60rem] text-primary">
             ${number}
@@ -38,52 +38,47 @@ export function BotMessage({
     if (data) {
       let preprocessedData = preprocessLaTeX(data)
 
-      // Handle special cases where HTML is mistakenly rendered
-      preprocessedData = preprocessedData.replace(
-        /<button class="select-none no-underline">[\s\S]*?<\/button>\(([^)]+)\)/g,
-        (match, url) => {
-          const numberMatch = match.match(/class="h-\[1rem\].*?">(\d+)<\/span>/)
-          if (numberMatch) {
-            const number = parseInt(numberMatch[1])
-            return `[${number}](${url})`
-          }
-          return match
-        }
-      )
-
-      if (isChatResearch) {
-        // For chat-research, keep the original [1] references intact
-        // No processing needed
-      } else {
-        // Process citations for search-research.tsx
-        const citationRegex =
-          /\[(\d+)\](?:\((https?:\/\/[^\s"]+)(?:\s+"([^"]+)")?\)|\:(https?:\/\/[^\s]+))/g
-        const citations: { [key: number]: { url: string; title?: string } } = {}
-
-        let citationMatch
-        while (
-          (citationMatch = citationRegex.exec(preprocessedData)) !== null
-        ) {
-          const number = parseInt(citationMatch[1])
-          const url = citationMatch[2] || citationMatch[4] // URL can be in group 2 or 4
-          const title = citationMatch[3]
-          citations[number] = { url, title }
-        }
-
-        preprocessedData = preprocessedData.replace(
-          /(\S+)(\s*)(\[(\d+)\](?:\((https?:\/\/[^\s"]+)(?:\s+"([^"]+)")?\)|\:(https?:\/\/[^\s]+)))/g,
-          (match, precedingWord, space, fullCitation, number) => {
-            const citation = citations[parseInt(number)]
-            const citationBubble = citation
-              ? CitationText({ number: parseInt(number), href: citation.url })
-              : fullCitation
-            return `${precedingWord}${citationBubble}${space}`
-          }
-        )
+      // Extract all citations and their URLs
+      const citations: { [key: number]: string } = {}
+      const citationRegex =
+        /\[(\d+)\](?:\((https?:\/\/[^\s"]+)(?:\s+"[^"]+")?\)|\:(https?:\/\/[^\s]+))/g
+      let match
+      while ((match = citationRegex.exec(preprocessedData)) !== null) {
+        const number = parseInt(match[1])
+        const url = match[2] || match[3]
+        citations[number] = url
       }
 
-      // Remove references section only for search-research
       if (!isChatResearch) {
+        // For search-research mode, replace citations with CitationBubble
+        preprocessedData = preprocessedData.replace(
+          /\[(\d+)\](?:\((https?:\/\/[^\s"]+)(?:\s+"[^"]+")?\)|\:(https?:\/\/[^\s]+))/g,
+          (_, number) =>
+            CitationBubble({
+              number: parseInt(number),
+              href: citations[parseInt(number)]
+            })
+        )
+
+        // Handle any remaining AI-generated HTML citations
+        preprocessedData = preprocessedData.replace(
+          /<button class="select-none no-underline">[\s\S]*?<\/button>/g,
+          match => {
+            const numberMatch = match.match(
+              /class="h-\[1rem\].*?">(\d+)<\/span>/
+            )
+            const hrefMatch = match.match(/href="([^"]*)"/)
+            if (numberMatch && hrefMatch) {
+              return CitationBubble({
+                number: parseInt(numberMatch[1]),
+                href: hrefMatch[1]
+              })
+            }
+            return match
+          }
+        )
+
+        // Remove references section for search-research
         const patterns = [
           /References:\n*([\s\S]*)/i,
           /\*\*References\*\*\n*-+\n*([\s\S]*)/i,
@@ -104,6 +99,7 @@ export function BotMessage({
           ''
         )
       }
+      // For chat-research mode, we don't need to do anything as the citations are already in [1] format
 
       setProcessedData(preprocessedData)
     }
