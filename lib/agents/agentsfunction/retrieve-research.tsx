@@ -13,7 +13,7 @@ import { retrieve2Tool } from '../toolsfunction/retrievefunc'
 import {
   SearchResults,
   SearchResultItem
-} from '/Users/gurbakshchahal/morphic/lib/types/index'
+} from '@/lib/types'
 
 type SearchResearch = {
   fullResponse: string

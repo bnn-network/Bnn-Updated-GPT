@@ -2,7 +2,6 @@ import { createStreamableUI, createStreamableValue } from 'ai/rsc'
 import { Card } from '@/components/ui/card'
 import { SearchSection } from '@/components/search-section'
 
-
 export const search2Tool = async (
   query: string,
   uiStream: ReturnType<typeof createStreamableUI>,
@@ -40,9 +39,9 @@ export const search2Tool = async (
     return searchResult
   }
 
-  streamResults.done(JSON.stringify(searchResult))
+  streamResults.done(JSON.stringify(searchResult.slice(0, 6)))
 
-  return searchResult
+  return searchResult.slice(0, 6)
 }
 
 async function searXNG(query: string) {
@@ -58,7 +57,7 @@ async function searXNG(query: string) {
   if (!response.ok) {
     throw new Error(`Error: ${response.status}`)
   }
- 
+
   const data = await response.json()
 
   return data
