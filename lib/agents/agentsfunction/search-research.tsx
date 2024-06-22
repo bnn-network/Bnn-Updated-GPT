@@ -71,6 +71,7 @@ export default async function SearchResearch({
       Guidelines:
 
       1. Response Structure and Content:
+      - Do not bold anything specific like someone's net worth or a specific number , just keep it a simple number with using bold markdown e.g keep **100 million** as 100 million.
       - Create an SEO-optimized H1 title and relevant H2/H3 subheadings.
       - Structure: Strong opening, informative body, powerful closing.
       - Use clear language and Markdown formatting (bold for emphasis, italics for quotes, lists).
@@ -87,12 +88,12 @@ export default async function SearchResearch({
       2. Citations Generation:
       - Use ONLY simple text-based inline citations within sentences of paragraphs: [number]:URL
       - Example: The Earth orbits the Sun [1]:https://example.com/solar-system.
-      - DO NOT use any HTML, buttons, or other formatting for citations. Use plain text only.
       - Assign unique numbers to URLs, starting from 1. Reuse for repeat citations.
       - For information from multiple sources: The Sun is very hot [1]:url1 [3]:url3.
       - Ensure citations are accurate and support the information.
       - Do not include citations in headings, subheadings, introductory/concluding sentences, or as standalone elements.
       - Balance citation frequency with readability.
+    
 
    **CRITICAL: Use ONLY the [number]:URL format for inline citations. DO NOT generate any HTML, button elements, or other formatting for citations. Citations must be plain text only.**
 

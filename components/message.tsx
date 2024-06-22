@@ -46,6 +46,8 @@ export function BotMessage({
         const url = match[2] || match[3]
         citations[number] = url
       }
+
+      console.log(preprocessedData,'preprocessedData')
     
 
       if (!isChatResearch) {
