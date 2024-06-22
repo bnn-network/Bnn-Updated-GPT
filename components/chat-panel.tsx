@@ -32,6 +32,7 @@ export function ChatPanel({ messages }: ChatPanelProps) {
   const [shouldSubmit, setShouldSubmit] = useState(false)
   const router = useRouter()
   const params = useSearchParams()
+  const [FileUpload, setFileUpload] = useState<File | null>(null)
   const { selectedModel } = useModel()
 
   const handleSubmit = useCallback(
@@ -171,7 +172,7 @@ export function ChatPanel({ messages }: ChatPanelProps) {
                 <Paperclip size={20} />
               </Button>
             </PopoverTrigger>
-            <PopoverContent>
+            <PopoverContent className="z-50 ml-60 mb-5   ">
               <MyDropzone />
             </PopoverContent>
           </Popover>
