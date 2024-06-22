@@ -15,11 +15,13 @@ export default function Page() {
 
   return (
     <AI initialAIState={{ chatId: id, messages: [] }}>
-      <div className="flex flex-col items-center min-h-screen justify-between bg-secondary text-primary px-4 py-8 md:py-16">
-        <main className="flex flex-col items-center justify-center flex-1 w-full max-w-xl mx-auto">
-          <DynamicTypingEffect />
-          <div className="w-full mt-4 md:mt-8">
-            <Chat id={id} />
+      <div className="flex flex-col min-h-screen bg-secondary text-primary">
+        <main className="flex-grow flex flex-col items-center justify-center px-4 py-8 md:py-16">
+          <div className="w-full max-w-xl mx-auto flex flex-col items-center">
+            <DynamicTypingEffect />
+            <div className="w-full mt-4 md:mt-8">
+              <Chat id={id} />
+            </div>
           </div>
         </main>
         <FooterAI />

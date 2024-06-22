@@ -58,7 +58,7 @@ export default function TypingEffect() {
   }, [charIndex, isDeleting, phraseIndex])
 
   return (
-    <h1 className="text-2xl md:text-3xl mb-4 md:mb-8 lg:mb-16 font-semibold text-center">
+    <h1 className="text-2xl md:text-3xl mb-6 md:mb-8 font-semibold text-center">
       {phrases[phraseIndex].substring(0, charIndex)}
       <span className="animate-blink">|</span>
     </h1>
