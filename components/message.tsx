@@ -8,8 +8,6 @@ import rehypeKatex from 'rehype-katex'
 import 'katex/dist/katex.min.css'
 import { useState, useEffect } from 'react'
 import rehypeRaw from 'rehype-raw'
-import rehypeSanitize from 'rehype-sanitize'
-import remarkRehype from 'remark-rehype'
 
 const CitationBubble = ({ number, href }: { number: number; href: string }) => {
   return `
@@ -41,19 +39,20 @@ export function BotMessage({
       // Extract all citations and their URLs
       const citations: { [key: number]: string } = {}
       const citationRegex =
-        /\[(\d+)\](?:\((https?:\/\/[^\s"]+)(?:\s+"[^"]+")?\)|\:(https?:\/\/[^\s]+))/g
+      /\[(\d+)\](?:\((https?:\/\/[^\s"]+)(?:\s+"[^"]+")?\)|:\s*(\S+))/g
       let match
       while ((match = citationRegex.exec(preprocessedData)) !== null) {
         const number = parseInt(match[1])
         const url = match[2] || match[3]
         citations[number] = url
       }
+    
 
       if (!isChatResearch) {
         // For search-research mode, replace citations with CitationBubble
         preprocessedData = preprocessedData.replace(
-          /\[(\d+)\](?:\((https?:\/\/[^\s"]+)(?:\s+"[^"]+")?\)|\:(https?:\/\/[^\s]+))/g,
-          (_, number) =>
+          /\[(\d+)\](?:\((https?:\/\/[^\s"]+)(?:\s+"[^"]+")?\)|:\s*(\S+)|(?!\(|:))/g,
+          (match, number) =>
             CitationBubble({
               number: parseInt(number),
               href: citations[parseInt(number)]

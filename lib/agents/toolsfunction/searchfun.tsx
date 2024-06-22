@@ -38,10 +38,16 @@ export const search2Tool = async (
     )
     return searchResult
   }
+  const firstSixSources = searchResult.responses.slice(0, 6)
+  const updatedSearchResult = {
+    responses: firstSixSources,
+    thumbnails: searchResult.thumbnails,
+    input: query
+  }
 
-  streamResults.done(JSON.stringify(searchResult.slice(0, 6)))
+  streamResults.done(JSON.stringify(updatedSearchResult))
 
-  return searchResult.slice(0, 6)
+  return updatedSearchResult
 }
 
 async function searXNG(query: string) {
