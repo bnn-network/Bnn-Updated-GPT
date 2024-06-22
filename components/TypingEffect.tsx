@@ -4,10 +4,9 @@ import React, { useState, useEffect } from 'react'
 
 const phrases = [
   'Limitless Curiosity',
-  'Unravel Mysteries',
+  'Ignite Your Curiosity',
   'Explore the Unknown',
   'Discover New Horizons',
-  'Ignite Your Curiosity',
   'Question Everything',
   'Seek Knowledge',
   'Embrace Wonder',
@@ -32,7 +31,8 @@ const phrases = [
   'Explore Possibilities',
   'Delve into Complexity',
   'Nurture Curiosity',
-  'Illuminate the Unknown'
+  'Illuminate the Unknown',
+  'Embark on Intellectual Adventures'
 ]
 
 export default function TypingEffect() {
@@ -58,7 +58,7 @@ export default function TypingEffect() {
   }, [charIndex, isDeleting, phraseIndex])
 
   return (
-    <h1 className="text-3xl mb-10 lg:mb-16 font-semibold">
+    <h1 className="text-2xl md:text-3xl mb-4 md:mb-8 lg:mb-16 font-semibold text-center">
       {phrases[phraseIndex].substring(0, charIndex)}
       <span className="animate-blink">|</span>
     </h1>
