@@ -4,25 +4,22 @@ import { AI } from '@/app/actions'
 import useModel from '@/store/useModel'
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
 import { useActions, useUIState } from 'ai/rsc'
-import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import { UserMessage } from './user-message'
 import { nanoid } from 'ai'
 
-interface props {
+interface Props {
   name: string
-  icon: string
+  icon: string // Change this to string as we're passing the icon as a string
 }
 
-function TrendingItem(topic: props) {
-  const [isOpen, setIsOpen] = React.useState(false)
+function TrendingItem({ name, icon }: Props) {
+  const [isOpen, setIsOpen] = useState(false)
   const { selectedModel } = useModel()
   const { submit } = useActions()
   const [, setMessages] = useUIState<typeof AI>()
 
-  const handleDropDown = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  const handleDropDown = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     setIsOpen(!isOpen)
   }
@@ -36,8 +33,8 @@ function TrendingItem(topic: props) {
       }
     ])
     const responseMessage = await submit(null, selectedModel, false, query)
-
     setMessages(currentMessages => [...currentMessages, responseMessage])
+    setIsOpen(false)
   }
 
   const TopicQueries = [
@@ -97,34 +94,39 @@ function TrendingItem(topic: props) {
     }
   ]
 
-  const matchingTopic = TopicQueries.find(t => t.topic === topic.name)
+  const matchingTopic = TopicQueries.find(t => t.topic === name)
 
   return (
-    <div
-      key={topic.name}
-      className="p-3 rounded-xl bg-muted flex flex-col gap-4 dark:bg-primary-foreground"
-    >
-      {/* header */}
-      <div className="flex items-center justify-between ">
+    <div className="relative mb-2">
+      <button
+        onClick={handleDropDown}
+        className="w-full flex items-center justify-between p-2.5 rounded-full bg-secondary hover:bg-secondary/80 transition-colors duration-200"
+      >
         <div className="flex items-center gap-2">
-          <Image src={topic.icon} alt={topic.name} />
-          <h2>{topic.name}</h2>
+          <img
+            src={icon}
+            alt={name}
+            className="w-4 h-4 text-muted-foreground"
+          />
+          <span className="text-xs font-medium">{name}</span>
         </div>
-        <button onClick={e => handleDropDown(e)}>
-          <ChevronDownIcon className="size-4 -rotate-90" />
-        </button>
-      </div>
+        <ChevronDownIcon
+          className={`w-4 h-4 text-muted-foreground transition-transform duration-200 ${
+            isOpen ? 'rotate-180' : ''
+          }`}
+        />
+      </button>
 
       {isOpen && matchingTopic && (
-        <div className="space-y-2 text-medium text-primary">
+        <div className="mt-1 py-1 bg-background border border-border rounded-lg shadow-sm">
           {matchingTopic.queries.map((query, index) => (
-            <p
-              className="cursor-pointer hover:animate-pulse transition hover:scale-110"
+            <button
               key={index}
+              className="w-full text-left px-3 py-2 text-xs hover:bg-secondary/50 transition-colors duration-200"
               onClick={() => handleSubmit(query)}
             >
               {query}
-            </p>
+            </button>
           ))}
         </div>
       )}
