@@ -94,8 +94,7 @@ export default async function SearchResearch({
         - Use plain text only
 
         Numbering and Multiple Sources:
-        - Assign unique numbers to URLs, starting from 1
-        - Reuse numbers for repeat citations
+        - Assign unique numbers to URLs, starting from 1. Reuse the same numbers for repeat citations.
         - For multiple sources in one sentence: The Sun is very hot. [1]:url1 [3]:url3
 
         Do Not Include Citations In:
