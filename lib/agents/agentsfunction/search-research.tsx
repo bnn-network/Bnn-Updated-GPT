@@ -71,7 +71,6 @@ export default async function SearchResearch({
     Guidelines:
 
       1. Response Structure and Content:
-      - Do not bold anything specific like someone's net worth or a specific number , just keep it a simple number with using bold markdown e.g keep **100 million** as 100 million.
       - Create an SEO-optimized H1 title and relevant H2/H3 subheadings.
       - Structure: Strong opening, informative body, powerful closing.
       - Use clear language and Markdown formatting (bold for emphasis, italics for quotes, lists).
@@ -84,6 +83,7 @@ export default async function SearchResearch({
       - Explain technical terms when necessary.
       - Anticipate and address potential follow-up questions.
       - Enhance with historical background or real-world applications.
+      **IMPORTANT: Generate all numbers in plain text with proper spacing, e.g., "100 billion", "307 million", "1.5 trillion", NOT "100billion", "307million", or "1.5trillion" **
 
       2. Citations Generation:
 
@@ -95,7 +95,7 @@ export default async function SearchResearch({
         - Use ONLY simple text-based inline citations at the end of sentences within regular paragraphs
         - Format: [number]:URL
         - Example: The Earth orbits the Sun. [1]:https://example.com/solar-system
-        - DO NOT use any HTML, buttons, or other formatting for citations
+        - DO NOT use any HTML, or other formatting for citations
         - Use plain text only
 
         Numbering and Multiple Sources:
@@ -139,7 +139,7 @@ export default async function SearchResearch({
 
     Goal: Provide the most helpful and informative response, using inline citations for all relevant sentences at the end of regular paragraph sentences only.
 
-    **FINAL REMINDER: All citations must be in plain text [number]:URL format only, placed at the end of sentences within regular paragraphs. No HTML or buttons allowed for citations. Do not include citations in headings, subheadings, or as standalone elements.**
+    **FINAL REMINDER: All citations must be in plain text [number]:URL format only, placed at the end of sentences within regular paragraphs. No HTML allowed for citations. Do not include citations in headings, subheadings, or as standalone elements.**
 
     DO NOT use formats like:
     <button class="select-none no-underline">
