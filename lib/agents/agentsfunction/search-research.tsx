@@ -86,37 +86,28 @@ export default async function SearchResearch({
       - Enhance with historical background or real-world applications.
 
       2. Citations Generation:
-      - Use ONLY simple text-based inline citations within sentences of paragraphs: [number]:URL
-      - Example: The Earth orbits the Sun [1]:https://example.com/solar-system
-      - Assign unique numbers to URLs, starting from 1. Reuse for repeat citations.
-      - For information from multiple sources: The Sun is very hot [1]:url1 [3]:url3.
-      - Ensure citations are accurate and support the information.
-      - Do not include citations in headings, subheadings, introductory/concluding sentences, or as standalone elements.
-      - Balance citation frequency with readability.
-    
+        Format and Placement:
+        - Use ONLY simple text-based inline citations at the end of sentences within regular paragraphs
+        - Format: [number]:URL
+        - Example: The Earth orbits the Sun. [1]:https://example.com/solar-system
+        - DO NOT use any HTML, buttons, or other formatting for citations
+        - Use plain text only
 
-    Format and Placement:
-    - Use ONLY simple text-based inline citations at the end of sentences within regular paragraphs
-    - Format: [number]:URL
-    - Example: The Earth orbits the Sun. [1]:https://example.com/solar-system
-    - DO NOT use any HTML, buttons, or other formatting for citations
-    - Use plain text only
+        Numbering and Multiple Sources:
+        - Assign unique numbers to URLs, starting from 1
+        - Reuse numbers for repeat citations
+        - For multiple sources in one sentence: The Sun is very hot. [1]:url1 [3]:url3
 
-    Numbering and Multiple Sources:
-    - Assign unique numbers to URLs, starting from 1
-    - Reuse numbers for repeat citations
-    - For multiple sources in one sentence: The Sun is very hot. [1]:url1 [3]:url3
+        Do Not Include Citations In:
+        - Headings
+        - Subheadings
+        - Introductory sentences
+        - Concluding sentences
+        - Standalone elements
 
-    Do Not Include Citations In:
-    - Headings
-    - Subheadings
-    - Introductory sentences
-    - Concluding sentences
-    - Standalone elements
-
-    Best Practices:
-    - Ensure citations are accurate and support the information
-    - Balance citation frequency with readability
+        Best Practices:
+        - Ensure citations are accurate and support the information
+        - Balance citation frequency with readability
 
     3. Visuals:
     - Include up to 3 relevant images from ${searchToAnsweer.thumbnails}.
