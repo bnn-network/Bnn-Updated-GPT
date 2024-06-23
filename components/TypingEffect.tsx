@@ -1,6 +1,7 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React from 'react'
+import { TypeAnimation } from 'react-type-animation'
 
 const phrases = [
   'Limitless Curiosity',
@@ -34,48 +35,21 @@ const phrases = [
 ]
 
 export default function TypingEffect() {
-  const [currentPhrase, setCurrentPhrase] = useState('')
-  const [charIndex, setCharIndex] = useState(0)
-  const [isDeleting, setIsDeleting] = useState(false)
-
-  useEffect(() => {
-    const getRandomPhrase = () => {
-      let newPhrase
-      do {
-        newPhrase = phrases[Math.floor(Math.random() * phrases.length)]
-      } while (newPhrase === currentPhrase)
-      return newPhrase
-    }
-
-    if (!currentPhrase) {
-      setCurrentPhrase(getRandomPhrase())
-    }
-
-    const typingInterval = setInterval(() => {
-      if (!isDeleting && charIndex < currentPhrase.length) {
-        setCharIndex(charIndex + 1)
-      } else if (!isDeleting && charIndex === currentPhrase.length) {
-        setTimeout(() => setIsDeleting(true), 1500)
-      } else if (isDeleting && charIndex > 0) {
-        setCharIndex(charIndex - 1)
-      } else if (isDeleting && charIndex === 0) {
-        setIsDeleting(false)
-        // Add a brief pause before setting the new phrase
-        setTimeout(() => {
-          setCurrentPhrase(getRandomPhrase())
-          setCharIndex(0) // Reset charIndex to ensure we start from the beginning
-        }, 500) // 500ms pause, adjust as needed
-      }
-    }, 100)
-
-    return () => clearInterval(typingInterval)
-  }, [charIndex, isDeleting, currentPhrase])
-
   return (
     <div className="w-full text-center">
       <h1 className="text-2xl font-semibold inline-block">
-        {currentPhrase.substring(0, charIndex)}
-        <span className="animate-blink">|</span>
+        <TypeAnimation
+          sequence={phrases.flatMap(phrase => [
+            phrase,
+            2000, // wait 1.5s before deleting
+            '' // delete the phrase
+          ])}
+          wrapper="span"
+          speed={50}
+          style={{ display: 'inline-block' }}
+          repeat={Infinity}
+        />
+        <span className="animate-blink"></span>
       </h1>
     </div>
   )

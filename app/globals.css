@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
+    --background: 210 50% 98%;
     --foreground: 222 47% 11%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
@@ -16,7 +16,7 @@
     --input: 214.3 31.8% 91.4%;
     --primary: 222 47% 11%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
+    --secondary: 210 40% 96.5%;
     --secondary-foreground: 222 47% 11%;
     --accent: 210 40% 96.1%;
     --accent-foreground: 222 47% 11%;
@@ -27,6 +27,7 @@
   }
 
   .dark {
+    /* Dark mode styles remain unchanged */
     --background: 222 47% 11%;
     --foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
@@ -75,17 +76,19 @@
 }
 
 @keyframes blink {
-  0%,
-  100% {
-    opacity: 0;
+  0% {
+    opacity: 1;
   }
   50% {
+    opacity: 0;
+  }
+  100% {
     opacity: 1;
   }
 }
 
 .animate-blink {
-  animation: blink 1s infinite;
+  animation: blink 1s step-start infinite;
 }
 
 @media (max-width: 640px) {

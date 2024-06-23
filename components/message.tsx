@@ -32,7 +32,17 @@ export function BotMessage({
       let match
       while ((match = citationRegex.exec(preprocessedData)) !== null) {
         const number = parseInt(match[1])
-        const url = match[2] || match[3]
+        let url = match[2] || match[3]
+
+        // Remove trailing period only if it's not part of the URL structure
+        if (
+          url.endsWith('.') &&
+          !url.endsWith('..') &&
+          !url.endsWith('.com.')
+        ) {
+          url = url.slice(0, -1)
+        }
+
         citations[number] = url
       }
 
