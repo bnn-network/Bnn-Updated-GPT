@@ -7,10 +7,11 @@ import { useActions, useUIState } from 'ai/rsc'
 import React, { useState } from 'react'
 import { UserMessage } from './user-message'
 import { nanoid } from 'ai'
+import Image from 'next/image'
 
 interface Props {
   name: string
-  icon: string // Change this to string as we're passing the icon as a string
+  icon: string
 }
 
 function TrendingItem({ name, icon }: Props) {
@@ -103,10 +104,12 @@ function TrendingItem({ name, icon }: Props) {
         className="w-full flex items-center justify-between p-2.5 rounded-full bg-secondary hover:bg-secondary/80 transition-colors duration-200"
       >
         <div className="flex items-center gap-2">
-          <img
+          <Image
             src={icon}
             alt={name}
-            className="w-4 h-4 text-muted-foreground"
+            width={16}
+            height={16}
+            className="text-muted-foreground"
           />
           <span className="text-xs font-medium">{name}</span>
         </div>
