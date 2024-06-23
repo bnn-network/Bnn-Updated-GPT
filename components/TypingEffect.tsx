@@ -34,31 +34,43 @@ const phrases = [
 ]
 
 export default function TypingEffect() {
-  const [phraseIndex, setPhraseIndex] = useState(0)
+  const [currentPhrase, setCurrentPhrase] = useState('')
   const [charIndex, setCharIndex] = useState(0)
   const [isDeleting, setIsDeleting] = useState(false)
 
+  const getRandomPhrase = () => {
+    let newPhrase
+    do {
+      newPhrase = phrases[Math.floor(Math.random() * phrases.length)]
+    } while (newPhrase === currentPhrase)
+    return newPhrase
+  }
+
   useEffect(() => {
+    if (!currentPhrase) {
+      setCurrentPhrase(getRandomPhrase())
+    }
+
     const typingInterval = setInterval(() => {
-      if (!isDeleting && charIndex < phrases[phraseIndex].length) {
+      if (!isDeleting && charIndex < currentPhrase.length) {
         setCharIndex(charIndex + 1)
-      } else if (!isDeleting && charIndex === phrases[phraseIndex].length) {
+      } else if (!isDeleting && charIndex === currentPhrase.length) {
         setTimeout(() => setIsDeleting(true), 1500)
       } else if (isDeleting && charIndex > 0) {
         setCharIndex(charIndex - 1)
       } else if (isDeleting && charIndex === 0) {
         setIsDeleting(false)
-        setPhraseIndex((phraseIndex + 1) % phrases.length)
+        setCurrentPhrase(getRandomPhrase())
       }
     }, 100)
 
     return () => clearInterval(typingInterval)
-  }, [charIndex, isDeleting, phraseIndex])
+  }, [charIndex, isDeleting, currentPhrase])
 
   return (
     <div className="w-full text-center">
       <h1 className="text-2xl font-semibold inline-block">
-        {phrases[phraseIndex].substring(0, charIndex)}
+        {currentPhrase.substring(0, charIndex)}
         <span className="animate-blink">|</span>
       </h1>
     </div>
