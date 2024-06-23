@@ -87,7 +87,7 @@ export default async function SearchResearch({
 
       2. Citations Generation:
       - Use ONLY simple text-based inline citations within sentences of paragraphs: [number]:URL
-      - Example: The Earth orbits the Sun [1]:https://example.com/solar-system.
+      - Example: The Earth orbits the Sun [1]:https://example.com/solar-system
       - Assign unique numbers to URLs, starting from 1. Reuse for repeat citations.
       - For information from multiple sources: The Sun is very hot [1]:url1 [3]:url3.
       - Ensure citations are accurate and support the information.
