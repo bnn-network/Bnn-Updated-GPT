@@ -25,14 +25,12 @@ const phrases = [
   'Ponder the Impossible',
   'Uncover Insights',
   'Probe the Depths',
-  'Satisfy Your Inquisitiveness',
   'Venture Beyond Limits',
   'Cultivate Wisdom',
   'Explore Possibilities',
   'Delve into Complexity',
   'Nurture Curiosity',
-  'Illuminate the Unknown',
-  'Embark on Intellectual Adventures'
+  'Illuminate the Unknown'
 ]
 
 export default function TypingEffect() {
@@ -58,9 +56,11 @@ export default function TypingEffect() {
   }, [charIndex, isDeleting, phraseIndex])
 
   return (
-    <h1 className="text-2xl md:text-3xl font-semibold">
-      {phrases[phraseIndex].substring(0, charIndex)}
-      <span className="animate-blink">|</span>
-    </h1>
+    <div className="w-full text-center">
+      <h1 className="text-2xl font-semibold inline-block">
+        {phrases[phraseIndex].substring(0, charIndex)}
+        <span className="animate-blink">|</span>
+      </h1>
+    </div>
   )
 }
