@@ -60,7 +60,11 @@ export default function TypingEffect() {
         setCharIndex(charIndex - 1)
       } else if (isDeleting && charIndex === 0) {
         setIsDeleting(false)
-        setCurrentPhrase(getRandomPhrase())
+        // Add a brief pause before setting the new phrase
+        setTimeout(() => {
+          setCurrentPhrase(getRandomPhrase())
+          setCharIndex(0) // Reset charIndex to ensure we start from the beginning
+        }, 500) // 500ms pause, adjust as needed
       }
     }, 100)
 
