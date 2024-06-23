@@ -38,15 +38,15 @@ export default function TypingEffect() {
   const [charIndex, setCharIndex] = useState(0)
   const [isDeleting, setIsDeleting] = useState(false)
 
-  const getRandomPhrase = () => {
-    let newPhrase
-    do {
-      newPhrase = phrases[Math.floor(Math.random() * phrases.length)]
-    } while (newPhrase === currentPhrase)
-    return newPhrase
-  }
-
   useEffect(() => {
+    const getRandomPhrase = () => {
+      let newPhrase
+      do {
+        newPhrase = phrases[Math.floor(Math.random() * phrases.length)]
+      } while (newPhrase === currentPhrase)
+      return newPhrase
+    }
+
     if (!currentPhrase) {
       setCurrentPhrase(getRandomPhrase())
     }
