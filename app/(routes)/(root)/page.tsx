@@ -16,10 +16,12 @@ export default function Page() {
   return (
     <AI initialAIState={{ chatId: id, messages: [] }}>
       <div className="flex flex-col min-h-screen bg-secondary text-primary">
-        <main className="flex-grow flex flex-col items-center justify-center px-4 py-8 md:py-16">
+        <main className="flex-grow flex flex-col items-center justify-start md:justify-center px-4 py-8 md:py-16">
           <div className="w-full max-w-xl mx-auto flex flex-col items-center">
-            <DynamicTypingEffect />
-            <div className="w-full mt-4 md:mt-8">
+            <div className="w-full text-center mb-8 md:mb-16 mt-16 md:mt-0">
+              <DynamicTypingEffect />
+            </div>
+            <div className="w-full">
               <Chat id={id} />
             </div>
           </div>

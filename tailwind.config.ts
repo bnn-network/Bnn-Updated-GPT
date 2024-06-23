@@ -15,7 +15,11 @@ const config = {
       center: true,
       padding: '2rem',
       screens: {
-        '2xl': '1400px'
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+        '2xl': '1536px' // Increased from 1400px
       }
     },
     extend: {
@@ -134,7 +138,16 @@ const config = {
       }
     }
   },
-  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')]
+  plugins: [
+    require('tailwindcss-animate'),
+    require('@tailwindcss/typography')({
+      className: 'prose',
+      // Customize the max width of prose
+      maxWidth: {
+        prose: '80ch' // Increase this value to make the prose wider
+      }
+    })
+  ]
 } satisfies Config
 
 export default config
