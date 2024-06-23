@@ -83,7 +83,7 @@ export default async function SearchResearch({
       - Explain technical terms when necessary.
       - Anticipate and address potential follow-up questions.
       - Enhance with historical background or real-world applications.
-      **IMPORTANT: Generate all numbers in plain text with proper spacing, e.g., "100 billion", "307 million", "1.5 trillion", NOT "100billion", "307million", or "1.5trillion" **
+      - Generate all numbers in plain text without using bold markdown.
 
       2. Citations Generation:
 
