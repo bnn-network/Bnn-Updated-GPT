@@ -16,9 +16,9 @@ export default function Page() {
   return (
     <AI initialAIState={{ chatId: id, messages: [] }}>
       <div className="flex flex-col min-h-screen bg-secondary text-primary">
-        <main className="flex-grow flex flex-col items-center justify-start px-4 pt-32 sm:pt-20 md:pt-16 pb-8">
+        <main className="flex-grow flex flex-col items-center justify-start px-4 pt-48 sm:pt-32 md:pt-24 pb-8">
           <div className="w-full max-w-xl mx-auto flex flex-col items-center">
-            <div className="mb-12 sm:mb-16">
+            <div className="mb-16 sm:mb-20 md:mb-24">
               <DynamicTypingEffect />
             </div>
             <div className="w-full">
