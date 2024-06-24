@@ -36,21 +36,19 @@ const phrases = [
 
 export default function TypingEffect() {
   return (
-    <div className="w-full text-center">
-      <h1 className="text-2xl font-semibold inline-block">
-        <TypeAnimation
-          sequence={phrases.flatMap(phrase => [
-            phrase,
-            2000, // wait 1.5s before deleting
-            '' // delete the phrase
-          ])}
-          wrapper="span"
-          speed={50}
-          style={{ display: 'inline-block' }}
-          repeat={Infinity}
-        />
-        <span className="animate-blink"></span>
-      </h1>
+    <div className="w-full max-w-4xl mx-auto px-4">
+      <div className="text-center min-h-[3rem] sm:min-h-[4rem] md:min-h-[5rem] flex items-center justify-center">
+        <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold">
+          <TypeAnimation
+            sequence={phrases.flatMap(phrase => [phrase, 2000, ''])}
+            wrapper="span"
+            speed={50}
+            style={{ display: 'inline-block' }}
+            repeat={Infinity}
+          />
+          <span className="animate-blink"></span>
+        </h1>
+      </div>
     </div>
   )
 }
