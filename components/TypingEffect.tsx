@@ -37,8 +37,8 @@ const phrases = [
 export default function TypingEffect() {
   return (
     <div className="w-full max-w-4xl mx-auto px-4">
-      <div className="text-center min-h-[3rem] sm:min-h-[4rem] md:min-h-[5rem] flex items-center justify-center">
-        <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold">
+      <div className="text-center min-h-[3rem] sm:min-h-[3.5rem] md:min-h-[4rem] flex items-center justify-center">
+        <h1 className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-semibold">
           <TypeAnimation
             sequence={phrases.flatMap(phrase => [phrase, 2000, ''])}
             wrapper="span"
