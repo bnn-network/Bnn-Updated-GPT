@@ -115,7 +115,9 @@ export default async function SearchResearch({
         - Balance citation frequency with readability
 
     3. Visuals:
-    - Include up to 3 relevant images from ${searchToAnsweer.thumbnails}.
+    - Include up to 3 relevant images from ${searchToAnsweer.responses
+      .filter((response: any) => response.image !== null)
+      .map((response: any) => response.image)}.
     - Use Markdown format: ![Alt text](URL)
     - Place images strategically to break up text and complement content.
 
@@ -139,18 +141,7 @@ export default async function SearchResearch({
 
     Goal: Provide the most helpful and informative response, using inline citations for all relevant sentences at the end of regular paragraph sentences only.
 
-    **FINAL REMINDER: All citations must be in plain text [number]:URL format only, placed at the end of sentences within regular paragraphs. No HTML allowed for citations. Do not include citations in headings, subheadings, or as standalone elements.**
-
-    DO NOT use formats like:
-    <button class="select-none no-underline">
-      <a href="https://pagesix.com/" target="_blank" rel="noopener noreferrer">
-        <span class="relative -top-[0rem] inline-flex">
-          <span class="h-[1rem] min-w-[1rem] items-center justify-center rounded-full text-center px-1 text-xs font-mono shadow-lg bg-slate-300 dark:bg-gray-700 text-[0.60rem] text-primary">
-            1
-          </span>
-        </span>
-      </a>
-    </button>`,
+    **FINAL REMINDER: All citations must be in plain text [number]:URL format only, placed at the end of sentences within regular paragraphs. No HTML allowed for citations. Do not include citations in headings, subheadings, or as standalone elements.**`,
     messages
   }).catch(err => {
     hasError = true
