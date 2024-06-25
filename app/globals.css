@@ -97,3 +97,33 @@
     line-height: 2rem;
   }
 }
+
+.code-block {
+  margin: 1em 0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em 1em;
+  background-color: #343541;
+  color: white;
+}
+
+.code-header button {
+  background: none;
+  border: 1px solid white;
+  color: white;
+  padding: 0.2em 0.5em;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.code-block pre {
+  margin: 0;
+  padding: 1em;
+  overflow-x: auto;
+}

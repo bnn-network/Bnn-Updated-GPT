@@ -10,6 +10,12 @@ import rehypeRaw from 'rehype-raw'
 import { CitationBubble } from './CitationBubble'
 import ReactDOMServer from 'react-dom/server'
 import 'katex/dist/katex.min.css'
+import { Components } from 'react-markdown'
+import Prism from 'prismjs'
+import 'prismjs/themes/prism-tomorrow.css'
+import 'prismjs/components/prism-python'
+import 'prismjs/components/prism-javascript'
+// Add more language imports as needed
 
 export function BotMessage({
   content,
@@ -24,6 +30,16 @@ export function BotMessage({
   useEffect(() => {
     if (data) {
       let preprocessedData = data
+
+      // Protect code blocks and bold text
+      const protectedElements: string[] = []
+      preprocessedData = preprocessedData.replace(
+        /(`{3}[\s\S]*?`{3})|(\*\*.*?\*\*)/g,
+        match => {
+          protectedElements.push(match)
+          return `__PROTECTED_ELEMENT_${protectedElements.length - 1}__`
+        }
+      )
 
       // Extract all citations and their URLs
       const citations: { [key: number]: string } = {}
@@ -45,8 +61,6 @@ export function BotMessage({
 
         citations[number] = url
       }
-
-      console.log(preprocessedData, 'preprocessedData')
 
       if (!isChatResearch) {
         // For search-research mode, replace citations with CitationBubble
@@ -89,11 +103,46 @@ export function BotMessage({
         )
       }
 
+      // Restore protected elements
+      preprocessedData = preprocessedData.replace(
+        /__PROTECTED_ELEMENT_(\d+)__/g,
+        (_, index) => protectedElements[parseInt(index)]
+      )
+
       setProcessedData(preprocessedData)
+      setTimeout(() => Prism.highlightAll(), 0)
     }
   }, [data, isChatResearch])
 
   if (error) return <div>Error</div>
+
+  const components: Components = {
+    code({ node, inline, className, children, ...props }: any) {
+      const match = /language-(\w+)/.exec(className || '')
+      const language = match ? match[1] : ''
+      return !inline && match ? (
+        <div className="code-block">
+          <div className="code-header">
+            <span>{language}</span>
+            <button
+              onClick={() => navigator.clipboard.writeText(String(children))}
+            >
+              Copy code
+            </button>
+          </div>
+          <pre className={className}>
+            <code className={className} {...props}>
+              {children}
+            </code>
+          </pre>
+        </div>
+      ) : (
+        <code className={className} {...props}>
+          {children}
+        </code>
+      )
+    }
+  }
 
   return (
     <MemoizedReactMarkdown
@@ -103,8 +152,9 @@ export function BotMessage({
         rehypeKatex
       ]}
       remarkPlugins={[remarkGfm, remarkMath]}
-      disallowedElements={['code', 'span']}
+      disallowedElements={['span']}
       className="prose-sm prose-neutral prose-a:text-accent-foreground/50"
+      components={components}
     >
       {processedData}
     </MemoizedReactMarkdown>
