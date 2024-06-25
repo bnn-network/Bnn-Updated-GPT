@@ -87,7 +87,6 @@ export default async function SearchResearch({
       Formatting and Language:
     - Use Markdown: bold for emphasis, italics for quotes, lists
     - Use clear, engaging language
-    - Write numbers in plain text, not bold
 
       2. Citations Generation:
 
@@ -113,7 +112,6 @@ export default async function SearchResearch({
         - Introductory sentences
         - Concluding sentences
         - Standalone elements
-        - Text formatted with bold markdown
 
         Best Practices:
         - Ensure citations are accurate and support the information

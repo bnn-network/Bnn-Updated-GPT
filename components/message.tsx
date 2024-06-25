@@ -46,20 +46,24 @@ export function BotMessage({
         citations[number] = url
       }
 
-      console.log(preprocessedData,'preprocessedData')
+      console.log(preprocessedData, 'preprocessedData')
 
       if (!isChatResearch) {
         // For search-research mode, replace citations with CitationBubble
         preprocessedData = preprocessedData.replace(
-          /\[(\d+)\](?:\((https?:\/\/[^\s"]+)(?:\s+"[^"]+")?\)|:\s*(\S+)|(?!\(|:))/g,
-          (match, number) => {
+          /(\S+?)(\s*)(\[(\d+)\](?:\((https?:\/\/[^\s"]+)(?:\s+"[^"]+")?\)|:\s*(\S+)|(?!\(|:)))/g,
+          (match, precedingText, whitespace, fullCitation, number) => {
             const citationComponent = (
               <CitationBubble
                 number={parseInt(number)}
                 href={citations[parseInt(number)]}
               />
             )
-            return ReactDOMServer.renderToString(citationComponent)
+            // Add a period if the preceding text doesn't end with punctuation
+            const punctuation = /[.!?]$/.test(precedingText) ? '' : '.'
+            return `${precedingText}${punctuation}${whitespace}${ReactDOMServer.renderToString(
+              citationComponent
+            )}`
           }
         )
 
@@ -99,8 +103,7 @@ export function BotMessage({
         rehypeKatex
       ]}
       remarkPlugins={[remarkGfm, remarkMath]}
-      disallowedElements={['code','span']}
-      
+      disallowedElements={['code', 'span']}
       className="prose-sm prose-neutral prose-a:text-accent-foreground/50"
     >
       {processedData}
