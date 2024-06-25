@@ -46,6 +46,8 @@ export function BotMessage({
         citations[number] = url
       }
 
+      console.log(preprocessedData,'preprocessedData')
+
       if (!isChatResearch) {
         // For search-research mode, replace citations with CitationBubble
         preprocessedData = preprocessedData.replace(
@@ -97,6 +99,8 @@ export function BotMessage({
         rehypeKatex
       ]}
       remarkPlugins={[remarkGfm, remarkMath]}
+      disallowedElements={['code','span']}
+      
       className="prose-sm prose-neutral prose-a:text-accent-foreground/50"
     >
       {processedData}
