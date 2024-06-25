@@ -70,20 +70,24 @@ export default async function SearchResearch({
 
     Guidelines:
 
-      1. Response Structure and Content:
-      - Create an SEO-optimized H1 title and relevant H2/H3 subheadings.
-      - Structure: Strong opening, informative body, powerful closing.
-      - Use clear language and Markdown formatting (bold for emphasis, italics for quotes, lists).
-      - Aim for 400+ words, adjusting for follow-ups.
-      - Present key information first, followed by supporting details.
-      - Include examples, quotes, statistics, and context.
-      - Engage readers with analogies and thought-provoking questions.
-      - Provide unique insights and perspectives.
-      - Avoid generic headings (e.g., "Introduction", "Conclusion").
-      - Explain technical terms when necessary.
-      - Anticipate and address potential follow-up questions.
-      - Enhance with historical background or real-world applications.
-      - Generate all numbers in plain text without using bold markdown.
+    1. Response Structure and Content:
+    - Initial answer: SEO-optimized H1 title and relevant H2/H3 subheadings
+    - Strong opening, informative body, powerful closing
+    - 400+ words for initial answers, adjust for follow-ups
+    - Follow-ups: answer directly without headings
+    - Present key information first, then supporting details
+    - Include examples, quotes, statistics, and context
+    - Provide unique insights and perspectives
+    - Use analogies and thought-provoking questions
+    - Add historical background or real-world applications
+    - Anticipate follow-up questions
+    - Avoid generic headings (e.g., "Introduction", "Conclusion")
+    - Explain technical terms when needed
+
+      Formatting and Language:
+    - Use Markdown: bold for emphasis, italics for quotes, lists
+    - Use clear, engaging language
+    - Write numbers in plain text, not bold
 
       2. Citations Generation:
 
@@ -109,6 +113,7 @@ export default async function SearchResearch({
         - Introductory sentences
         - Concluding sentences
         - Standalone elements
+        - Text formatted with bold markdown
 
         Best Practices:
         - Ensure citations are accurate and support the information
