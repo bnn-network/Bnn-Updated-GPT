@@ -10,9 +10,9 @@ export type searXNGSearchResults = {
       title: string
       url: string
       content: string
+      image:string
     }
   ]
-  thumbnails: string[]
   input:string
 
 }

@@ -20,6 +20,9 @@ export function SearchSection({ result }: SearchSectionProps) {
   const searchResults: searXNGSearchResults = data
     ? JSON.parse(data)
     : undefined
+    const images = searchResults.responses
+      .filter((response) => response.image !== null)
+      .map((response) => response.image);
   return (
     <div>
       {!pending && data ? (
@@ -27,10 +30,10 @@ export function SearchSection({ result }: SearchSectionProps) {
           <Section size="sm" className="pt-2 pb-0">
             <ToolBadge tool="search">{searchResults.input}</ToolBadge>
           </Section>
-          {searchResults.thumbnails && searchResults.thumbnails.length > 0 && (
+          {images && images.length > 0 && (
             <Section title="Images">
               <SearchResultsImageSection
-                images={searchResults.thumbnails}
+                images={images}
                 query={searchResults.input}
               />
             </Section>
