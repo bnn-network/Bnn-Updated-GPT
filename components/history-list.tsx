@@ -1,4 +1,3 @@
-
 import React, { cache } from 'react'
 import HistoryItem from './history-item'
 import { Chat } from '@/lib/types'
@@ -6,7 +5,6 @@ import { getChats } from '@/lib/actions/chat'
 import { ClearHistory } from './clear-history'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
-
 
 type HistoryListProps = {
   userId?: string
@@ -17,9 +15,7 @@ const loadChats = cache(async (userId?: string) => {
 })
 
 export async function HistoryList({ userId }: HistoryListProps) {
-
   const chats = await loadChats(userId)
-
 
   return (
     <div className="flex flex-col flex-1 space-y-3 h-full">

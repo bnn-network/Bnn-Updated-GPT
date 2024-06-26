@@ -6,7 +6,7 @@ import {
   getAIState,
   getMutableAIState
 } from 'ai/rsc'
-import { CoreMessage,nanoid, ToolResultPart } from 'ai'
+import { CoreMessage, nanoid, ToolResultPart } from 'ai'
 import { Spinner } from '@/components/ui/spinner'
 import { Section } from '@/components/section'
 import { FollowupPanel } from '@/components/followup-panel'
@@ -391,7 +391,7 @@ export const getUIStateFromAIState = async (aiState: Chat) => {
                 id,
                 component: (
                   <Section title="Answer">
-                    <BotMessage content={answer.value}  />
+                    <BotMessage content={answer.value} />
                   </Section>
                 )
               }

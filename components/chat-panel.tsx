@@ -13,6 +13,11 @@ import Textarea from 'react-textarea-autosize'
 import { nanoid } from 'ai'
 import useModel from '@/store/useModel'
 
+import Image from 'next/image'
+
+import RightArrow from '@/assets/icons/right-arrow.svg'
+import Information from '@/assets/icons/Information.svg'
+
 interface ChatPanelProps {
   messages: UIState
 }
@@ -80,11 +85,11 @@ export function ChatPanel({ messages }: ChatPanelProps) {
   // If there are messages and the new button has not been pressed, display the new Button
   if (messages.length > 0) {
     return (
-      <div className="fixed right-4 bottom-2  md:bottom-8 flex justify-center items-center mx-auto pointer-events-none">
+      <div className="fixed right-4 bottom-2 md:bottom-8 flex justify-center items-center mx-auto pointer-events-none">
         <Button
           type="button"
           variant={'secondary'}
-          className="rounded-full bg-primary gap-2 text-secondary group hover:bg-primary transition-all hover:scale-105 pointer-events-auto"
+          className=" bg-primary gap-2 text-secondary group hover:bg-primary transition-all hover:scale-105 pointer-events-auto"
           onClick={() => handleClear()}
         >
           <Plus size={18} />
@@ -99,21 +104,22 @@ export function ChatPanel({ messages }: ChatPanelProps) {
   return (
     <div
       className={
-        'fixed overflow-y-auto left-0 right-0 top-10 mx-auto h-[80vh] lg:h-[88vh] flex flex-col items-center justify-center'
+        'fixed overflow-y-auto left-0 right-0 top-0 mx-auto h-[80vh] lg:h-[88vh] flex flex-col items-center justify-center transform -translate-y-[10%]'
       }
     >
-      <form onSubmit={handleSubmit} className="max-w-2xl w-full px-6">
-        <div className="relative flex items-center w-full">
+      <form onSubmit={handleSubmit} className="max-w-2xl w-full px-6 ">
+        <div className="relative flex items-center w-full ">
           <Textarea
             ref={inputRef}
             name="input"
             rows={1}
             maxRows={5}
             tabIndex={0}
-            placeholder="Ask a question..."
+            placeholder="Ask a question"
             spellCheck={false}
             value={input}
-            className="resize-none font-medium placeholder:select-none w-full min-h-12 rounded-full bg-muted dark:bg-primary-foreground pl-4 pr-10 pt-3.5 pb-1 text-sm border border-gray-200 dark:border-gray-700 placeholder:text-muted-foreground transition-all duration-200 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-0 dark:focus:ring-offset-0 dark:focus:border-transparent"
+            // className="resize-none font-medium placeholder:select-none w-full min-h-12 dark:bg-primary-foreground pl-4 pr-10 pt-3.5 pb-1 text-sm border-b-2 border-gray-200 dark:border-gray-700 placeholder:text-muted-foreground transition-all duration-200 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-0 dark:focus:ring-offset-0 dark:focus:border-transparent rounded-none"
+            className=" resize-none placeholder:select-none w-full min-h-12 pl-4 pr-10 pt-3.5 pb-1 text-xl  file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:cursor-not-allowed disabled:opacity-50 rounded-none  focus:outline-none focus:ring-0"
             onChange={e => {
               setInput(e.target.value)
               setShowEmptyScreen(e.target.value.length === 0)
@@ -135,36 +141,27 @@ export function ChatPanel({ messages }: ChatPanelProps) {
                 textarea.form?.requestSubmit()
               }
             }}
-            onHeightChange={height => {
-              // Ensure inputRef.current is defined
-              if (!inputRef.current) return
-
-              // The initial height and left padding is 70px and 2rem
-              const initialHeight = 70
-              // The initial border radius is 32px
-              const initialBorder = 32
-              // The height is incremented by multiples of 20px
-              const multiple = (height - initialHeight) / 20
-
-              // Decrease the border radius by 4px for each 20px height increase
-              const newBorder = initialBorder - 4 * multiple
-              // The lowest border radius will be 8px
-              inputRef.current.style.borderRadius =
-                Math.max(8, newBorder) + 'px'
-            }}
-            onFocus={() => setShowEmptyScreen(true)}
+            // onFocus={() => setShowEmptyScreen(true)}
             onBlur={() => setShowEmptyScreen(false)}
           />
+
           <Button
             type="submit"
             size={'icon'}
-            variant={'ghost'}
+            variant={'secondary'}
             className="absolute right-2 top-1/2 transform -translate-y-1/2"
             disabled={input.length === 0}
           >
-            <ArrowRight size={20} />
+            {/* <div className="w-full flex justify-center items-center rounded-md h-[45px]"> */}
+            <Image src={RightArrow} width={20} height={20} alt="right arrow" />
+            {/* </div> */}
           </Button>
+
+          <div className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-gradient-start via-gradient-middle to events-none"></div>
         </div>
+
+        {/* <----------------------------------------------------------------> */}
+
         <EmptyScreen
           submitMessage={message => {
             setInput(message)

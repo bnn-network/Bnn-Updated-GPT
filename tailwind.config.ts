@@ -1,3 +1,4 @@
+import { waitForDebugger } from 'inspector'
 import type { Config } from 'tailwindcss'
 const { fontFamily } = require('tailwindcss/defaultTheme')
 
@@ -27,14 +28,14 @@ const config = {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
-        background: 'hsl(var(--background))',
+        background: '(var(--background))',
         foreground: 'hsl(var(--foreground))',
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))'
         },
         secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
+          DEFAULT: '(var(--secondary))',
           foreground: 'hsl(var(--secondary-foreground))'
         },
         destructive: {
@@ -56,6 +57,17 @@ const config = {
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))'
+        },
+        gradient: {
+          start: 'var(--gradient-start)',
+          middle: 'var(--gradient-middle)',
+          end: 'var(--gradient-end)'
+        },
+        results: {
+          foreground: 'var(--results-foreground)'
+        },
+        text: {
+          secondary: 'var(--text-secondary)'
         }
       },
       borderRadius: {

@@ -2,7 +2,6 @@ import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
 import TrendingSearches from './TrendingSearches'
 
-
 export function EmptyScreen({
   submitMessage,
   className
