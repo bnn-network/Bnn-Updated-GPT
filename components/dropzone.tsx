@@ -4,22 +4,39 @@ import React, { useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { CloudUpload } from 'lucide-react'
 import { Progress } from '@/components/ui/progress'
+import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
+import { WebPDFLoader } from "@langchain/community/document_loaders/web/pdf";
 
 function MyDropzone() {
   const [uploadProgress, setUploadProgress] = useState(0)
   const [isUploading, setIsUploading] = useState(false)
   const [FileUpload, setFile] = useState<File | null>(null)
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    acceptedFiles.forEach(file => {
-      const reader = new FileReader()
+  const onDrop = useCallback(async (acceptedFiles: File[]) => {
+    acceptedFiles.forEach(async file => {
       setFile(file)
+      setIsUploading(true)
+      console
 
-      reader.onabort = () => console.log('file reading was aborted')
-      reader.onerror = () => console.log('file reading has failed')
-      reader.onload = () => {
-        // Do whatever you want with the file contents
-        const binaryStr = reader.result
-        console.log(binaryStr)
+      try {
+        // Convert File to Blob
+        const blob = new Blob([file], { type: file.type })
+
+        // Use PDFLoader to load the PDF
+        const loader = new WebPDFLoader(blob)
+        const docs = await loader.load()
+
+        // Use RecursiveCharacterTextSplitter to split the document
+        const splitter = new RecursiveCharacterTextSplitter({
+          chunkSize: 3000,
+          chunkOverlap: 200
+        })
+
+        const chunks = await splitter.splitDocuments(docs)
+
+        // Log the chunks
+        console.log('Chunks:', chunks)
+
+        // Simulate upload progress
         let progress = 0
         const interval = setInterval(() => {
           progress += 10
@@ -29,18 +46,20 @@ function MyDropzone() {
             setIsUploading(false)
           }
         }, 200)
+      } catch (error) {
+        console.error('Error processing PDF:', error)
+        setIsUploading(false)
       }
-      reader.readAsArrayBuffer(file)
     })
   }, [])
   const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
     useDropzone({
       onDrop,
       accept: {
-        'image/jpeg': ['.jpg'],
-        'image/png': ['.png'],
-        'image/jpg': ['.jpg'],
-        'file/pdf': ['.pdf']
+        'file/pdf': ['.pdf'],
+        'file/doc': ['.doc'],
+        'file/docx': ['.docx'],
+        'file/txt': ['.txt']
       },
       maxFiles: 1,
       maxSize: 5242880,
