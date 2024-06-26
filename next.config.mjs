@@ -4,7 +4,12 @@ const nextConfig = {
     ignoreBuildErrors: true
   },
   images: {
-    domains: ['d30ynstjdvogo0.cloudfront.net']
+    remotePatterns:[
+      {
+        protocol: 'https',
+        hostname: '**',
+      }
+    ]
   },
   async rewrites() {
     return [

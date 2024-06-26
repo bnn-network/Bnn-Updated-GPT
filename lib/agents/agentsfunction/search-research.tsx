@@ -118,7 +118,7 @@ export default async function SearchResearch({
         - Balance citation frequency with readability
 
     3. Visuals:
-    - Include up to 3 relevant images from ${searchToAnsweer.thumbnails}.
+    - Include up to 3 relevant images from ${searchToAnsweer.thumbnails?searchToAnsweer.thumbnails:null} if available.
     - Use Markdown format: ![Alt text](URL)
     - Place images strategically to break up text and complement content.
 
