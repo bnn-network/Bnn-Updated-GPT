@@ -120,7 +120,7 @@ export function ChatPanel({ messages }: ChatPanelProps) {
             placeholder="Ask a question..."
             spellCheck={false}
             value={input}
-            className="resize-none pl-14 font-medium placeholder:select-none w-full min-h-12 rounded-fill bg-muted dark:bg-primary-foreground  pr-10 pt-3.5 pb-1 text-sm outline-offset-muted dark:outline-offset-primary file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50'"
+            className="resize-none font-medium placeholder:select-none w-full min-h-12 rounded-full bg-muted dark:bg-primary-foreground pl-4 pr-10 pt-3.5 pb-1 text-sm border border-gray-200 dark:border-gray-700 placeholder:text-muted-foreground transition-all duration-200 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-0 dark:focus:ring-offset-0 dark:focus:border-transparent"
             onChange={e => {
               setInput(e.target.value)
               setShowEmptyScreen(e.target.value.length === 0)

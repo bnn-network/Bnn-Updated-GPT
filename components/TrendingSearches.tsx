@@ -1,13 +1,13 @@
 import React from 'react'
-import {
-  ChipIcon,
-  GlobeIcon,
-  GraphIcon,
-  HealthIcon,
-  MusicIcon,
-  MoonIcon
-} from '@/assets/icons/icons'
 import TrendingItem from './TrendingItem'
+
+// Import your SVG icons
+import GraphIcon from '@/assets/icons/graph.svg'
+import GlobeIcon from '@/assets/icons/globe.svg'
+import MusicIcon from '@/assets/icons/music.svg'
+import HealthIcon from '@/assets/icons/health.svg'
+import ChipIcon from '@/assets/icons/chip.svg'
+import MoonIcon from '@/assets/icons/moon.svg'
 
 const trendingTopics = [
   {
@@ -22,12 +22,10 @@ const trendingTopics = [
     name: 'Entertainment',
     icon: MusicIcon
   },
-
   {
     name: 'Health',
     icon: HealthIcon
   },
-
   {
     name: 'Technology',
     icon: ChipIcon
@@ -40,16 +38,24 @@ const trendingTopics = [
 
 function TrendingSearches() {
   return (
-    <div className="absolute grid grid-cols-2 gap-4 text-xs w-full">
-      <div className="flex flex-col gap-4">
+    <div className="absolute grid grid-cols-2 gap-3 w-full max-w-2xl">
+      <div className="flex flex-col gap-3">
         {trendingTopics.slice(0, 3).map(topic => (
-          <TrendingItem key={topic.name} name={topic.name} icon={topic.icon} />
+          <TrendingItem
+            key={topic.name}
+            name={topic.name}
+            icon={topic.icon.src} // Use .src for Next.js imported images
+          />
         ))}
       </div>
 
-      <div className="flex flex-col gap-4  lg:space-y-0">
+      <div className="flex flex-col gap-3">
         {trendingTopics.slice(3, 6).map(topic => (
-          <TrendingItem key={topic.name} name={topic.name} icon={topic.icon} />
+          <TrendingItem
+            key={topic.name}
+            name={topic.name}
+            icon={topic.icon.src} // Use .src for Next.js imported images
+          />
         ))}
       </div>
     </div>

@@ -15,7 +15,11 @@ const config = {
       center: true,
       padding: '2rem',
       screens: {
-        '2xl': '1400px'
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+        '2xl': '1536px' // Increased from 1400px
       }
     },
     extend: {
@@ -57,17 +61,51 @@ const config = {
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)'
+        sm: 'calc(var(--radius) - 4px)',
+        xl: '1rem',
+        '2xl': '1.5rem'
+      },
+      fontFamily: {
+        sans: ['Inter var', ...fontFamily.sans],
+        serif: ['Merriweather', ...fontFamily.serif]
+      },
+      fontSize: {
+        xs: ['0.75rem', { lineHeight: '1rem' }],
+        sm: ['0.875rem', { lineHeight: '1.25rem' }],
+        base: ['1rem', { lineHeight: '1.5rem' }],
+        lg: ['1.125rem', { lineHeight: '1.75rem' }],
+        xl: ['1.25rem', { lineHeight: '1.75rem' }],
+        '2xl': ['1.5rem', { lineHeight: '2rem' }],
+        '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
+        '4xl': ['2.25rem', { lineHeight: '2.5rem' }],
+        '5xl': ['3rem', { lineHeight: '1' }]
+      },
+      letterSpacing: {
+        tighter: '-0.05em',
+        tight: '-0.025em',
+        normal: '0',
+        wide: '0.025em',
+        wider: '0.05em',
+        widest: '0.1em'
       },
       spacing: {
-        '1.25': '0.3125rem', // 5px
-        '3.75': '0.9375rem', // 15px
-        '4.5': '1.125rem', // 18px
-        '5': '1.25rem', // 20px
-        '7.5': '1.875rem', // 30px
-        '10': '2.5rem', // 40px
-        '12.5': '3.125rem', // 50px
-        '13.75': '3.4375rem' // 55px
+        '1.25': '0.3125rem',
+        '3.75': '0.9375rem',
+        '4.5': '1.125rem',
+        '5': '1.25rem',
+        '7.5': '1.875rem',
+        '10': '2.5rem',
+        '12.5': '3.125rem',
+        '13.75': '3.4375rem',
+        '128': '32rem',
+        '144': '36rem'
+      },
+      maxWidth: {
+        '8xl': '88rem',
+        '9xl': '96rem'
+      },
+      boxShadow: {
+        soft: '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)'
       },
       keyframes: {
         'accordion-down': {
@@ -83,12 +121,33 @@ const config = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out'
       },
-      fontFamily: {
-        sans: ['var(--font-sans)', ...fontFamily.sans]
+      scale: {
+        '110': '1.1'
+      },
+      opacity: {
+        '80': '0.8'
+      },
+      width: {
+        '5': '1.25rem'
+      },
+      height: {
+        '5': '1.25rem'
+      },
+      transitionDuration: {
+        '400': '400ms'
       }
     }
   },
-  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')]
+  plugins: [
+    require('tailwindcss-animate'),
+    require('@tailwindcss/typography')({
+      className: 'prose',
+      // Customize the max width of prose
+      maxWidth: {
+        prose: '80ch' // Increase this value to make the prose wider
+      }
+    })
+  ]
 } satisfies Config
 
 export default config

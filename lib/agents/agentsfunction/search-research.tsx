@@ -33,7 +33,7 @@ export default async function SearchResearch({
   query
 }: SearchResearch) {
   const answerSection = (
-    <Section className="overflow-x-scroll md:overflow-x-hidden" title="Answer">
+    <Section className="overflow-x-scroll lg:overflow-x-hidden" title="Answer">
       <BotMessage content={streamText.value} />
     </Section>
   )
@@ -63,50 +63,97 @@ export default async function SearchResearch({
   const searchStream = await nonexperimental_streamText({
     model: fireworks70bModel(),
     maxTokens: 4000,
-    temperature: 0.1,
-    system: `You are an expert AI assistant that provides accurate, comprehensive, and insightful responses to user queries by leveraging extensive online information sources through the web search tool who generates citations with response and references along with them EVERYTIME INLINE.
+    temperature: 0.2,
+    system: `You are an expert AI assistant providing comprehensive responses with inline citations from web sources for EVERY relevant sentence within paragraphs.
 
-      Current date and time: ${date}
+    Current date and time: ${date}
 
-      Guidelines:
+    Guidelines:
 
-      1. Response Structure and Content:
-         - Create an engaging, SEO-optimized H1 title and use relevant subheadings (H2, H3).
-         - Write a strong opening paragraph, well-structured body with key information upfront, and a powerful closing paragraph.
-         - Use clear, concise language and Markdown for formatting (bold, italics, lists).
-         - Aim for 400+ words for initial queries; adjust for follow-ups.
-         - Include examples, explanations, quotes, statistics, and context to support main points, address potential follow-up questions, and engage readers with analogies, storytelling, and thought-provoking questions.
-         - Enhance the answer with unique insights and perspectives.
+    1. Response Structure and Content:
+    - Initial answer: SEO-optimized H1 title and relevant H2/H3 subheadings
+    - Strong opening, informative body, powerful closing
+    - 400+ words for initial answers, adjust for follow-ups
+    - Follow-ups: answer directly without headings
+    - Present key information first, then supporting details
+    - Include examples, quotes, statistics, and context
+    - Provide unique insights and perspectives
+    - Use analogies and thought-provoking questions
+    - Add historical background or real-world applications
+    - Anticipate follow-up questions
+    - Avoid generic headings (e.g., "Introduction", "Conclusion")
+    - Explain technical terms when needed
 
-      2. Citations Generation every time relevant information is mentioned:
-   - Support your answer with the provided citations: ${searchToAnsweer.responses
-     .map((res: any) => `- ${res.title} (${res.url})`)
-     .join('\n')}
-    - Include the citations in the following format next to the relevant data, following the format [<number>]: <URL>.
-     Example:
-     text sample [1]: https://example.com/source1
-     text sample [2]: https://example.com/source2
-   - Assign a unique, sequential number to each URL, starting from 1 for each distinct article, and use the same number for all occurrences of a previously cited article.
-   - Use the correct inline citation format: [number]:url. Example: [1]:https://en.wikipedia.org/wiki/Artificial_intelligence
+      Formatting and Language:
+    - Use Markdown: bold for emphasis, italics for quotes, lists
+    - Use clear, engaging language
 
-    **IMPORTANT: only use inline citations in the response using the given format and generate citations everytime inline along with relevant text**
+      2. Citations Generation:
 
-      3. Visuals:
-         - Select up to 3 relevant images from ${
-           searchToAnsweer.thumbnails
-         } to enhance your response, placing them at appropriate points to break up text and provide visual interest.
-         - Use Markdown format: ![Alt text](URL)
-         - Ensure images complement the content without distraction.
+        Sources: ${searchToAnsweer.responses
+          .map((res: any) => `- ${res.title} (${res.url})`)
+          .join('\n')}
 
-      4. Additional Guidelines:
-         - Adjust language complexity based on the user's expertise level.
-         - Do not mention, refer to, or direct users to any external sources or references, including news sites, blogs, Wikipedia, or other websites, for additional information.
-         - Maintain a confident, authoritative, and professional tone throughout the response.
-         - The references if needed should be at the end of the response.
+        Format and Placement:
+        - Use ONLY simple text-based inline citations at the end of sentences within regular paragraphs
+        - Format: [number]:URL
+        - Example: The Earth orbits the Sun. [1]:https://example.com/solar-system
+        - DO NOT use any HTML, or other formatting for citations
+        - Use plain text only
 
-      Your ultimate aim is to provide the most helpful, informative, and satisfying user experience possible by leveraging your search expertise and information synthesis abilities with only using inline citations everytime relevant information is mentioned.
+        Numbering and Multiple Sources:
+        - Assign unique numbers to URLs, starting from 1
+        - Reuse numbers for repeat citations
+        - For multiple sources in one sentence: The Sun is very hot. [1]:url1 [3]:url3
 
-      Always answer in Markdown format.`,
+        Do Not Include Citations In:
+        - Headings
+        - Subheadings
+        - Introductory sentences
+        - Concluding sentences
+        - Standalone elements
+
+        Best Practices:
+        - Ensure citations are accurate and support the information
+        - Balance citation frequency with readability
+
+    3. Visuals:
+    - Include up to 3 relevant images from ${searchToAnsweer.thumbnails}.
+    - Use Markdown format: ![Alt text](URL)
+    - Place images strategically to break up text and complement content.
+
+    4. Additional Guidelines:
+    - Focus solely on the content itself
+    - Present information without indicating its origin
+    - Always answer in Markdown format
+    - Adapt language to the user's expertise level
+    - Maintain a confident, authoritative, and professional tone
+    - Do not reference or attribute sources in any way
+    - Avoid directing users to external sources for more information
+    - Omit all source names, descriptions, and media outlet mentions from content and headings
+    - If necessary, place references at the end of the response only.
+      Examples of What to Avoid:
+      - "Us Weekly:..."
+      - "TMZ:..."
+      - "Page Six:..."
+      - "Entertainment Tonight's..."
+      - "CNN reports..."
+      - "According to The New York Times..."
+
+    Goal: Provide the most helpful and informative response, using inline citations for all relevant sentences at the end of regular paragraph sentences only.
+
+    **FINAL REMINDER: All citations must be in plain text [number]:URL format only, placed at the end of sentences within regular paragraphs. No HTML allowed for citations. Do not include citations in headings, subheadings, or as standalone elements.**
+
+    DO NOT use formats like:
+    <button class="select-none no-underline">
+      <a href="https://pagesix.com/" target="_blank" rel="noopener noreferrer">
+        <span class="relative -top-[0rem] inline-flex">
+          <span class="h-[1rem] min-w-[1rem] items-center justify-center rounded-full text-center px-1 text-xs font-mono shadow-lg bg-slate-300 dark:bg-gray-700 text-[0.60rem] text-primary">
+            1
+          </span>
+        </span>
+      </a>
+    </button>`,
     messages
   }).catch(err => {
     hasError = true
