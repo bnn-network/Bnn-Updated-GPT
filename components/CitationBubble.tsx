@@ -32,7 +32,7 @@ export const CitationBubble: React.FC<CitationBubbleProps> = ({
           href={`${href}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full h-full flex items-center justify-center"
+          className="w-full h-full flex items-center justify-center no-underline" // Added no-underline class
         >
           {number}
         </a>

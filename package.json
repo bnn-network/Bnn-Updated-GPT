@@ -48,7 +48,7 @@
     "langchain": "^0.2.5",
     "lucide-react": "^0.363.0",
     "mathjax-react": "^2.0.1",
-    "next": "^14.2.3",
+    "next": "^14.2.4",
     "next-sitemap": "^4.2.3",
     "next-themes": "^0.3.0",
     "npm": "^10.8.1",
@@ -59,6 +59,7 @@
     "react-icons": "^5.0.1",
     "react-latex-next": "^3.0.0",
     "react-markdown": "^9.0.1",
+    "react-markdown-renderer": "^1.4.0",
     "react-textarea-autosize": "^8.5.3",
     "react-tooltip": "^5.27.0",
     "react-type-animation": "^3.2.0",
@@ -78,6 +79,7 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@types/katex": "^0.16.7",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
