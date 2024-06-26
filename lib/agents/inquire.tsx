@@ -98,6 +98,7 @@ export async function inquire(
       })
       .then(async result => {
         for await (const obj of result) {
+          console.log(obj, 'obj')
           if (obj && typeof obj === 'object') {
             const partialInquiry: PartialInquiry = obj as PartialInquiry
             objectStream.update(partialInquiry)
