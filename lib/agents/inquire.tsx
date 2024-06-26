@@ -1,9 +1,5 @@
 import { Copilot } from '@/components/copilot'
-import {
-  createStreamableUI,
-  createStreamableValue,
-  StreamableValue
-} from 'ai/rsc'
+import { createStreamableUI, createStreamableValue } from 'ai/rsc'
 import { CoreMessage } from 'ai'
 import { PartialInquiry, inquirySchema } from '@/lib/schema/inquiry'
 import { fireworks70bLangchainModel } from '@/lib/utils'
@@ -11,43 +7,24 @@ import { StructuredOutputParser } from '@langchain/core/output_parsers'
 import { ChatPromptTemplate } from '@langchain/core/prompts'
 import { RunnableSequence } from '@langchain/core/runnables'
 
-// Define a type that includes both StreamableValue and StreamableValueWrapper
-type StreamableValueOrWrapper<T> =
-  | StreamableValue<T>
-  | { value: StreamableValue<T> }
+// Define the correct type for what createStreamableValue returns
+type StreamableValueWrapper<T> = {
+  update: (value: T) => void
+  done: () => void
+  value: T
+}
 
-export async function inquire(
-  uiStream: ReturnType<typeof createStreamableUI>,
-  messages: CoreMessage[],
-  selectedModel: string
-) {
-  if (selectedModel.includes('llama')) {
-    selectedModel = 'gpt-4o'
-  }
-  const objectStream = createStreamableValue<PartialInquiry>({})
+// This component bridges the gap between StreamableValueWrapper and Copilot
+const StreamableCopilot = ({
+  inquiryStream
+}: {
+  inquiryStream: StreamableValueWrapper<PartialInquiry>
+}) => {
+  return <Copilot inquiry={inquiryStream.value} />
+}
 
-  // Create a wrapper component to handle the StreamableValue or StreamableValueWrapper
-  const CopilotWrapper = ({
-    inquiryStream
-  }: {
-    inquiryStream: StreamableValueOrWrapper<PartialInquiry>
-  }) => {
-    const streamToUse =
-      'value' in inquiryStream ? inquiryStream.value : inquiryStream
-
-    return <Copilot inquiry={streamToUse as unknown as PartialInquiry} />
-  }
-
-  // Update the UI with the StreamableValue
-  uiStream.update(
-    <CopilotWrapper
-      inquiryStream={objectStream as StreamableValueOrWrapper<PartialInquiry>}
-    />
-  )
-
-  let finalInquiry: PartialInquiry = {}
-  const parser = StructuredOutputParser.fromZodSchema(inquirySchema)
-  const appendedPrompt = `The user query is: {input}
+const appendedPrompt = `
+  The user query is: {input}
 
   As a professional web researcher, your role is to deepen your understanding of the user's input by conducting further inquiries when necessary. Your primary goal is to gather sufficient information to provide a comprehensive and accurate answer.
 
@@ -61,7 +38,7 @@ export async function inquire(
      - Focus on aspects that still need clarification.
      - Identify any ambiguities or missing information.
 
-  When crafting your inquiry, always structure it as follows:
+  When crafting your inquiry, structure it as follows:
   {format_instructions}
 
   Guidelines for creating options:
@@ -80,37 +57,91 @@ export async function inquire(
   - If the initial query is extremely vague (e.g., single word or very short phrase), start with very broad categories or ask about the general topic area the user is interested in.
 
   Always provide a structured response, even for the vaguest queries. Do not leave any part of the structure empty or undefined.
-  `
+`
+
+export async function inquire(
+  uiStream: ReturnType<typeof createStreamableUI>,
+  messages: CoreMessage[],
+  selectedModel: string,
+  isSkipped: boolean = false
+) {
+  if (selectedModel.includes('llama')) {
+    selectedModel = 'gpt-4o'
+  }
+
+  const inquiryStream = createStreamableValue<PartialInquiry>(
+    {}
+  ) as StreamableValueWrapper<PartialInquiry>
+  let isStreamClosed = false
+
+  const updateUI = () => {
+    if (!isStreamClosed) {
+      try {
+        uiStream.update(<StreamableCopilot inquiryStream={inquiryStream} />)
+      } catch (error) {
+        console.error('Error updating UI:', error)
+      }
+    }
+  }
+
+  // Initial UI update
+  updateUI()
+
+  let finalInquiry: PartialInquiry = {}
+  const parser = StructuredOutputParser.fromZodSchema(inquirySchema)
+
   const filteredTasks = messages.filter(task => {
     return task.role === 'user' && task.content.includes('"input"' as any)
   })
+
+  const input = isSkipped
+    ? `The user skipped the previous question. Please provide a more general inquiry based on the original input: ${
+        JSON.parse(filteredTasks[0].content as string).input
+      }`
+    : JSON.parse(filteredTasks[0].content as string).input
 
   const chain = RunnableSequence.from([
     ChatPromptTemplate.fromTemplate(appendedPrompt),
     fireworks70bLangchainModel(),
     parser
   ])
+
   try {
     await chain
       .stream({
-        input: JSON.parse(filteredTasks[0].content as string).input,
+        input,
         format_instructions: parser.getFormatInstructions()
       })
       .then(async result => {
         for await (const obj of result) {
-          if (obj && typeof obj === 'object') {
+          if (obj && typeof obj === 'object' && !isStreamClosed) {
             const partialInquiry: PartialInquiry = obj as PartialInquiry
-            objectStream.update(partialInquiry)
+            inquiryStream.update(partialInquiry)
+            updateUI()
             finalInquiry = partialInquiry
           }
         }
       })
-      .catch(() => {
-        const RecursiveInquire = inquire(uiStream, messages, selectedModel)
-        return RecursiveInquire
+      .catch(error => {
+        console.error('Error in chain execution:', error)
+        const errorInquiry: PartialInquiry = {
+          question:
+            "I'm sorry, I'm having trouble understanding. Could you please rephrase your question?",
+          options: [
+            { value: 'rephrase', label: 'Rephrase my question' },
+            { value: 'new_topic', label: 'Ask about a new topic' }
+          ],
+          allowsInput: true,
+          inputLabel: 'Or type your response here'
+        }
+        inquiryStream.update(errorInquiry)
+        updateUI()
       })
   } finally {
-    objectStream.done()
+    if (!isStreamClosed) {
+      isStreamClosed = true
+      inquiryStream.done()
+    }
   }
 
   return finalInquiry
