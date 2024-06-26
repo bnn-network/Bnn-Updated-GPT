@@ -15,7 +15,6 @@ import Prism from 'prismjs'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'prismjs/components/prism-python'
 import 'prismjs/components/prism-javascript'
-// Add more language imports as needed
 
 export function BotMessage({
   content,
