@@ -8,6 +8,14 @@ const nextConfig = {
 
     return config
   },
+  images: {
+    remotePatterns:[
+      {
+        protocol: 'https',
+        hostname: '**',
+      }
+    ]
+  },
   async rewrites() {
     return [
       {
@@ -17,4 +25,7 @@ const nextConfig = {
     ]
   }
 }
+ 
+
+
 export default nextConfig

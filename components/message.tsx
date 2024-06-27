@@ -15,6 +15,7 @@ import Prism from 'prismjs'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'prismjs/components/prism-python'
 import 'prismjs/components/prism-javascript'
+import { toast } from 'sonner'
 
 export function BotMessage({
   content,
@@ -25,6 +26,11 @@ export function BotMessage({
 }) {
   const [data, error, pending] = useStreamableValue(content)
   const processedDataRef = useRef('')
+
+  const handleCopy = (data: any) => {
+    navigator.clipboard.writeText(data)
+    toast.success('Code copied to clipboard')
+  }
 
   useEffect(() => {
     if (data) {
@@ -117,12 +123,8 @@ export function BotMessage({
       return !inline && match ? (
         <div className="code-block">
           <div className="code-header">
-            <span>{match[1]}</span>
-            <button
-              onClick={() => navigator.clipboard.writeText(String(children))}
-            >
-              Copy code
-            </button>
+            <span>{language}</span>
+            <button onClick={() => handleCopy(String(children))}>Copy</button>
           </div>
           <pre className={className}>
             <code className={className} {...props}>
