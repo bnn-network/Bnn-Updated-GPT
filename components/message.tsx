@@ -10,6 +10,12 @@ import rehypeRaw from 'rehype-raw'
 import { CitationBubble } from './CitationBubble'
 import ReactDOMServer from 'react-dom/server'
 import 'katex/dist/katex.min.css'
+import { Components } from 'react-markdown'
+import Prism from 'prismjs'
+import 'prismjs/themes/prism-tomorrow.css'
+import 'prismjs/components/prism-python'
+import 'prismjs/components/prism-javascript'
+import { toast } from 'sonner'
 
 export function BotMessage({
   content,
@@ -21,9 +27,24 @@ export function BotMessage({
   const [data, error, pending] = useStreamableValue(content)
   const [processedData, setProcessedData] = useState('')
 
+  const handleCopy = (data: any) => {
+    navigator.clipboard.writeText(data)
+    toast.success('Code copied to clipboard')
+  }
+
   useEffect(() => {
     if (data) {
       let preprocessedData = data
+
+      // Protect code blocks and bold text
+      const protectedElements: string[] = []
+      preprocessedData = preprocessedData.replace(
+        /(`{3}[\s\S]*?`{3})|(\*\*.*?\*\*)/g,
+        match => {
+          protectedElements.push(match)
+          return `__PROTECTED_ELEMENT_${protectedElements.length - 1}__`
+        }
+      )
 
       // Extract all citations and their URLs
       const citations: { [key: number]: string } = {}
@@ -49,15 +70,19 @@ export function BotMessage({
       if (!isChatResearch) {
         // For search-research mode, replace citations with CitationBubble
         preprocessedData = preprocessedData.replace(
-          /\[(\d+)\](?:\((https?:\/\/[^\s"]+)(?:\s+"[^"]+")?\)|:\s*(\S+)|(?!\(|:))/g,
-          (match, number) => {
+          /(\S+?)(\s*)(\[(\d+)\](?:\((https?:\/\/[^\s"]+)(?:\s+"[^"]+")?\)|:\s*(\S+)|(?!\(|:)))/g,
+          (match, precedingText, whitespace, fullCitation, number) => {
             const citationComponent = (
               <CitationBubble
                 number={parseInt(number)}
                 href={citations[parseInt(number)]}
               />
             )
-            return ReactDOMServer.renderToString(citationComponent)
+            // Add a period if the preceding text doesn't end with punctuation
+            const punctuation = /[.!?]$/.test(precedingText) ? '' : '.'
+            return `${precedingText}${punctuation}${whitespace}${ReactDOMServer.renderToString(
+              citationComponent
+            )}`
           }
         )
 
@@ -83,11 +108,42 @@ export function BotMessage({
         )
       }
 
+      // Restore protected elements
+      preprocessedData = preprocessedData.replace(
+        /__PROTECTED_ELEMENT_(\d+)__/g,
+        (_, index) => protectedElements[parseInt(index)]
+      )
+
       setProcessedData(preprocessedData)
+      setTimeout(() => Prism.highlightAll(), 0)
     }
   }, [data, isChatResearch])
 
   if (error) return <div>Error</div>
+
+  const components: Components = {
+    code({ node, inline, className, children, ...props }: any) {
+      const match = /language-(\w+)/.exec(className || '')
+      const language = match ? match[1] : ''
+      return !inline && match ? (
+        <div className="code-block">
+          <div className="code-header">
+            <span>{language}</span>
+            <button onClick={() => handleCopy(String(children))}>Copy</button>
+          </div>
+          <pre className={className}>
+            <code className={className} {...props}>
+              {children}
+            </code>
+          </pre>
+        </div>
+      ) : (
+        <code className={className} {...props}>
+          {children}
+        </code>
+      )
+    }
+  }
 
   return (
     <MemoizedReactMarkdown
@@ -97,7 +153,9 @@ export function BotMessage({
         rehypeKatex
       ]}
       remarkPlugins={[remarkGfm, remarkMath]}
+      disallowedElements={['span']}
       className="prose-sm prose-neutral prose-a:text-accent-foreground/50"
+      components={components}
     >
       {processedData}
     </MemoizedReactMarkdown>

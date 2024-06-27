@@ -9,11 +9,11 @@ const ImageComponent = () => {
   const { theme, systemTheme } = useTheme()
   const conditionForTheme = !theme
     ? systemTheme === 'dark'
-      ? '/images/logo-white.png'
-      : '/images/logo-black.png'
+      ? 'https://d30ynstjdvogo0.cloudfront.net/BNN-Final-Logo-white.png'
+      : 'https://d30ynstjdvogo0.cloudfront.net/BNN-Final-Logo-black.png'
     : theme === 'dark'
-      ? '/images/logo-white.png'
-      : '/images/logo-black.png'
+      ? 'https://d30ynstjdvogo0.cloudfront.net/BNN-Final-Logo-white.png'
+      : 'https://d30ynstjdvogo0.cloudfront.net/BNN-Final-Logo-black.png'
   return (
     <div className="pl-2 pt-2">
       <a href="/">

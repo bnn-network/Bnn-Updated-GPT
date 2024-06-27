@@ -5,8 +5,10 @@ import { cn } from '@/lib/utils'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/sonner'
 import Script from 'next/script'
-import OgImage from './twitter-image.png'
 import { ClerkProvider } from '@clerk/nextjs'
+import { DefaultSeo } from 'next-seo'
+import SEO from './next-seo.config'
+import { DynamicSeo } from '@/components/DynamicSeo'
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -25,24 +27,19 @@ export const metadata: Metadata = {
     description,
     images: [
       {
-        url: OgImage.src,
-        width: OgImage.width,
-        height: OgImage.height
+        url: '/og-image.jpg',
+        width: 800,
+        height: 600
       }
     ]
   },
   twitter: {
     title,
     description,
-    card: 'summary_large_image', // Use a valid card type here
-    creator: 'BNNGPT',
-    images: [
-      {
-        url: OgImage.src,
-        width: OgImage.width,
-        height: OgImage.height
-      }
-    ]
+    card: 'summary_large_image',
+    site: '@epiphanyAITech',
+    creator: '@epiphanyAITech',
+    images: ['/og-image.jpg']
   }
 }
 
@@ -59,52 +56,54 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <>
-      <ClerkProvider>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-NFW7H1G22S"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
+    <ClerkProvider>
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-NFW7H1G22S"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', 'G-NFW7H1G22S');
         `}
-        </Script>
-        <Script
-          id="clarity-js"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
+      </Script>
+      <Script
+        id="clarity-js"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
             (function(c,l,a,r,i,t,y){
                 c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
                 t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
                 y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
             })(window, document, "clarity", "script", "mfuyx7jlww");
           `
-          }}
-        />
-        <html lang="en" suppressHydrationWarning>
-          <body
-            className={cn(
-              'font-sans antialiased bg-secondary',
-              fontSans.variable
-            )}
+        }}
+      />
+      <html lang="en" suppressHydrationWarning>
+        <head>
+          {/* <DefaultSeo {...SEO} />
+          <DynamicSeo /> */}
+        </head>
+        <body
+          className={cn(
+            'font-sans antialiased bg-secondary',
+            fontSans.variable
+          )}
+        >
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem
+            disableTransitionOnChange
           >
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="light"
-              enableSystem
-              disableTransitionOnChange
-            >
-              {children}
-              <Toaster />
-            </ThemeProvider>
-          </body>
-        </html>
-      </ClerkProvider>
-    </>
+            {children}
+            <Toaster />
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   )
 }
