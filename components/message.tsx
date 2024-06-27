@@ -24,19 +24,12 @@ export function BotMessage({
   content: StreamableValue<string>
   isChatResearch?: boolean
 }) {
-  const [isCopied, setIsCopied] = useState(false)
   const [data, error, pending] = useStreamableValue(content)
   const [processedData, setProcessedData] = useState('')
 
   const handleCopy = (data: any) => {
     navigator.clipboard.writeText(data)
-    setIsCopied(true)
-    setTimeout(() => setIsCopied(false), 2000)
-    toast.success('Code copied to clipboard', {
-      style: {
-        backgroundColor: 'green'
-      }
-    })
+    toast.success('Code copied to clipboard')
   }
 
   useEffect(() => {
@@ -136,9 +129,7 @@ export function BotMessage({
         <div className="code-block">
           <div className="code-header">
             <span>{language}</span>
-            <button onClick={() => handleCopy(String(children))}>
-              {isCopied ? 'Copied!' : 'Copy'}
-            </button>
+            <button onClick={() => handleCopy(String(children))}>Copy</button>
           </div>
           <pre className={className}>
             <code className={className} {...props}>
