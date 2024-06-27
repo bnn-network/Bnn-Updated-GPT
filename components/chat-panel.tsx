@@ -32,7 +32,7 @@ export function ChatPanel({ messages }: ChatPanelProps) {
   const [shouldSubmit, setShouldSubmit] = useState(false)
   const router = useRouter()
   const params = useSearchParams()
-  const [FileUpload, setFileUpload] = useState<File | null>(null)
+  const [FileUpload, setFileUpload] = useState<File | null>(null) //for dropzone
   const { selectedModel } = useModel()
 
   const handleSubmit = useCallback(
@@ -173,7 +173,7 @@ export function ChatPanel({ messages }: ChatPanelProps) {
               </Button>
             </PopoverTrigger>
             <PopoverContent className="z-50 ml-60 mb-5   ">
-              <MyDropzone />
+              <MyDropzone FileUpload={FileUpload} setFileUpload={setFileUpload}  />
             </PopoverContent>
           </Popover>
 

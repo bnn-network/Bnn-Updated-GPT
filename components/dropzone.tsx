@@ -4,16 +4,20 @@ import React, { useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { CloudUpload } from 'lucide-react'
 import { Progress } from '@/components/ui/progress'
-import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
-import { WebPDFLoader } from "@langchain/community/document_loaders/web/pdf";
+import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter'
+import { WebPDFLoader } from '@langchain/community/document_loaders/web/pdf'
 
-function MyDropzone() {
+type MyDropzoneProps = {
+  FileUpload: File | null
+  setFileUpload: (file: File | null) => void
+}
+
+function MyDropzone({ FileUpload, setFileUpload }: MyDropzoneProps) {
   const [uploadProgress, setUploadProgress] = useState(0)
   const [isUploading, setIsUploading] = useState(false)
-  const [FileUpload, setFile] = useState<File | null>(null)
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
     acceptedFiles.forEach(async file => {
-      setFile(file)
+      setFileUpload(file)
       setIsUploading(true)
       console
 
@@ -86,7 +90,7 @@ function MyDropzone() {
               <div className="  px-24  cursor-pointer flex flex-col text-primary items-center ">
                 <CloudUpload className="w-12 h-12 text-muted-foreground " />
                 <p className="text-center  break-words text-sm ">
-                  {acceptedFiles[0].name}
+                  {FileUpload.name}
                 </p>
               </div>
               {isUploading && (
