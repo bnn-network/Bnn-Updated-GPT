@@ -28,10 +28,34 @@ export async function fetchContentAndMetadata(
     }
 
     const data = await response.json()
-    return {
-      title: data.title || 'BNNGPT',
-      description: data.description || 'Elevate Your Search Experience with AI.'
+
+    // Parse the HTML content
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(data.content, 'text/html')
+
+    // Extract title from the first <h1>, <h2>, or <h3> tag
+    const titleElement = doc.querySelector('h1, h2, h3')
+    const title = titleElement?.textContent?.trim() || 'BNNGPT'
+
+    // Extract description from the text content following the title
+    let description = ''
+    if (titleElement) {
+      let nextElement = titleElement.nextElementSibling
+      while (nextElement && description.length < 160) {
+        if (nextElement.textContent) {
+          description += ' ' + nextElement.textContent.trim()
+        }
+        nextElement = nextElement.nextElementSibling
+      }
     }
+    description = description.trim().substring(0, 160) + '...'
+
+    // If no description was found, use a default
+    if (!description) {
+      description = 'Elevate Your Search Experience with AI.'
+    }
+
+    return { title, description }
   } catch (error) {
     console.error('Error fetching content:', error)
     return {

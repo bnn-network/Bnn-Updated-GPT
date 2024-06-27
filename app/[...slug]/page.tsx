@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { fetchContentAndMetadata } from '@/lib/seo'
+import { fetchContentAndMetadata, generateDynamicMetadata } from '@/lib/seo'
 
 export async function generateMetadata({
   params,
@@ -8,47 +8,25 @@ export async function generateMetadata({
   params: { slug: string[] }
   searchParams: { prequery?: string }
 }): Promise<Metadata> {
-  let metadata
+  let extractedMetadata
 
   if (searchParams.prequery) {
     // Handle prequery parameter
-    metadata = await fetchContentAndMetadata(searchParams.prequery)
+    extractedMetadata = await fetchContentAndMetadata(searchParams.prequery)
   } else if (params.slug && params.slug.length > 0) {
     // Handle dynamic routes
     const path = `/${params.slug.join('/')}`
-    metadata = await fetchContentAndMetadata(path)
+    extractedMetadata = await fetchContentAndMetadata(path)
   } else {
     // Default metadata for the root route
-    metadata = {
+    extractedMetadata = {
       title: 'BNNGPT',
       description: 'Elevate Your Search Experience with AI.'
     }
   }
 
-  return {
-    title: metadata.title,
-    description: metadata.description,
-    openGraph: {
-      title: metadata.title,
-      description: metadata.description,
-      images: [
-        {
-          url: '/og-image.jpg',
-          width: 800,
-          height: 600,
-          alt: metadata.title
-        }
-      ]
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: metadata.title,
-      description: metadata.description,
-      images: ['/og-image.jpg'],
-      site: '@epiphanyAITech',
-      creator: '@epiphanyAITech'
-    }
-  }
+  // Use the generateDynamicMetadata function from seo.ts
+  return generateDynamicMetadata(extractedMetadata)
 }
 
 export default function DynamicPage() {
