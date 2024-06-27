@@ -57,8 +57,7 @@ export default async function SearchResearch({
   if (!searchToAnsweer) {
     return { searchToAnsweer, fullResponse, hasError, toolResponses }
   }
-  console.log(searchToAnsweer, 'searchToAnsweer')
-  console.log(messages.length, 'messages.length')
+  console.log(searchToAnsweer,'searchToAnsweer')
   const date = new Date().toLocaleString()
   const searchStream = await nonexperimental_streamText({
     model: fireworks70bModel(),
@@ -88,7 +87,7 @@ export default async function SearchResearch({
       2. Citations Generation:
 
         Sources: ${searchToAnsweer.responses
-          .map((res: any) => `- ${res.title} (${res.url})`)
+          .map((res: any) => `- ${res.title} (${res.sourceURL})`)
           .join('\n')}
 
         Format and Placement:
@@ -116,8 +115,8 @@ export default async function SearchResearch({
 
     3. Visuals:
     - Include up to 3 relevant images from ${searchToAnsweer.responses
-      .filter((response: any) => response.image !== null)
-      .map((response: any) => response.image)}.
+      .filter((response: any) => response.imageURL !== null)    
+      .map((response: any) => response.imageURL)} based on the content you display and their title.
     - Use Markdown format: ![Alt text](URL)
     - Place images strategically to break up text and complement content.
 

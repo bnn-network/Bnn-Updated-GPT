@@ -20,9 +20,7 @@ export function SearchSection({ result }: SearchSectionProps) {
   const searchResults: searXNGSearchResults = data
     ? JSON.parse(data)
     : undefined
-  const thumbnails = searchResults.responses
-    .filter(response => response.thumbnailURL !== null)
-    .map(response => response.thumbnailURL)
+  const thumbnails = searchResults.responses.filter(response => response.thumbnailURL !== null).map(response => response.thumbnailURL)
   return (
     <div>
       {!pending && data ? (
