@@ -27,7 +27,6 @@
   }
 
   .dark {
-    /* Dark mode styles remain unchanged */
     --background: 222 47% 11%;
     --foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
@@ -102,6 +101,7 @@
   margin: 1em 0;
   border-radius: 6px;
   overflow: hidden;
+  background-color: #1e1e1e;
 }
 
 .code-header {
@@ -126,6 +126,12 @@
   margin: 0;
   padding: 1em;
   overflow-x: auto;
+}
+
+.code-block code {
+  font-family: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: 0.9em;
+  line-height: 1.5;
 }
 
 /* Ensure lists are visible and properly styled */
