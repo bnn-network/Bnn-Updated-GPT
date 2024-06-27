@@ -5,7 +5,7 @@ import rehypeExternalLinks from 'rehype-external-links'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
-import { useState, useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import rehypeRaw from 'rehype-raw'
 import { CitationBubble } from './CitationBubble'
 import ReactDOMServer from 'react-dom/server'
@@ -24,21 +24,11 @@ export function BotMessage({
   isChatResearch?: boolean
 }) {
   const [data, error, pending] = useStreamableValue(content)
-  const [processedData, setProcessedData] = useState('')
+  const processedDataRef = useRef('')
 
   useEffect(() => {
     if (data) {
       let preprocessedData = data
-
-      // Protect code blocks and bold text
-      const protectedElements: string[] = []
-      preprocessedData = preprocessedData.replace(
-        /(`{3}[\s\S]*?`{3})|(\*\*.*?\*\*)/g,
-        match => {
-          protectedElements.push(match)
-          return `__PROTECTED_ELEMENT_${protectedElements.length - 1}__`
-        }
-      )
 
       // Extract all citations and their URLs
       const citations: { [key: number]: string } = {}
@@ -102,27 +92,32 @@ export function BotMessage({
         )
       }
 
-      // Restore protected elements
-      preprocessedData = preprocessedData.replace(
-        /__PROTECTED_ELEMENT_(\d+)__/g,
-        (_, index) => protectedElements[parseInt(index)]
-      )
-
-      setProcessedData(preprocessedData)
-      setTimeout(() => Prism.highlightAll(), 0)
+      processedDataRef.current = preprocessedData
     }
   }, [data, isChatResearch])
+
+  useEffect(() => {
+    const highlightCode = () => {
+      Prism.highlightAll()
+    }
+
+    highlightCode()
+    // Set up a MutationObserver to watch for changes in the DOM
+    const observer = new MutationObserver(highlightCode)
+    observer.observe(document.body, { childList: true, subtree: true })
+
+    return () => observer.disconnect()
+  }, [])
 
   if (error) return <div>Error</div>
 
   const components: Components = {
     code({ node, inline, className, children, ...props }: any) {
       const match = /language-(\w+)/.exec(className || '')
-      const language = match ? match[1] : ''
       return !inline && match ? (
         <div className="code-block">
           <div className="code-header">
-            <span>{language}</span>
+            <span>{match[1]}</span>
             <button
               onClick={() => navigator.clipboard.writeText(String(children))}
             >
@@ -155,7 +150,7 @@ export function BotMessage({
       className="prose-sm prose-neutral prose-a:text-accent-foreground/50"
       components={components}
     >
-      {processedData}
+      {processedDataRef.current || data}
     </MemoizedReactMarkdown>
   )
 }

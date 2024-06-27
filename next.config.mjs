@@ -4,7 +4,7 @@ const nextConfig = {
     ignoreBuildErrors: true
   },
   webpack: config => {
-    config.resolve.fallback = { fs: false,http:false,url:false,https:false }
+    config.resolve.fallback = { fs: false,http:false,url:false,https:false,zlib:false }
 
     return config
   },
