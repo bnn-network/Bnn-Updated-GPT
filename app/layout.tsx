@@ -6,7 +6,7 @@ import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/sonner'
 import Script from 'next/script'
 import { ClerkProvider } from '@clerk/nextjs'
-import { DynamicMetadata } from '../components/DynamicMetadata'
+import { DynamicMetadata } from '@/components/DynamicMetadata'
 
 const fontSans = FontSans({
   subsets: ['latin'],
