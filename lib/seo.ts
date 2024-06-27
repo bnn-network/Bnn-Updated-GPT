@@ -13,10 +13,15 @@ export async function fetchContentAndMetadata(
       throw new Error('NEXT_PUBLIC_BASE_URL is not defined')
     }
 
+    const endpoint = query.startsWith('/')
+      ? '/getdynamiccontent'
+      : '/getparamquery'
+    const param = query.startsWith('/') ? 'path' : 'query'
+
     const response = await fetch(
       `${
         process.env.NEXT_PUBLIC_BASE_URL
-      }/getparamquery?query=${encodeURIComponent(query)}`
+      }${endpoint}?${param}=${encodeURIComponent(query)}`
     )
 
     if (!response.ok) {
@@ -66,7 +71,6 @@ export function generateDynamicMetadata(
   }
 }
 
-// New function to get metadata as plain object
 export function getMetadataObject(
   extractedMetadata: ExtractedMetadata
 ): Record<string, string> {

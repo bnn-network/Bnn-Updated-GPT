@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams, usePathname } from 'next/navigation'
 import Head from 'next/head'
 import {
   fetchContentAndMetadata,
@@ -12,13 +12,17 @@ import {
 export function DynamicMetadata() {
   const [metadata, setMetadata] = useState<ExtractedMetadata | null>(null)
   const searchParams = useSearchParams()
+  const pathname = usePathname()
 
   useEffect(() => {
     async function updateMetadata() {
       const prequery = searchParams.get('prequery')
-      if (prequery) {
+      const isDynamicRoute = pathname.endsWith('/parameter')
+
+      if (prequery || isDynamicRoute) {
         try {
-          const extractedMetadata = await fetchContentAndMetadata(prequery)
+          const query = prequery || pathname
+          const extractedMetadata = await fetchContentAndMetadata(query)
           setMetadata(extractedMetadata)
         } catch (error) {
           console.error('Error updating metadata:', error)
@@ -27,7 +31,7 @@ export function DynamicMetadata() {
     }
 
     updateMetadata()
-  }, [searchParams])
+  }, [searchParams, pathname])
 
   if (!metadata) return null
 
