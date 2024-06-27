@@ -6,9 +6,7 @@ import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/sonner'
 import Script from 'next/script'
 import { ClerkProvider } from '@clerk/nextjs'
-import { DefaultSeo } from 'next-seo'
-import SEO from './next-seo.config'
-import { DynamicSeo } from '@/components/DynamicSeo'
+import { DynamicMetadata } from '../components/DynamicMetadata'
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -83,10 +81,7 @@ export default function RootLayout({
         }}
       />
       <html lang="en" suppressHydrationWarning>
-        <head>
-          <DefaultSeo {...SEO} />
-          <DynamicSeo />
-        </head>
+        <DynamicMetadata />
         <body
           className={cn(
             'font-sans antialiased bg-secondary',
