@@ -13,10 +13,9 @@ export async function fetchContentAndMetadata(
       throw new Error('NEXT_PUBLIC_BASE_URL is not defined')
     }
 
-    const endpoint = query.startsWith('/')
-      ? '/getdynamiccontent'
-      : '/getparamquery'
-    const param = query.startsWith('/') ? 'path' : 'query'
+    const isPrequery = query.includes('?prequery=')
+    const endpoint = isPrequery ? '/getparamquery' : '/getdynamiccontent'
+    const param = isPrequery ? 'query' : 'path'
 
     const response = await fetch(
       `${

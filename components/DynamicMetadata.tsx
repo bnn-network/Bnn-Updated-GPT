@@ -22,7 +22,9 @@ export function DynamicMetadata() {
       if (prequery || isDynamicRoute) {
         try {
           const query = prequery || pathname
+          console.log('Fetching metadata for:', query)
           const extractedMetadata = await fetchContentAndMetadata(query)
+          console.log('Extracted metadata:', extractedMetadata)
           setMetadata(extractedMetadata)
         } catch (error) {
           console.error('Error updating metadata:', error)
@@ -32,6 +34,30 @@ export function DynamicMetadata() {
 
     updateMetadata()
   }, [searchParams, pathname])
+
+  useEffect(() => {
+    if (metadata) {
+      console.log('Updating document metadata:', metadata)
+      document.title = metadata.title
+      const descMeta = document.querySelector('meta[name="description"]')
+      if (descMeta) {
+        descMeta.setAttribute('content', metadata.description)
+      }
+      // Update OpenGraph and Twitter meta tags
+      const metaTags = document.getElementsByTagName('meta')
+      for (let i = 0; i < metaTags.length; i++) {
+        const tag = metaTags[i]
+        const property = tag.getAttribute('property')
+        const name = tag.getAttribute('name')
+        if (property === 'og:title' || name === 'twitter:title') {
+          tag.setAttribute('content', metadata.title)
+        }
+        if (property === 'og:description' || name === 'twitter:description') {
+          tag.setAttribute('content', metadata.description)
+        }
+      }
+    }
+  }, [metadata])
 
   if (!metadata) return null
 
