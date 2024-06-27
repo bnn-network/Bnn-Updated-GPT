@@ -84,8 +84,8 @@ export default function RootLayout({
       />
       <html lang="en" suppressHydrationWarning>
         <head>
-          <DefaultSeo {...SEO} />
-          <DynamicSeo />
+          {/* <DefaultSeo {...SEO} />
+          <DynamicSeo /> */}
         </head>
         <body
           className={cn(
