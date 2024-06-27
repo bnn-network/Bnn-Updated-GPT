@@ -15,7 +15,6 @@ export type searXNGSearchResults = {
     }
   ]
   input:string
-
 }
 
 export type ExaSearchResults = {

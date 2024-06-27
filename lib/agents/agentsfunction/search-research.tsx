@@ -57,7 +57,6 @@ export default async function SearchResearch({
   if (!searchToAnsweer) {
     return { searchToAnsweer, fullResponse, hasError, toolResponses }
   }
-  console.log(searchToAnsweer,'searchToAnsweer')
   const date = new Date().toLocaleString()
   const searchStream = await nonexperimental_streamText({
     model: fireworks70bModel(),
@@ -86,9 +85,7 @@ export default async function SearchResearch({
 
       2. Citations Generation:
 
-        Sources: ${searchToAnsweer.responses
-          .map((res: any) => `- ${res.title} (${res.sourceURL})`)
-          .join('\n')}
+        Sources: ${searchToAnsweer.responses.map((res: any) => `- ${res.title} (${res.sourceURL})`).join('\n')}
 
         Format and Placement:
         - Use ONLY simple text-based inline citations at the end of sentences within regular paragraphs

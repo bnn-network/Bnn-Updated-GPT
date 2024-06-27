@@ -43,7 +43,6 @@ export const search2Tool = async (
     responses: firstSixSources,
     input: searchResult.input
   }
-
   streamResults.done(JSON.stringify(updatedSearchResult))
   return updatedSearchResult
 }
