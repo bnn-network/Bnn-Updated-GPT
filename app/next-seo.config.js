@@ -1,4 +1,4 @@
-export default {
+const seoConfig = {
   title: 'BNNGPT - Transform Your Search Experience with AI',
   description:
     'Discover the power of AI with BNNGPT. Get instant, accurate, and comprehensive search results tailored to your needs. Experience the future of search today.',
@@ -30,3 +30,5 @@ export default {
     }
   ]
 }
+
+export default seoConfig

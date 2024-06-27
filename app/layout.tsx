@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     description,
     images: [
       {
-        url: '/twitter-image.png', // Adjust path if needed
+        url: '/og-image.jpg', // Adjust path if needed
         width: 800,
         height: 600
       }
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     creator: 'BNNGPT',
     images: [
       {
-        url: '/twitter-image.png', // Adjust path if needed
+        url: '/og-image.jpg', // Adjust path if needed
         width: 800,
         height: 600
       }
