@@ -1,4 +1,5 @@
 import TopBar from '@/components/TopBar'
+import DynamicShareButton from '@/components/share-button'
 
 export default function Page() {
   const sections = [

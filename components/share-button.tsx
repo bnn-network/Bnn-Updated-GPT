@@ -1,8 +1,20 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { FacebookShare } from 'react-share-kit'
-// import { FaTwitter, FaLinkedin, FaInstagram, FaFacebook } from 'react-icons/fa'
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  LinkedinShareButton,
+  WhatsappShareButton
+} from 'react-share'
+import {
+  FaTwitter,
+  FaLinkedin,
+  FaWhatsapp,
+  FaFacebook,
+  FaArrowUp
+} from 'react-icons/fa'
+import { Share } from 'lucide-react'
 import Clip from '@/assets/icons/clip.svg'
 
 import Image from 'next/image'
@@ -21,17 +33,13 @@ const DynamicShareButton: React.FC = () => {
     navigator.clipboard.writeText(currentUrl)
   }
 
-  //   const shareButtons: ShareButtonProps[] = [
-  //     { network: 'twitter', icon: FaTwitter },
-  //     { network: 'linkedin', icon: FaLinkedin },
-  //     { network: 'facebook', icon: FaFacebook },
-  //     { network: 'instagram', icon: FaInstagram, url: 'https://instagram.com' }
-  //   ]
-
   return (
     <div>
-      <button onClick={toggleModal} className="bg-black-500 px-4 py-2 rounded">
-        Share
+      <button
+        onClick={toggleModal}
+        className="flex justify-center items-center rounded-full w-12 h-12 bg-modal-inputBoxSecondary"
+      >
+        <Share />
       </button>
 
       {showModal && (
@@ -49,16 +57,27 @@ const DynamicShareButton: React.FC = () => {
             <p className="text-text-secondary text-sm pt-2 mb-4 border-t">
               Share via
             </p>
-            <div className="flex space-x-4 mb-6">
-              {/* {shareButtons.map((btn, index) => (
-                <ShareButton
-                  key={index}
-                  {...btn}
-                  url={currentUrl}
-                  className="text-white p-2 bg-gray-700 rounded-full"
-                />
-              ))} */}
-              <FacebookShare url={currentUrl} quote="FaceBook" />
+            <div className="flex flex-row gap-4">
+              <div className="flex space-x-4 mb-6 rounded-full w-10 h-10 bg-modal-inputBoxSecondary justify-center">
+                <TwitterShareButton url={currentUrl}>
+                  <FaTwitter />
+                </TwitterShareButton>
+              </div>
+              <div className="flex space-x-4 mb-6 rounded-full w-10 h-10 bg-modal-inputBoxSecondary justify-center">
+                <WhatsappShareButton url={currentUrl}>
+                  <FaWhatsapp />
+                </WhatsappShareButton>
+              </div>
+              <div className="flex space-x-4 mb-6 rounded-full w-10 h-10 bg-modal-inputBoxSecondary justify-center">
+                <LinkedinShareButton url={currentUrl}>
+                  <FaLinkedin />
+                </LinkedinShareButton>
+              </div>
+              <div className="flex mb-6 rounded-full w-10 h-10 bg-modal-inputBoxSecondary justify-center">
+                <FacebookShareButton url={'copyLink'}>
+                  <FaFacebook />
+                </FacebookShareButton>
+              </div>
             </div>
             <p className="text-text-secondary text-sm mb-2">or copy link</p>
 
