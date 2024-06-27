@@ -1,4 +1,6 @@
 import TopBar from '@/components/TopBar'
+import DynamicShareButton from '@/components/share-button'
+
 export default function Page() {
   const sections = [
     {
@@ -34,6 +36,7 @@ Explore BNNGPT today and see how we're making the future of search smarter, fast
   return (
     <div>
       <TopBar />
+      <DynamicShareButton />
       <div className="min-h-screen bg-primary">
         <div className="max-w-3xl mx-auto py-12">
           {/* <h1 className="text-lg font-base mb-8 items-center">About Us</h1> */}

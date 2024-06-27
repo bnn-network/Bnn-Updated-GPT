@@ -35,6 +35,9 @@
     --results-foreground: #F6F6F6;
     --text-secondary: #515151;
 
+    --modal-inputBox: #F5F5F5;
+    --modal-inputBox-secondary: #ECECEC;
+    --modal-background: #ffffff;
   }
 
   .dark {
@@ -65,6 +68,12 @@
 
     --results-foreground: #161616;
     --text-secondary: #8F8F8F;
+
+
+    --modal-inputBox: #171717;
+    --modal-inputBox-secondary: #202020;
+   
+    --modal-background: #0D0D0D;
   }
 }
 

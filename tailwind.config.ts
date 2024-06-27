@@ -68,6 +68,11 @@ const config = {
         },
         text: {
           secondary: 'var(--text-secondary)'
+        },
+        modal: {
+          inputBox: 'var(--modal-inputBox)',
+          inputBoxSecondary: 'var( --modal-inputBox-secondary)',
+          background: 'var( --modal-background)'
         }
       },
       borderRadius: {

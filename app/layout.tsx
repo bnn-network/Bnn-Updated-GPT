@@ -7,6 +7,7 @@ import { Toaster } from '@/components/ui/sonner'
 import Script from 'next/script'
 import OgImage from './twitter-image.png'
 import { ClerkProvider } from '@clerk/nextjs'
+import { dark } from '@clerk/themes'
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -60,7 +61,11 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <ClerkProvider>
+      <ClerkProvider
+        appearance={{
+          baseTheme: dark
+        }}
+      >
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-NFW7H1G22S"
           strategy="afterInteractive"
