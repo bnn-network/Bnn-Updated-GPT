@@ -15,10 +15,10 @@ export function DynamicMetadata() {
 
   useEffect(() => {
     async function updateMetadata() {
-      const query = searchParams.get('query')
-      if (query) {
+      const prequery = searchParams.get('prequery')
+      if (prequery) {
         try {
-          const extractedMetadata = await fetchContentAndMetadata(query)
+          const extractedMetadata = await fetchContentAndMetadata(prequery)
           setMetadata(extractedMetadata)
         } catch (error) {
           console.error('Error updating metadata:', error)
@@ -35,6 +35,7 @@ export function DynamicMetadata() {
 
   return (
     <Head>
+      <title>{metadata.title}</title>
       {Object.entries(metadataObject).map(([name, content]) => (
         <meta key={name} name={name} content={content} />
       ))}
