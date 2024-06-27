@@ -6,7 +6,7 @@ const seoConfig = {
     type: 'website',
     locale: 'en_IE',
     url: 'https://bnngpt.com/',
-    site_name: 'BNNGPT',
+    siteName: 'BNNGPT',
     title: 'BNNGPT - Transform Your Search Experience with AI',
     description:
       'Discover the power of AI with BNNGPT. Get instant, accurate, and comprehensive search results tailored to your needs. Experience the future of search today.',
@@ -18,6 +18,11 @@ const seoConfig = {
         alt: 'BNNGPT Open Graph Image'
       }
     ]
+  },
+  twitter: {
+    handle: '@epiphanyAITech',
+    site: '@epiphanyAITech',
+    cardType: 'summary_large_image'
   },
   additionalMetaTags: [
     {
