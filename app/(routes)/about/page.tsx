@@ -1,6 +1,6 @@
 import Footer from '@/components/footer'
 import '../../styles.css' // This should be the correct relative path
-import Head from 'next/head'
+import { NextSeo } from 'next-seo'
 
 export async function generateMetadata() {
   return {
@@ -15,46 +15,31 @@ export async function generateMetadata() {
 export default function Page() {
   return (
     <>
+      <NextSeo
+        title="About BNNGPT - Leading AI-Powered Search Engine for Accurate Answers"
+        description="Learn how BNNGPT redefines search with AI, delivering precise, human-like responses to your queries."
+        openGraph={{
+          url: 'https://www.bnngpt.com/about',
+          title:
+            'About BNNGPT - Leading AI-Powered Search Engine for Accurate Answers',
+          description:
+            'Learn how BNNGPT redefines search with AI, delivering precise, human-like responses to your queries.',
+          images: [
+            {
+              url: 'https://www.bnngpt.com/og-image.jpg',
+              width: 800,
+              height: 600,
+              alt: 'BNNGPT Open Graph Image'
+            }
+          ],
+          site_name: 'BNNGPT'
+        }}
+        twitter={{
+          cardType: 'summary_large_image',
+          site: '@epiphanyaitech' // Replace with your Twitter handle if available
+        }}
+      />
       <div className="inner_page">
-        {/* Head component for SEO enhancements */}
-        <Head>
-          <title>
-            About BNNGPT - Leading AI-Powered Search Engine for Accurate Answers
-          </title>
-          <meta
-            name="description"
-            content="Learn how BNNGPT redefines search with AI, delivering precise, human-like responses to your queries."
-          />
-          <meta
-            property="og:title"
-            content="About BNNGPT - Leading AI-Powered Search Engine for Accurate Answers"
-          />
-          <meta
-            property="og:description"
-            content="Learn how BNNGPT redefines search with AI, delivering precise, human-like responses to your queries."
-          />
-          <meta property="og:url" content="https://www.bnngpt.com/about" />
-          <meta
-            property="og:image"
-            content="https://www.bnngpt.com/opengraph-image.jpg"
-          />
-          <meta property="og:site_name" content="BNNGPT" />
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:site" content="@rashadphz" />
-          <meta name="twitter:creator" content="@rashadphz" />
-          <meta
-            name="twitter:title"
-            content="About BNNGPT - Leading AI-Powered Search Engine for Accurate Answers"
-          />
-          <meta
-            name="twitter:description"
-            content="Learn how BNNGPT redefines search with AI, delivering precise, human-like responses to your queries."
-          />
-          <meta
-            name="twitter:image"
-            content="https://www.bnngpt.com/logo.jpg"
-          />
-        </Head>
         <a href="/" className="logo_div"></a>
         <h2>About Us</h2>
         <h3>Welcome to BNNGPT – The Future of AI-Powered Search</h3>

@@ -140,6 +140,13 @@ const config = {
         disc: 'disc',
         decimal: 'decimal',
         circle: 'circle'
+      },
+      backgroundColor: {
+        'code-bg': '#1e1e1e',
+        'code-header': '#343541'
+      },
+      textColor: {
+        'code-text': '#ffffff'
       }
     }
   },
