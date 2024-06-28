@@ -6,7 +6,8 @@ export type ExtractedMetadata = {
 }
 
 export async function fetchContentAndMetadata(
-  query: string
+  query: string,
+  isGooglebot: boolean
 ): Promise<ExtractedMetadata> {
   try {
     if (!process.env.NEXT_PUBLIC_BASE_URL) {
@@ -28,6 +29,11 @@ export async function fetchContentAndMetadata(
     }
 
     const data = await response.json()
+
+    if (isGooglebot) {
+      // Add an additional delay for Googlebot to ensure content is fully loaded
+      await new Promise(resolve => setTimeout(resolve, 2000))
+    }
 
     // Parse the HTML content
     const parser = new DOMParser()
