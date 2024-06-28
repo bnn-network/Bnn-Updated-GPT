@@ -1,3 +1,4 @@
+// app/layout.tsx
 import type { Metadata, Viewport } from 'next'
 import { Inter as FontSans } from 'next/font/google'
 import './globals.css'
@@ -6,6 +7,16 @@ import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/sonner'
 import Script from 'next/script'
 import { ClerkProvider } from '@clerk/nextjs'
+import { DefaultSeo } from 'next-seo'
+import { seoConfig as SEO } from './next-seo.config'
+import dynamic from 'next/dynamic'
+
+const ClientDynamicSeo = dynamic(
+  () => import('@/components/ClientDynamicSeo'),
+  {
+    ssr: false
+  }
+)
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -80,6 +91,10 @@ export default function RootLayout({
         }}
       />
       <html lang="en" suppressHydrationWarning>
+        <head>
+          <DefaultSeo {...SEO} />
+          <ClientDynamicSeo />
+        </head>
         <body
           className={cn(
             'font-sans antialiased bg-secondary',

@@ -1,21 +1,23 @@
 import { Metadata } from 'next'
-import { JSDOM } from 'jsdom'
 
 export async function generateDynamicMetadata(html: string): Promise<Metadata> {
-  const dom = new JSDOM(html)
-  const document = dom.window.document
+  const titleMatch =
+    html.match(/<h1[^>]*>(.*?)<\/h1>/i) || html.match(/<h2[^>]*>(.*?)<\/h2>/i)
+  const descriptionMatch = html.match(/<p[^>]*>(.*?)<\/p>/i)
 
-  const answerDiv = document.querySelector('#answer')
-  const title = answerDiv?.querySelector('h1, h2')?.textContent || 'BNNGPT'
-  const description =
-    answerDiv?.querySelector('p')?.textContent?.substring(0, 160) + '...' ||
-    'Elevate Your Search Experience with AI.'
+  const title = titleMatch ? titleMatch[1].trim() : 'BNNGPT'
+  const description = descriptionMatch
+    ? descriptionMatch[1].trim().substring(0, 157) + '...'
+    : 'Elevate Your Search Experience with AI.'
+
+  console.log('Generated SEO Title:', title)
+  console.log('Generated SEO Description:', description)
 
   return {
-    title: `${title} - BNNGPT`,
+    title,
     description,
     openGraph: {
-      title: `${title} - BNNGPT`,
+      title,
       description,
       images: [
         {
@@ -28,7 +30,7 @@ export async function generateDynamicMetadata(html: string): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${title} - BNNGPT`,
+      title,
       description,
       images: ['/og-image.jpg'],
       site: '@epiphanyAITech',
@@ -37,17 +39,27 @@ export async function generateDynamicMetadata(html: string): Promise<Metadata> {
   }
 }
 
-export async function fetchContent(query: string): Promise<string> {
+export async function fetchContent(
+  path: string,
+  query?: string
+): Promise<string> {
   try {
     if (!process.env.NEXT_PUBLIC_BASE_URL) {
       throw new Error('NEXT_PUBLIC_BASE_URL is not defined')
     }
 
-    const response = await fetch(
-      `${
+    let url: string
+    if (query) {
+      // For prequery format
+      url = `${
         process.env.NEXT_PUBLIC_BASE_URL
       }/getparamquery?query=${encodeURIComponent(query)}`
-    )
+    } else {
+      // For /parameter format
+      url = `${process.env.NEXT_PUBLIC_BASE_URL}${path}/parameter`
+    }
+
+    const response = await fetch(url)
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)

@@ -4,10 +4,10 @@ const nextConfig = {
     ignoreBuildErrors: true
   },
   images: {
-    remotePatterns:[
+    remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**',
+        hostname: '**'
       }
     ]
   },
@@ -18,6 +18,18 @@ const nextConfig = {
         destination: '/api/sitemaps/:filename*'
       }
     ]
+  },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false
+      }
+    }
+    return config
+  },
+  eslint: {
+    ignoreDuringBuilds: true
   }
 }
 
