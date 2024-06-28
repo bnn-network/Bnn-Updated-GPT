@@ -12,40 +12,60 @@ export interface SearchResultsProps {
 }
 
 export function SearchResults({ results }: SearchResultsProps) {
-  // State to manage whether to display the results
   const [showAllResults, setShowAllResults] = useState(false)
 
   const handleViewMore = () => {
     setShowAllResults(true)
   }
 
-  const displayedResults = results ? showAllResults ? results : results.slice(0, 3): []
-  const additionalResultsCount = results ? results.length > 3 ? results.length - 3 : 0 : 0
+  const displayedResults = results
+    ? showAllResults
+      ? results
+      : results.slice(0, 3)
+    : []
+  const additionalResultsCount = results
+    ? results.length > 3
+      ? results.length - 3
+      : 0
+    : 0
+
+  const getHostname = (url: string | undefined): string => {
+    if (!url) return 'Unknown'
+    try {
+      return new URL(url).hostname
+    } catch {
+      const parts = url.split('/')
+      return parts.length > 2 ? parts[2] : url
+    }
+  }
+
+  const getFaviconUrl = (url: string | undefined): string => {
+    const hostname = getHostname(url)
+    return `https://www.google.com/s2/favicons?domain=${hostname}`
+  }
 
   return (
     <div className="flex flex-wrap">
       {displayedResults.map((result, index) => (
-        <div className="w-1/2  md:w-1/4 p-1 " key={index}>
-          <Link href={result.url} passHref target="_blank">
+        <div className="w-1/2 md:w-1/4 p-1" key={index}>
+          <Link href={result.url || '#'} passHref target="_blank">
             <Card className="flex-1 h-full bg-primary-foreground">
               <CardContent className="p-2">
                 <p className="text-xs line-clamp-2">
-                  {result.title || result.content}
+                  {result.title || result.content || 'No content available'}
                 </p>
                 <div className="mt-2 flex items-center space-x-2">
                   <Avatar className="h-4 w-4">
                     <AvatarImage
-                      src={`https://www.google.com/s2/favicons?domain=${
-                        new URL(result.url).hostname
-                      }`}
-                      alt={new URL(result.url).hostname}
+                      src={getFaviconUrl(result.url)}
+                      alt={getHostname(result.url)}
                     />
                     <AvatarFallback>
-                      {new URL(result.url).hostname[0]}
+                      {getHostname(result.url)[0] || '?'}
                     </AvatarFallback>
                   </Avatar>
                   <div className="text-xs opacity-60 truncate">
-                    {new URL(result.url).hostname}
+                    {getHostname(result.url)}
                   </div>
                 </div>
               </CardContent>
