@@ -7,9 +7,6 @@ import { Toaster } from '@/components/ui/sonner'
 import Script from 'next/script'
 import { ClerkProvider } from '@clerk/nextjs'
 import { DefaultSeo } from 'next-seo'
-import SEO from './next-seo.config'
-import { DynamicSeo } from '@/components/DynamicSeo'
-
 const fontSans = FontSans({
   subsets: ['latin'],
   variable: '--font-sans'

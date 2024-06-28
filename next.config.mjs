@@ -10,14 +10,6 @@ const nextConfig = {
         hostname: '**',
       }
     ]
-  },
-  async rewrites() {
-    return [
-      {
-        source: '/sitemaps/:filename*',
-        destination: '/api/sitemaps/:filename*'
-      }
-    ]
   }
 }
 

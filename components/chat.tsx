@@ -10,10 +10,8 @@ type ChatProps = {
 }
 
 export function Chat({ id }: ChatProps) {
-  const router = useRouter()
   const path = usePathname()
   const [messages] = useUIState()
-  const [aiState] = useAIState()
 
   useEffect(() => {
     if (!path.includes('search') && messages.length === 1) {
