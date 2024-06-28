@@ -38,15 +38,12 @@ export const search2Tool = async (
     )
     return searchResult
   }
-  const firstSixSources = searchResult.responses.slice(0, 6)
+  const firstSixSources = searchResult.responses.slice(0, 6) ? searchResult.responses.slice(0, 6) : searchResult.responses
   const updatedSearchResult = {
     responses: firstSixSources,
-    thumbnails: searchResult.thumbnails,
-    input: query
+    input: searchResult.input
   }
-
   streamResults.done(JSON.stringify(updatedSearchResult))
-
   return updatedSearchResult
 }
 

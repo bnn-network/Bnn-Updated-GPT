@@ -1,6 +1,6 @@
 import { waitForDebugger } from 'inspector'
 import type { Config } from 'tailwindcss'
-const { fontFamily } = require('tailwindcss/defaultTheme')
+import plugin from 'tailwindcss/plugin'
 
 const config = {
   darkMode: ['class'],
@@ -20,7 +20,7 @@ const config = {
         md: '768px',
         lg: '1024px',
         xl: '1280px',
-        '2xl': '1536px' // Increased from 1400px
+        '2xl': '1536px'
       }
     },
     extend: {
@@ -83,8 +83,8 @@ const config = {
         '2xl': '1.5rem'
       },
       fontFamily: {
-        sans: ['Inter var', ...fontFamily.sans],
-        serif: ['Merriweather', ...fontFamily.serif]
+        sans: ['Inter var', 'sans-serif'],
+        serif: ['Merriweather', 'serif']
       },
       fontSize: {
         xs: ['0.75rem', { lineHeight: '1rem' }],
@@ -152,6 +152,18 @@ const config = {
       },
       transitionDuration: {
         '400': '400ms'
+      },
+      listStyleType: {
+        disc: 'disc',
+        decimal: 'decimal',
+        circle: 'circle'
+      },
+      backgroundColor: {
+        'code-bg': '#1e1e1e',
+        'code-header': '#343541'
+      },
+      textColor: {
+        'code-text': '#ffffff'
       }
     }
   },
@@ -159,10 +171,17 @@ const config = {
     require('tailwindcss-animate'),
     require('@tailwindcss/typography')({
       className: 'prose',
-      // Customize the max width of prose
       maxWidth: {
-        prose: '80ch' // Increase this value to make the prose wider
+        prose: '80ch'
       }
+    }),
+    plugin(function ({ addBase }) {
+      addBase({
+        ul: { listStyleType: 'disc', paddingLeft: '1.5em', margin: '1em 0' },
+        ol: { listStyleType: 'decimal', paddingLeft: '1.5em', margin: '1em 0' },
+        li: { marginBottom: '0.5em' },
+        '.dark ul': { listStyleType: 'circle' }
+      })
     })
   ]
 } satisfies Config

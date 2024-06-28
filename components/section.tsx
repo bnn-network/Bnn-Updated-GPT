@@ -54,7 +54,7 @@ export const Section: React.FC<SectionProps> = ({
   }
 
   return (
-    <>
+    <div className="bg-results-foreground p-4">
       {separator && <Separator className="my-2 bg-primary/10" />}
       <section
         className={cn(
@@ -63,13 +63,13 @@ export const Section: React.FC<SectionProps> = ({
         )}
       >
         {title && (
-          <h2 className="flex items-center text-lg font-semibold text-muted-foreground leading-none py-4">
+          <p className="flex items-center text-sm font-sm text-text-secondary leading-none py-2">
             {/* {icon} */}
             {title}
-          </h2>
+          </p>
         )}
         {children}
       </section>
-    </>
+    </div>
   )
 }

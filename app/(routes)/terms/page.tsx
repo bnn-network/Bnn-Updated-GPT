@@ -1,6 +1,6 @@
 import Footer from '@/components/footer'
-import '../../styles.css' 
-import Head from 'next/head'
+import '../../styles.css' // This should be the correct relative path
+import { NextSeo } from 'next-seo'
 
 export async function generateMetadata() {
   return {
@@ -14,46 +14,31 @@ export async function generateMetadata() {
 export default function Page() {
   return (
     <>
+      <NextSeo
+        title="BNNGPT Terms of Service - Your Guide to Using Our AI-Powered Search Engine"
+        description="Read BNNGPT's Terms of Service to understand the rules and guidelines for using our AI-powered search engine."
+        openGraph={{
+          url: 'https://www.bnngpt.com/terms',
+          title:
+            'BNNGPT Terms of Service - Your Guide to Using Our AI-Powered Search Engine',
+          description:
+            "Read BNNGPT's Terms of Service to understand the rules and guidelines for using our AI-powered search engine.",
+          images: [
+            {
+              url: 'https://www.bnngpt.com/og-image.jpg',
+              width: 800,
+              height: 600,
+              alt: 'BNNGPT Open Graph Image'
+            }
+          ],
+          site_name: 'BNNGPT'
+        }}
+        twitter={{
+          cardType: 'summary_large_image',
+          site: '@epiphanyaitech' // If you have a Twitter handle for your site
+        }}
+      />
       <div className="inner_page">
-        <Head>
-          <title>
-            BNNGPT Terms of Service - Your Guide to Using Our AI-Powered Search
-            Engine
-          </title>
-          <meta
-            name="description"
-            content="Read BNNGPT's Terms of Service to understand the rules and guidelines for using our AI-powered search engine."
-          />
-          <meta
-            property="og:title"
-            content="BNNGPT Terms of Service - Your Guide to Using Our AI-Powered Search Engine"
-          />
-          <meta
-            property="og:description"
-            content="Read BNNGPT's Terms of Service to understand the rules and guidelines for using our AI-powered search engine."
-          />
-          <meta
-            property="og:url"
-            content="https://www.bnngpt.com/terms-of-service"
-          />
-          <meta property="og:image" content="https://www.bnngpt.com/logo.jpg" />
-          <meta property="og:site_name" content="BNNGPT" />
-          <meta name="twitter:card" content="" />
-          <meta name="twitter:site" content="" />
-          <meta name="twitter:creator" content="" />
-          <meta
-            name="twitter:title"
-            content="BNNGPT Terms of Service - Your Guide to Using Our AI-Powered Search Engine"
-          />
-          <meta
-            name="twitter:description"
-            content="Read BNNGPT's Terms of Service to understand the rules and guidelines for using our AI-powered search engine."
-          />
-          <meta
-            name="twitter:image"
-            content="https://www.bnngpt.com/logo.jpg"
-          />
-        </Head>
         <a href="/" className="logo_div"></a>
         <h2>BNNGPT Terms of Service</h2>
         <p>Last updated: May 18th, 2024.</p>

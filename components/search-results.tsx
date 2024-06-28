@@ -19,15 +19,23 @@ export function SearchResults({ results }: SearchResultsProps) {
     setShowAllResults(true)
   }
 
-  const displayedResults = results ? showAllResults ? results : results.slice(0, 3): []
-  const additionalResultsCount = results ? results.length > 3 ? results.length - 3 : 0 : 0
+  const displayedResults = results
+    ? showAllResults
+      ? results
+      : results.slice(0, 3)
+    : []
+  const additionalResultsCount = results
+    ? results.length > 3
+      ? results.length - 3
+      : 0
+    : 0
 
   return (
-    <div className="flex flex-wrap">
+    <div className="flex flex-wrap ">
       {displayedResults.map((result, index) => (
         <div className="w-1/2  md:w-1/4 p-1 " key={index}>
-          <Link href={result.url} passHref target="_blank">
-            <Card className="flex-1 h-full bg-primary-foreground">
+          <Link href={result.sourceURL} passHref target="_blank">
+            <Card className="px-4 py-1 flex-1 h-full bg-modal-inputBoxSecondary">
               <CardContent className="p-2">
                 <p className="text-xs line-clamp-2">
                   {result.title || result.content}
@@ -36,16 +44,16 @@ export function SearchResults({ results }: SearchResultsProps) {
                   <Avatar className="h-4 w-4">
                     <AvatarImage
                       src={`https://www.google.com/s2/favicons?domain=${
-                        new URL(result.url).hostname
+                        new URL(result.sourceURL).hostname
                       }`}
-                      alt={new URL(result.url).hostname}
+                      alt={new URL(result.sourceURL).hostname}
                     />
                     <AvatarFallback>
-                      {new URL(result.url).hostname[0]}
+                      {new URL(result.sourceURL).hostname[0]}
                     </AvatarFallback>
                   </Avatar>
                   <div className="text-xs opacity-60 truncate">
-                    {new URL(result.url).hostname}
+                    {new URL(result.sourceURL).hostname}
                   </div>
                 </div>
               </CardContent>

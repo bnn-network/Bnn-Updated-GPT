@@ -17,9 +17,18 @@ export type SearchSectionProps = {
 
 export function SearchSection({ result }: SearchSectionProps) {
   const [data, error, pending] = useStreamableValue(result)
+  // console.log(data, 'data')
+  // console.log(pending, 'pending')
+
   const searchResults: searXNGSearchResults = data
     ? JSON.parse(data)
     : undefined
+  const thumbnails = searchResults
+    ? searchResults.responses
+        .filter(response => response.thumbnailURL !== null)
+        .map(response => response.thumbnailURL)
+    : []
+  // console.log(thumbnails, 'thumbnails')
   return (
     <div>
       {!pending && data ? (
@@ -27,18 +36,16 @@ export function SearchSection({ result }: SearchSectionProps) {
           <Section size="sm" className="pt-2 pb-0">
             <ToolBadge tool="search">{searchResults.input}</ToolBadge>
           </Section>
-          {searchResults.thumbnails && searchResults.thumbnails.length > 0 && (
-            <Section title="Images">
+          {thumbnails && thumbnails.length > 0 && (
+            <Section title="Media">
               <SearchResultsImageSection
-                images={searchResults.thumbnails}
+                images={thumbnails}
                 query={searchResults.input}
               />
             </Section>
           )}
           <Section title="Sources">
-            <SearchResults
-              results={searchResults.responses || searchResults.responses}
-            />
+            <SearchResults results={searchResults.responses || []} />
           </Section>
         </>
       ) : (

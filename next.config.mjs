@@ -1,16 +1,24 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    typescript:{
-        ignoreBuildErrors: true
-    },
-    async rewrites() {
-        return [
-            {
-                source: '/sitemaps/:filename*',
-                destination: '/api/sitemaps/:filename*',
-            },
-        ];
-    }
-};
+  typescript: {
+    ignoreBuildErrors: true
+  },
+  images: {
+    remotePatterns:[
+      {
+        protocol: 'https',
+        hostname: '**',
+      }
+    ]
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/sitemaps/:filename*',
+        destination: '/api/sitemaps/:filename*'
+      }
+    ]
+  }
+}
 
-export default nextConfig;
+export default nextConfig

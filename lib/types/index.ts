@@ -8,13 +8,13 @@ export type searXNGSearchResults = {
   responses:[
     {
       title: string
-      url: string
+      sourceURL: string
       content: string
+      imageURL:string
+      thumbnailURL:string
     }
   ]
-  thumbnails: string[]
   input:string
-
 }
 
 export type ExaSearchResults = {
@@ -32,8 +32,10 @@ export type SerperSearchResults = {
 
 export type SearchResultItem = {
   title: string
-  url: string
+  sourceURL: string
   content: string
+  imageURL: string
+  thumbnailURL:string
 }
 
 export type ExaSearchResultItem = {

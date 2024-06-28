@@ -5,9 +5,7 @@ import { cn } from '@/lib/utils'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/sonner'
 import Script from 'next/script'
-import OgImage from './twitter-image.png'
 import { ClerkProvider } from '@clerk/nextjs'
-import { dark } from '@clerk/themes'
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -26,24 +24,19 @@ export const metadata: Metadata = {
     description,
     images: [
       {
-        url: OgImage.src,
-        width: OgImage.width,
-        height: OgImage.height
+        url: '/og-image.jpg',
+        width: 800,
+        height: 600
       }
     ]
   },
   twitter: {
     title,
     description,
-    card: 'summary_large_image', // Use a valid card type here
-    creator: 'BNNGPT',
-    images: [
-      {
-        url: OgImage.src,
-        width: OgImage.width,
-        height: OgImage.height
-      }
-    ]
+    card: 'summary_large_image',
+    site: '@epiphanyAITech',
+    creator: '@epiphanyAITech',
+    images: ['/og-image.jpg']
   }
 }
 
@@ -61,11 +54,7 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <ClerkProvider
-        appearance={{
-          baseTheme: dark
-        }}
-      >
+      <ClerkProvider>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-NFW7H1G22S"
           strategy="afterInteractive"
@@ -92,6 +81,10 @@ export default function RootLayout({
           }}
         />
         <html lang="en" suppressHydrationWarning>
+          <head>
+            {/* <DefaultSeo {...SEO} />
+          <DynamicSeo /> */}
+          </head>
           <body
             className={cn(
               'font-sans antialiased bg-secondary',

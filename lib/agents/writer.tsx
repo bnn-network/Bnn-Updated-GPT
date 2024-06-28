@@ -3,10 +3,6 @@ import { CoreMessage, streamText as nonexperimental_streamText } from 'ai'
 import { Section } from '@/components/section'
 import { BotMessage } from '@/components/message'
 import {
-  deepinfra8bModel,
-  fireworksMistral8x22Model,
-  groq7bModel,
-  groq8bModel,
   openAIInstance
 } from '../utils'
 

@@ -4,6 +4,13 @@ import { ClerkMiddlewareAuth, clerkMiddleware } from '@clerk/nextjs/server'
 export default clerkMiddleware(
   async (auth: ClerkMiddlewareAuth, req: NextRequest) => {
     const { pathname } = req.nextUrl
+    if (
+      !pathname.includes('parameter') &&
+      pathname.length !== 16 &&
+      pathname.length !== 10
+    ) {
+      return NextResponse.next()
+    }
     if (pathname.length === 16) {
       try {
         const segments = pathname.split('/').filter(segment => segment !== '')

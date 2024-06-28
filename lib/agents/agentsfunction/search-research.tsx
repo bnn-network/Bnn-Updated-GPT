@@ -57,8 +57,6 @@ export default async function SearchResearch({
   if (!searchToAnsweer) {
     return { searchToAnsweer, fullResponse, hasError, toolResponses }
   }
-  console.log(searchToAnsweer, 'searchToAnsweer')
-  console.log(messages.length, 'messages.length')
   const date = new Date().toLocaleString()
   const searchStream = await nonexperimental_streamText({
     model: fireworks70bModel(),
@@ -70,25 +68,28 @@ export default async function SearchResearch({
 
     Guidelines:
 
-      1. Response Structure and Content:
-      - Create an SEO-optimized H1 title and relevant H2/H3 subheadings.
-      - Structure: Strong opening, informative body, powerful closing.
-      - Use clear language and Markdown formatting (bold for emphasis, italics for quotes, lists).
-      - Aim for 400+ words, adjusting for follow-ups.
-      - Present key information first, followed by supporting details.
-      - Include examples, quotes, statistics, and context.
-      - Engage readers with analogies and thought-provoking questions.
-      - Provide unique insights and perspectives.
-      - Avoid generic headings (e.g., "Introduction", "Conclusion").
-      - Explain technical terms when necessary.
-      - Anticipate and address potential follow-up questions.
-      - Enhance with historical background or real-world applications.
-      - Generate all numbers in plain text without using bold markdown.
+    1. Response Structure and Content:
+    - Initial answer: SEO-optimized H1 title and relevant H2/H3 subheadings
+    - Strong opening, informative body, powerful closing
+    - 400+ words for initial answers, adjust for follow-ups
+    - Follow-ups: answer directly without headings
+    - Present key information first, then supporting details
+    - Include examples, quotes, statistics, and context
+    - Provide unique insights and perspectives
+    - Use analogies and thought-provoking questions
+    - Add historical background or real-world applications
+    - Anticipate follow-up questions
+    - Avoid generic headings (e.g., "Introduction", "Conclusion")
+    - Explain technical terms when needed
+
+      Formatting and Language:
+    - Use Markdown: bold for emphasis, italics for quotes, lists
+    - Use clear, engaging language
 
       2. Citations Generation:
 
         Sources: ${searchToAnsweer.responses
-          .map((res: any) => `- ${res.title} (${res.url})`)
+          .map((res: any) => `- ${res.title} (${res.sourceURL})`)
           .join('\n')}
 
         Format and Placement:
@@ -115,7 +116,11 @@ export default async function SearchResearch({
         - Balance citation frequency with readability
 
     3. Visuals:
-    - Include up to 3 relevant images from ${searchToAnsweer.thumbnails}.
+    - Include up to 3 relevant images from ${searchToAnsweer.responses
+      .filter((response: any) => response.imageURL !== null)
+      .map(
+        (response: any) => response.imageURL
+      )} based on the content you display and their title.
     - Use Markdown format: ![Alt text](URL)
     - Place images strategically to break up text and complement content.
 
@@ -139,20 +144,9 @@ export default async function SearchResearch({
 
     Goal: Provide the most helpful and informative response, using inline citations for all relevant sentences at the end of regular paragraph sentences only.
 
-    **FINAL REMINDER: All citations must be in plain text [number]:URL format only, placed at the end of sentences within regular paragraphs. No HTML allowed for citations. Do not include citations in headings, subheadings, or as standalone elements.**
-
-    DO NOT use formats like:
-    <button class="select-none no-underline">
-      <a href="https://pagesix.com/" target="_blank" rel="noopener noreferrer">
-        <span class="relative -top-[0rem] inline-flex">
-          <span class="h-[1rem] min-w-[1rem] items-center justify-center rounded-full text-center px-1 text-xs font-mono shadow-lg bg-slate-300 dark:bg-gray-700 text-[0.60rem] text-primary">
-            1
-          </span>
-        </span>
-      </a>
-    </button>`,
+    **FINAL REMINDER: All citations must be in plain text [number]:URL format only, placed at the end of sentences within regular paragraphs. No HTML allowed for citations. Do not include citations in headings, subheadings, or as standalone elements.**`,
     messages
-  }).catch(err => {
+  }).catch((err:any) => {
     hasError = true
     fullResponse = 'Error: ' + err.message
     streamText.update(fullResponse)

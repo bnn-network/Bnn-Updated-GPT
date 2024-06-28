@@ -61,25 +61,27 @@ export const SearchResultsImageSection: React.FC<
               className="w-[calc(50%-0.5rem)] md:w-[calc(25%-0.5rem)]  aspect-video cursor-pointer relative"
               onClick={() => setSelectedIndex(index)}
             >
-              <Card className="flex-1 h-[90%]">
-                <CardContent className=" w-full h-full bg-primary-foreground">
+              <Card className="flex-1 h-[90%] ">
+                {/* <Card className="h-full"> */}
+                <CardContent className=" w-full h-full p-0 bg-modal-inputBoxSecondary rounded">
                   {image ? (
                     <img
                       src={image}
                       alt={`Image ${index + 1}`}
-                      className="h-full w-full object-cover object-center "
+                      className="h-full w-full object-cover object-center rounded"
                       onError={e =>
                         (e.currentTarget.src = '/images/logo-white.png')
                       }
                     />
                   ) : (
-                    <div className="w-full h-full bg-muted animate-pulse" />
+                    <div className="w-full h-full bg-modal-inputBoxSecondary animate-pulse" />
                   )}
                 </CardContent>
               </Card>
               {index === 3 && images.length > 4 && (
-                <div className="absolute inset-0 bg-black/30 rounded-md flex items-center justify-center text-white/80 text-sm">
-                  <PlusCircle size={24} />
+                <div className="absolute inset-0 bg-modal-inputBoxSecondary rounded-md flex items-center justify-center font-medium text-sm">
+                  {/* <PlusCircle size={24} /> */}
+                  View All
                 </div>
               )}
             </div>
@@ -88,7 +90,7 @@ export const SearchResultsImageSection: React.FC<
             <div className="">
               <Carousel
                 setApi={setApi}
-                className="lg:w-full  lg:bg-primary-foreground max-h-[60vh] lg:-z-10 lg:mt-5"
+                className="lg:w-full bg-modal-inputBoxSecondary max-h-[60vh] lg:-z-10 lg:mt-5"
               >
                 <CarouselContent>
                   {images.map((img, idx) => (
