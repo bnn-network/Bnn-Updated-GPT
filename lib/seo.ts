@@ -18,6 +18,9 @@ export async function fetchContentAndMetadata(
     const endpoint = isPrequery ? '/getparamquery' : '/getdynamiccontent'
     const param = isPrequery ? 'query' : 'path'
 
+    // Add a 3-second delay
+    await new Promise(resolve => setTimeout(resolve, 3000))
+
     const response = await fetch(
       `${
         process.env.NEXT_PUBLIC_BASE_URL
@@ -29,11 +32,6 @@ export async function fetchContentAndMetadata(
     }
 
     const data = await response.json()
-
-    if (isGooglebot) {
-      // Add an additional delay for Googlebot to ensure content is fully loaded
-      await new Promise(resolve => setTimeout(resolve, 2000))
-    }
 
     // Parse the HTML content
     const parser = new DOMParser()

@@ -23,7 +23,6 @@ export function DynamicMetadata() {
         try {
           const query = prequery || pathname
           console.log('Fetching metadata for:', query)
-          // Note: We're passing false for isGooglebot here because this is client-side code
           const extractedMetadata = await fetchContentAndMetadata(query, false)
           console.log('Extracted metadata:', extractedMetadata)
           setMetadata(extractedMetadata)
