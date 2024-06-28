@@ -6,16 +6,16 @@ export async function generateDynamicMetadata(html: string): Promise<Metadata> {
   const document = dom.window.document
 
   const answerDiv = document.querySelector('#answer')
-  const title = answerDiv?.querySelector('h2')?.textContent || 'BNNGPT'
+  const title = answerDiv?.querySelector('h1, h2')?.textContent || 'BNNGPT'
   const description =
     answerDiv?.querySelector('p')?.textContent?.substring(0, 160) + '...' ||
     'Elevate Your Search Experience with AI.'
 
   return {
-    title,
+    title: `${title} - BNNGPT`,
     description,
     openGraph: {
-      title,
+      title: `${title} - BNNGPT`,
       description,
       images: [
         {
@@ -28,7 +28,7 @@ export async function generateDynamicMetadata(html: string): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
-      title,
+      title: `${title} - BNNGPT`,
       description,
       images: ['/og-image.jpg'],
       site: '@epiphanyAITech',
