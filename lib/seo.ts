@@ -18,8 +18,8 @@ export async function fetchContentAndMetadata(
     const endpoint = isPrequery ? '/getparamquery' : '/getdynamiccontent'
     const param = isPrequery ? 'query' : 'path'
 
-    // Add a 3-second delay
-    await new Promise(resolve => setTimeout(resolve, 3000))
+    // Add a 5-second delay
+    await new Promise(resolve => setTimeout(resolve, 5000))
 
     const response = await fetch(
       `${
