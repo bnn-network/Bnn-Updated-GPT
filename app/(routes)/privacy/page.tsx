@@ -1,51 +1,49 @@
+import { Metadata } from 'next'
 import Footer from '@/components/footer'
-import '../../styles.css' // This should be the correct relative path
-import { NextSeo } from 'next-seo'
+import '../../styles.css' // Ensure this path is correct
 
-export async function generateMetadata() {
-  return {
+export const metadata: Metadata = {
+  title: 'BNNGPT Privacy Policy - Protecting Your Data and Privacy',
+  description: `Read BNNGPT's Privacy Policy to learn how we collect, use, and protect your information.`,
+  openGraph: {
+    type: 'website',
+    url: 'https://www.bnngpt.com/privacy',
     title: 'BNNGPT Privacy Policy - Protecting Your Data and Privacy',
-    description: `Read BNNGPT's Privacy Policy to learn how we collect, use, and protect your information.`,
-    metadataBase: new URL('https://www.bnngpt.com/privacy')
+    description:
+      "Read BNNGPT's Privacy Policy to learn how we collect, use, and protect your information.",
+    images: [
+      {
+        url: 'https://www.bnngpt.com/og-image.jpg',
+        width: 800,
+        height: 600,
+        alt: 'BNNGPT Open Graph Image'
+      }
+    ],
+    siteName: 'BNNGPT'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@epiphanyaitech',
+    title: 'BNNGPT Privacy Policy - Protecting Your Data and Privacy',
+    description:
+      "Read BNNGPT's Privacy Policy to learn how we collect, use, and protect your information.",
+    images: ['https://www.bnngpt.com/og-image.jpg']
   }
 }
 
-export default function Page() {
+export default function PrivacyPolicyPage() {
   return (
     <>
-      <NextSeo
-        title="BNNGPT Privacy Policy - Protecting Your Data and Privacy"
-        description="Read BNNGPT's Privacy Policy to learn how we collect, use, and protect your information."
-        openGraph={{
-          url: 'https://www.bnngpt.com/privacy',
-          title: 'BNNGPT Privacy Policy - Protecting Your Data and Privacy',
-          description:
-            "Read BNNGPT's Privacy Policy to learn how we collect, use, and protect your information.",
-          images: [
-            {
-              url: 'https://www.bnngpt.com/og-image.jpg',
-              width: 800,
-              height: 600,
-              alt: 'BNNGPT Open Graph Image'
-            }
-          ],
-          site_name: 'BNNGPT'
-        }}
-        twitter={{
-          cardType: 'summary_large_image',
-          site: '@epiphanyaitech' // If you have a Twitter handle for your site
-        }}
-      />
       <div className="inner_page">
         <a href="/" className="logo_div"></a>
         <h2>BNNGPT Privacy Policy</h2>
         <p>Last updated: May 18th, 2024.</p>
         <p>
-          This privacy policy (“Policy”) describes how{' '}
+          This privacy policy ("Policy") describes how{' '}
           <a href="http://www.bnngpt.com/">www.bnngpt.com</a> and associated
-          websites (“BNNGPT,” “we,” “us,” or “our”) collect, use, share, and
+          websites ("BNNGPT," "we," "us," or "our") collect, use, share, and
           protect information about you when you use our website, products, and
-          services (collectively, the “Services”). This Privacy Policy does not
+          services (collectively, the "Services"). This Privacy Policy does not
           cover the BNNGPT API, which is subject to the terms outlined in the
           Data Processing Agreement.
         </p>
@@ -136,16 +134,14 @@ export default function Page() {
           of data collection for AI improvement purposes in your account
           settings. If you delete your account, we will delete your personal
           information from our servers within 30 days. Please contact us at{' '}
-          <a href="mailto:support@bnngpt.com" target="_top">
-            support@bnngpt.com
-          </a>{' '}
-          to request deletion.
+          <a href="mailto:support@bnngpt.com">support@bnngpt.com</a> to request
+          deletion.
         </p>
         <h3>Changes to Our Privacy Policy</h3>
         <p>
           We may update this Policy from time to time. If we make changes, we
-          will post the revised Policy on our website and update the “Last
-          updated” date above. We encourage you to review the Policy whenever
+          will post the revised Policy on our website and update the "Last
+          updated" date above. We encourage you to review the Policy whenever
           you access or use our Services or otherwise interact with us to stay
           informed about our information practices and the choices available to
           you.
@@ -153,10 +149,7 @@ export default function Page() {
         <h3>Contact Us</h3>
         <p>
           If you have any questions about this Policy, please contact us at{' '}
-          <a href="mailto:support@bnngpt.com" target="_top">
-            support@bnngpt.com
-          </a>
-          .
+          <a href="mailto:support@bnngpt.com">support@bnngpt.com</a>.
         </p>
       </div>
       <Footer />

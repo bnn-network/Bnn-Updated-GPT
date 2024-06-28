@@ -1,52 +1,51 @@
+import { Metadata } from 'next'
 import Footer from '@/components/footer'
-import '../../styles.css' // This should be the correct relative path
-import { NextSeo } from 'next-seo'
+import '../../styles.css' // Ensure this path is correct
 
-export async function generateMetadata() {
-  return {
+export const metadata: Metadata = {
+  title:
+    'BNNGPT Terms of Service - Your Guide to Using Our AI-Powered Search Engine',
+  description: `Read BNNGPT's Terms of Service to understand the rules and guidelines for using our AI-powered search engine.`,
+  openGraph: {
+    type: 'website',
+    url: 'https://www.bnngpt.com/terms',
     title:
       'BNNGPT Terms of Service - Your Guide to Using Our AI-Powered Search Engine',
-    description: `Read BNNGPT's Terms of Service to understand the rules and guidelines for using our AI-powered search engine.`,
-    metadataBase: new URL('https://www.bnngpt.com/terms')
+    description:
+      "Read BNNGPT's Terms of Service to understand the rules and guidelines for using our AI-powered search engine.",
+    images: [
+      {
+        url: 'https://www.bnngpt.com/og-image.jpg',
+        width: 800,
+        height: 600,
+        alt: 'BNNGPT Open Graph Image'
+      }
+    ],
+    siteName: 'BNNGPT'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@epiphanyaitech',
+    title:
+      'BNNGPT Terms of Service - Your Guide to Using Our AI-Powered Search Engine',
+    description:
+      "Read BNNGPT's Terms of Service to understand the rules and guidelines for using our AI-powered search engine.",
+    images: ['https://www.bnngpt.com/og-image.jpg']
   }
 }
 
-export default function Page() {
+export default function TermsOfServicePage() {
   return (
     <>
-      <NextSeo
-        title="BNNGPT Terms of Service - Your Guide to Using Our AI-Powered Search Engine"
-        description="Read BNNGPT's Terms of Service to understand the rules and guidelines for using our AI-powered search engine."
-        openGraph={{
-          url: 'https://www.bnngpt.com/terms',
-          title:
-            'BNNGPT Terms of Service - Your Guide to Using Our AI-Powered Search Engine',
-          description:
-            "Read BNNGPT's Terms of Service to understand the rules and guidelines for using our AI-powered search engine.",
-          images: [
-            {
-              url: 'https://www.bnngpt.com/og-image.jpg',
-              width: 800,
-              height: 600,
-              alt: 'BNNGPT Open Graph Image'
-            }
-          ],
-          site_name: 'BNNGPT'
-        }}
-        twitter={{
-          cardType: 'summary_large_image',
-          site: '@epiphanyaitech' // If you have a Twitter handle for your site
-        }}
-      />
       <div className="inner_page">
         <a href="/" className="logo_div"></a>
         <h2>BNNGPT Terms of Service</h2>
         <p>Last updated: May 18th, 2024.</p>
         <p>
-          Please read these Terms of Service (“Terms”, “Terms of Service”)
+          Please read these Terms of Service ("Terms", "Terms of Service")
           carefully before using the{' '}
           <a href="http://www.bnngpt.com/">www.bnngpt.com</a> website (the
-          “Service”) operated by BNNGPT (“us”, “we”, or “our”).
+          "Service") operated by BNNGPT ("us", "we", or "our").
         </p>
         <p>
           Your access to and use of the Service is conditioned on your
@@ -68,7 +67,7 @@ export default function Page() {
         <h3>Acceptable Use</h3>
         <p>
           You must be at least 13 years old to use the Service. If you are under
-          18, you must have your parent or legal guardian’s permission to use
+          18, you must have your parent or legal guardian's permission to use
           the Service. You agree not to share, transfer, or sell your account.
           You are responsible for all activities on your account.
         </p>
@@ -112,7 +111,7 @@ export default function Page() {
         <p>
           You understand that all information, data, text, software, music,
           sound, photographs, graphics, video, messages, tags, or other
-          materials (“Content”), whether publicly posted or privately
+          materials ("Content"), whether publicly posted or privately
           transmitted, are the sole responsibility of the person from whom such
           Content originated. This means that you, and not BNNGPT, are entirely
           responsible for all Content that you upload, post, email, transmit, or
@@ -172,7 +171,7 @@ export default function Page() {
         <h3>Disclaimer</h3>
         <p>
           Your use of the Service is at your sole risk. The Service is provided
-          on an “AS IS” and “AS AVAILABLE” basis. The Service is provided
+          on an "AS IS" and "AS AVAILABLE" basis. The Service is provided
           without warranties of any kind, whether express or implied, including,
           but not limited to, implied warranties of merchantability, fitness for
           a particular purpose, non-infringement, or course of performance.
@@ -191,7 +190,7 @@ export default function Page() {
           licensee and licensors, and their employees, contractors, agents,
           officers, and directors, from and against any and all claims, damages,
           obligations, losses, liabilities, costs or debt, and expenses
-          (including but not limited to attorney’s fees), resulting from or
+          (including but not limited to attorney's fees), resulting from or
           arising out of a) your use and access of the Service, by you or any
           person using your account and password; b) a breach of these Terms; or
           c) Content posted on the Service.
@@ -206,7 +205,7 @@ export default function Page() {
         </p>
         <p>
           After modification, we will post the revised Terms and update the
-          “Last updated” date above. By continuing to access or use our Service
+          "Last updated" date above. By continuing to access or use our Service
           after those revisions become effective, you agree to be bound by the
           revised terms. If you do not agree to the new terms, please cease
           using the Service.
