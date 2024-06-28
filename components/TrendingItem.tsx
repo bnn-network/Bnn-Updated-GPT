@@ -6,7 +6,7 @@ import { ChevronDownIcon } from '@heroicons/react/24/outline'
 import { useActions, useUIState } from 'ai/rsc'
 import React, { useState } from 'react'
 import { UserMessage } from './user-message'
-import { nanoid } from 'ai'
+import { generateId } from 'ai'
 import Image from 'next/image'
 
 interface Props {
@@ -29,7 +29,7 @@ function TrendingItem({ name, icon }: Props) {
     setMessages(currentMessages => [
       ...currentMessages,
       {
-        id: nanoid(),
+        id: generateId(),
         component: <UserMessage message={query} />
       }
     ])
