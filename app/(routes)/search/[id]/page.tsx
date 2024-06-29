@@ -38,8 +38,8 @@ export default async function SearchPage({ params }: SearchPageProps) {
     redirect('/')
   }
 
-  if (chat?.userId !== userId) {
-    notFound()
+  if (chat?.userId !== userId && chat?.userId !== 'anonymous') {
+    notFound();
   }
 
   return (
