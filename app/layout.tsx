@@ -6,7 +6,6 @@ import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/sonner'
 import Script from 'next/script'
 import { ClerkProvider } from '@clerk/nextjs'
-import { DefaultSeo } from 'next-seo'
 const fontSans = FontSans({
   subsets: ['latin'],
   variable: '--font-sans'

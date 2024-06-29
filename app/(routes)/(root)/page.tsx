@@ -3,6 +3,7 @@ import { generateId } from 'ai'
 import { AI } from '../../actions'
 import FooterAI from '@/components/ui/footerAi'
 import dynamic from 'next/dynamic'
+import { auth } from '@clerk/nextjs/server'
 
 const DynamicTypingEffect = dynamic(() => import('@/components/TypingEffect'), {
   ssr: false
@@ -10,8 +11,9 @@ const DynamicTypingEffect = dynamic(() => import('@/components/TypingEffect'), {
 
 export const runtime = 'edge'
 
-export default function Page() {
-  const id = generateId()
+export default async function Page() {
+  const { userId } = auth()
+  const id = generateId(userId ? 10 : 7)
 
   return (
     <AI initialAIState={{ chatId: id, messages: [] }}>

@@ -1,0 +1,15 @@
+import { MetadataRoute } from 'next'
+
+export default function robots(): MetadataRoute.Robots {
+  return {
+    rules: {
+      userAgent: '*',
+      allow: ['/'],
+      disallow: ['/api/','/search/??????????']
+    },
+    sitemap: Array.from(
+      { length: 12 },
+      (_, i) => `${process.env.BASE_URL}/sitemap/${i}.xml`
+    )
+  }
+}

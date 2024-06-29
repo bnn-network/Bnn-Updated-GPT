@@ -15,7 +15,7 @@ export interface SearchPageProps {
 export async function generateMetadata({ params }: SearchPageProps) {
   const chat = await getChat(params.id)
   return {
-    title: chat?.title.toString().slice(0, 50) || 'Search'
+    title: chat?.title.toString().slice(0, 50) || 'Search',
   }
 }
 

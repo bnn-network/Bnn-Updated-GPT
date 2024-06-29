@@ -324,6 +324,7 @@ export const AI = createAI<AIState, UIState>({
           'Untitled'
         : 'Untitled'
     // Add an 'end' message at the end to determine if the history needs to be reloaded
+    const description = messages.length>0 ? JSON.parse(messages[0].content) : 'Untitled'
     const updatedMessages: AIMessage[] = [
       ...messages,
       {
