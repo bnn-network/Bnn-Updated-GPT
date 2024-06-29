@@ -19,12 +19,11 @@ export function SearchSection({ result }: SearchSectionProps) {
   const [data, error, pending] = useStreamableValue(result)
   console.log(data, 'data')
   console.log(pending, 'pending')
-  
+
   const searchResults: searXNGSearchResults = data
     ? JSON.parse(data)
     : undefined
-  const thumbnails = searchResults ? searchResults.responses.filter(response => response.thumbnailURL !== null).map(response => response.thumbnailURL): []
-  console.log(thumbnails, 'thumbnails')
+  const thumbnails = searchResults ? searchResults.responses.filter(response => response.thumbnailURL !== null).map(response => response.thumbnailURL) : []
   return (
     <div>
       {!pending && data ? (
