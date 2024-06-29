@@ -28,17 +28,15 @@ export async function generateMetadata({ params }: SearchPageProps) {
             .trim()
         : 'BNNGPT - Search Anything Instantly',
     description:
-      chat?.description?.toString().slice(0, 160) ||
-      (chat?.messages && chat.messages.length > 0
+      chat?.messages && chat.messages.length > 0
         ? chat.messages
             .filter(m => m.role === 'assistant')[0]
-            ?.content.substring(90, 255)
+            ?.content.substring(90, 400)
             .replace(/\n/g, '')
             .replace(/\s\s+/g, ' ')
-            .replace(/^=+|=+$/g, '')
-            .replace(/^[-*]+|[-*]+$|(?<=\s)[-*]+(?=\s)/g, '')
-            .trim()
-        : 'BNNGPT - Search Anything Instantly')
+            .replace(/([*=\-]){2,}|^[*=\-]+|[*=\-]+$/g, '')
+            .trim() + '....'
+        : 'BNNGPT - Search Anything Instantly'
   }
 }
 
