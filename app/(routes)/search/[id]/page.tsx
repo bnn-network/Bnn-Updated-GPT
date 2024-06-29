@@ -17,14 +17,16 @@ export async function generateMetadata({ params }: SearchPageProps) {
 
   return {
     title:
-    chat?.messages && chat.messages.length > 0
-    ? chat.messages
-        .filter(m => m.role === 'assistant')[0]
-        ?.content.substring(0, 90)
-        .replace(/\n/g, '')
-        .replace(/\s\s+/g, ' ')
-        .replace(/^(=+|\*+)\s*|\s*(=+|\*+)$/g, '')
-    : 'BNNGPT - Search Anything Instantly',
+      chat?.messages && chat.messages.length > 0
+        ? chat.messages
+            .filter(m => m.role === 'assistant')[0]
+            ?.content.substring(0, 90)
+            .replace(/\n/g, '')
+            .replace(/\s\s+/g, ' ')
+            .replace(/^(=+|\*+)\s*|\s*(=+|\*+)$/g, '')
+            .replace(/\*+$/, '')
+            .trim()
+        : 'BNNGPT - Search Anything Instantly',
     description:
       chat?.description?.toString().slice(0, 160) ||
       (chat?.messages && chat.messages.length > 0
@@ -34,6 +36,8 @@ export async function generateMetadata({ params }: SearchPageProps) {
             .replace(/\n/g, '')
             .replace(/\s\s+/g, ' ')
             .replace(/^=+|=+$/g, '')
+            .replace(/^[-*]+|[-*]+$|(?<=\s)[-*]+(?=\s)/g, '')
+            .trim()
         : 'BNNGPT - Search Anything Instantly')
   }
 }
