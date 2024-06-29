@@ -15,7 +15,12 @@ export interface SearchPageProps {
 export async function generateMetadata({ params }: SearchPageProps) {
   const chat = await getChat(params.id)
   return {
-    title: chat?.title.toString().slice(0, 50) || 'Search',
+    title:
+      chat?.title.toString().slice(0, 50) ||
+      'BNNGPT - Search Anything Instantly',
+    description:
+      chat?.description.toString().slice(0, 160) ||
+      'Instantly search for anything you want to know about around the world'
   }
 }
 

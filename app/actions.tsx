@@ -323,8 +323,18 @@ export const AI = createAI<AIState, UIState>({
         ? JSON.parse(messages[0].content)?.input?.substring(0, 100) ||
           'Untitled'
         : 'Untitled'
+    const descriptionValue =
+      messages.length > 0
+        ? messages
+            .filter(m => m.role === 'assistant')[0]
+            .content.substring(90, 255)
+            .replace(/\n/g, '')
+            .replace(/\s\s+/g, ' ')
+            .replace(/^=+|=+$/g, '') // Remove ===== from start and end
+        : 'Untitled'
+
+    console.log(descriptionValue, 'descr')
     // Add an 'end' message at the end to determine if the history needs to be reloaded
-    const description = messages.length>0 ? JSON.parse(messages[0].content) : 'Untitled'
     const updatedMessages: AIMessage[] = [
       ...messages,
       {
@@ -341,6 +351,7 @@ export const AI = createAI<AIState, UIState>({
       userId: userId ? userId : 'anonymous',
       path,
       title,
+      description: descriptionValue + '.....',
       messages: updatedMessages
     }
     await saveChat(chat)

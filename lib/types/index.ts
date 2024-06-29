@@ -62,7 +62,7 @@ export type SerperSearchResultItem = {
 export interface Chat extends Record<string, any> {
   id: string
   title: string
-  desciption: string
+  description: string
   createdAt: Date
   userId: string
   path: string
