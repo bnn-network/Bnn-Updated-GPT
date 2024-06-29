@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: ['/'],
-      disallow: ['/api/','/search/??????????']
+      disallow: ['/api/','/search/??????????','/share/']
     },
     sitemap: Array.from(
       { length: 12 },
