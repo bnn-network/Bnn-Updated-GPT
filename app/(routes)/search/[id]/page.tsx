@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: SearchPageProps) {
             .replace(/\s\s+/g, ' ')
             .replace(/^(=+|\*+)\s*|\s*(=+|\*+)$/g, '')
             .replace(/\*+$/, '')
-            .trim()
+            .trim() + ' - BNNGPT'
         : 'BNNGPT - Search Anything Instantly',
     description:
       chat?.messages && chat.messages.length > 0
