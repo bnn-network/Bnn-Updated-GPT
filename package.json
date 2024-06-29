@@ -10,7 +10,8 @@
     "lint": "next lint",
     "test": "tsx scripts/test.ts",
     "rag": "tsx scripts/rag.ts",
-    "chromarag": "tsx scripts/lang-rag.ts"
+    "chromarag": "tsx scripts/lang-rag.ts",
+    "test2": "tsx scripts/test2.ts"
   },
   "dependencies": {
     "@ai-sdk/google": "^0.0.14",
