@@ -8,7 +8,10 @@ export async function generateMetadata() {
       'About BNNGPT - Leading AI-Powered Search Engine for Accurate Answers',
     description:
       'Learn how BNNGPT redefines search with AI, delivering precise, human-like responses to your queries.',
-    metadataBase: new URL('https://www.bnngpt.com/about')
+    metadataBase: new URL('https://www.bnngpt.com'),
+    alternates: {
+      canonical: "/about"
+    }
   }
 }
 

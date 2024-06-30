@@ -6,7 +6,10 @@ export async function generateMetadata() {
     title:
       'BNNGPT Terms of Service - Your Guide to Using Our AI-Powered Search Engine',
     description: `Read BNNGPT's Terms of Service to understand the rules and guidelines for using our AI-powered search engine.`,
-    metadataBase: new URL('https://www.bnngpt.com/terms')
+    metadataBase: new URL('https://www.bnngpt.com'),
+    alternates: {
+      canonical: "/terms"
+    }
   }
 }
 

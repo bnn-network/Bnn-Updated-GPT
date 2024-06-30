@@ -5,7 +5,10 @@ export async function generateMetadata() {
   return {
     title: 'BNNGPT Privacy Policy - Protecting Your Data and Privacy',
     description: `Read BNNGPT's Privacy Policy to learn how we collect, use, and protect your information.`,
-    metadataBase: new URL('https://www.bnngpt.com/privacy')
+    metadataBase: new URL('https://www.bnngpt.com'),
+    alternates: {
+      canonical: "/privacy"
+    }
   }
 }
 

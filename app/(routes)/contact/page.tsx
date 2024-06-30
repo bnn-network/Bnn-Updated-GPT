@@ -6,7 +6,10 @@ export async function generateMetadata() {
   return {
     title: 'Contact BNNGPT - Get in Touch with Our AI Search Engine Team',
     description: `Reach out to BNNGPT for support, inquiries, or feedback. We're here to assist with all your AI search engine needs.`,
-    metadataBase: new URL('https://www.bnngpt.com/contact')
+    metadataBase: new URL('https://www.bnngpt.com'),
+    alternates: {
+      canonical: "/contact"
+    }
   }
 }
 
