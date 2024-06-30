@@ -42,7 +42,7 @@ export default function TypingEffect() {
       <div className="text-center min-h-[3rem] sm:min-h-[3.5rem] md:min-h-[4rem] lg:h-[100px] flex items-center justify-center">
         {' '}
         {/* Responsive heights */}
-        <h1 className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-semibold">
+        <span className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-semibold">
           <TypeAnimation
             sequence={phrases.flatMap(phrase => [phrase, 2000, ''])}
             wrapper="span"
@@ -51,7 +51,7 @@ export default function TypingEffect() {
             repeat={Infinity}
           />
           <span className="animate-blink"></span>
-        </h1>
+        </span>
       </div>
     </div>
   )

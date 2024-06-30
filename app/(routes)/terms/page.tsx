@@ -15,7 +15,7 @@ export default function Page() {
     <>
       <div className="inner_page">
         <a href="/" className="logo_div"></a>
-        <h2>BNNGPT Terms of Service</h2>
+        <h1>BNNGPT Terms of Service</h1>
         <p>Last updated: May 18th, 2024.</p>
         <p>
           Please read these Terms of Service (“Terms”, “Terms of Service”)

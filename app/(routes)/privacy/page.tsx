@@ -14,7 +14,7 @@ export default function Page() {
     <>
       <div className="inner_page">
         <a href="/" className="logo_div"></a>
-        <h2>BNNGPT Privacy Policy</h2>
+        <h1>BNNGPT Privacy Policy</h1>
         <p>Last updated: May 18th, 2024.</p>
         <p>
           This privacy policy (“Policy”) describes how{' '}

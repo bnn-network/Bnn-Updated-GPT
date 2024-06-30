@@ -15,10 +15,10 @@ export async function generateMetadata() {
 export default function Page() {
   return (
     <>
-     
+
       <div className="inner_page">
         <a href="/" className="logo_div"></a>
-        <h2>About Us</h2>
+        <h1>About Us</h1>
         <h3>Welcome to BNNGPT – The Future of AI-Powered Search</h3>
         <p>
           At BNNGPT, we&apos;re redefining the way you search and interact with

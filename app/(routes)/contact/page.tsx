@@ -15,7 +15,7 @@ export default function Page() {
     <>
       <div className="inner_page bg-secondary">
         <a href="/" className="logo_div"></a>
-        <h2>Contact Us</h2>
+        <h1>Contact Us</h1>
         <iframe src="https://forms.zohopublic.in/vijendersingh/form/BNNGPT/formperma/BHAVU_QZ00PzHO8Wfnx5gYJ_pZIRndsBaHZxTkN679w"></iframe>
       </div>
       <Footer />
