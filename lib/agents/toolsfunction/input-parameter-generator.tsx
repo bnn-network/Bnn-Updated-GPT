@@ -26,7 +26,7 @@ export default async function InputParamGenerator(input: string) {
     temperature: 0.4
   })
   if (result.text) {
-    return result
+    return result.text
   }
   return input
 }

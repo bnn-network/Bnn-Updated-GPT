@@ -1,10 +1,9 @@
 'use client'
 
 import { useEffect, useState, useRef, useCallback } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import type { AI, UIState } from '@/app/actions'
 import { useUIState, useActions } from 'ai/rsc'
-import { cn } from '@/lib/utils'
 import { UserMessage } from './user-message'
 import { Button } from './ui/button'
 import { ArrowRight, Plus } from 'lucide-react'
@@ -12,6 +11,7 @@ import { EmptyScreen } from './empty-screen'
 import Textarea from 'react-textarea-autosize'
 import { generateId } from 'ai'
 import useModel from '@/store/useModel'
+import InputParamGenerator from '@/lib/agents/toolsfunction/input-parameter-generator'
 
 interface ChatPanelProps {
   messages: UIState
@@ -26,6 +26,7 @@ export function ChatPanel({ messages }: ChatPanelProps) {
   const [shouldSubmit, setShouldSubmit] = useState(false)
   const router = useRouter()
   const params = useSearchParams()
+  const pathname = usePathname();
   const { selectedModel } = useModel()
 
   const handleSubmit = useCallback(
@@ -57,12 +58,19 @@ export function ChatPanel({ messages }: ChatPanelProps) {
   )
 
   useEffect(() => {
-    if (params.get('prequery') !== null) { // /parameter
-      const input = params.get('prequery') as string
-      setInput(input)
-      setShouldSubmit(true)
+    async function fetchInputParam() {
+      if (pathname && pathname.endsWith('/parameter')) {
+        let searchInput = await InputParamGenerator(pathname);
+        setInput(searchInput);
+        setShouldSubmit(true);
+      }
     }
-  }, [params])
+
+    if (!shouldSubmit) {
+      fetchInputParam();
+    }
+  }, [pathname]);
+
   // Clear messages
   const handleClear = () => {
     window.location.replace('/')
@@ -170,7 +178,7 @@ export function ChatPanel({ messages }: ChatPanelProps) {
           submitMessage={message => {
             setInput(message)
           }}
-          // className={cn(showEmptyScreen ? 'visible' : 'invisible')}
+        // className={cn(showEmptyScreen ? 'visible' : 'invisible')}
         />
       </form>
     </div>
