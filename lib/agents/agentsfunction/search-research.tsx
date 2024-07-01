@@ -57,6 +57,16 @@ export default async function SearchResearch({
   if (!searchToAnsweer) {
     return { searchToAnsweer, fullResponse, hasError, toolResponses }
   }
+  const uniqueImageURLs = Array.from(
+    new Set(
+      searchToAnsweer.responses
+        .filter(
+          (response: any): response is { imageURL: string } =>
+            response.imageURL !== null
+        )
+        .map((response: any) => response.imageURL)
+    )
+  )
   const date = new Date().toLocaleString()
   const searchStream = await nonexperimental_streamText({
     model: fireworks70bModel(),
@@ -88,9 +98,7 @@ export default async function SearchResearch({
 
       2. Citations Generation:
 
-        Sources: ${searchToAnsweer.responses
-          .map((res: any) => `- ${res.title} (${res.sourceURL})`)
-          .join('\n')}
+        Sources: ${uniqueImageURLs}
 
         Format and Placement:
         - Use ONLY simple text-based inline citations at the end of sentences within regular paragraphs
@@ -146,7 +154,7 @@ export default async function SearchResearch({
 
     **FINAL REMINDER: All citations must be in plain text [number]:URL format only, placed at the end of sentences within regular paragraphs. No HTML allowed for citations. Do not include citations in headings, subheadings, or as standalone elements.**`,
     messages
-  }).catch((err:any) => {
+  }).catch((err: any) => {
     hasError = true
     fullResponse = 'Error: ' + err.message
     streamText.update(fullResponse)
