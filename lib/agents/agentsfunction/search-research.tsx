@@ -57,9 +57,7 @@ export default async function SearchResearch({
   if (!searchToAnsweer) {
     return { searchToAnsweer, fullResponse, hasError, toolResponses }
   }
-  console.log(
-    searchToAnsweer.responses.map((response: any) => response.imageURL,'searchToAnsweer og images')
-  )
+
   const uniqueImageURLs = Array.from(
     new Set(
       searchToAnsweer.responses
@@ -70,7 +68,7 @@ export default async function SearchResearch({
         .map((response: any) => response.imageURL)
     )
   )
-  console.log(uniqueImageURLs, 'uniqueImageURLs')
+
   const date = new Date().toLocaleString()
   const searchStream = await nonexperimental_streamText({
     model: fireworks70bModel(),
