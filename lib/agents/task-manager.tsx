@@ -51,7 +51,6 @@ export async function taskManager(
 
     return result
   } catch (error) {
-
     return { next: 'proceed' }
   }
 }

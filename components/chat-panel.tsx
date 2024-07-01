@@ -44,6 +44,7 @@ export function ChatPanel({ messages }: ChatPanelProps) {
 
       // Submit and get response message
       if (!e) {
+        // /social-issues/parameter
         responseMessage = await submit(null, selectedModel, false, input)
       } else {
         formData = new FormData(e?.currentTarget)
@@ -56,7 +57,7 @@ export function ChatPanel({ messages }: ChatPanelProps) {
   )
 
   useEffect(() => {
-    if (params.get('prequery') !== null) {
+    if (params.get('prequery') !== null) { // /parameter
       const input = params.get('prequery') as string
       setInput(input)
       setShouldSubmit(true)

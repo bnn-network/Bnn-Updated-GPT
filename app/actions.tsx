@@ -30,7 +30,7 @@ async function submit(
   formData?: FormData,
   selectedModel?: string,
   skip?: boolean,
-  directInput?: string
+  directInput?: string // /parameter in the end -> function -> 1dZ40 -> api or otherwise -> llm to generate a meaningful query -> normal
 ) {
   'use server'
   const aiState = getMutableAIState<typeof AI>()
@@ -59,6 +59,9 @@ async function submit(
   // Limit the number of messages to the maximum
   messages.splice(0, Math.max(messages.length - maxMessages, 0))
   // Get the user input from the form data
+
+ // -> add the  input logic here for /parameter in the end (call InputParamGenerator function here)
+
   const userInput = skip
     ? `{"action": "skip"}`
     : directInput
