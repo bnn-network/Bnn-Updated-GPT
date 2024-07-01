@@ -17,11 +17,12 @@ import { PlusCircle } from 'lucide-react'
 interface SearchResultsImageSectionProps {
   images: string[]
   query?: string
+  fullimages: string[]
 }
 
 export const SearchResultsImageSection: React.FC<
   SearchResultsImageSectionProps
-> = ({ images, query }) => {
+> = ({ images, query, fullimages }) => {
   const [api, setApi] = useState<CarouselApi>()
   const [current, setCurrent] = useState(0)
   const [count, setCount] = useState(0)
@@ -91,7 +92,7 @@ export const SearchResultsImageSection: React.FC<
                 className="lg:w-full  lg:bg-primary-foreground max-h-[60vh] lg:-z-10 lg:mt-5"
               >
                 <CarouselContent>
-                  {images.map((img, idx) => (
+                  {fullimages.map((img, idx) => (
                     <CarouselItem key={idx}>
                       <div className="p-1 flex items-center justify-center h-full">
                         <img
@@ -102,6 +103,7 @@ export const SearchResultsImageSection: React.FC<
                             (e.currentTarget.src =
                               '/images/placeholder-image.png')
                           }
+                          loading="lazy"
                         />
                       </div>
                     </CarouselItem>

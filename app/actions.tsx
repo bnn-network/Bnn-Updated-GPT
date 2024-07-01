@@ -51,6 +51,8 @@ async function submit(
       return { role, content } as CoreMessage
     })
 
+    console.log(messages, 'messages core')
+
   // goupeiId is used to group the messages for collapse
   const groupeId = generateId()
 
@@ -60,13 +62,14 @@ async function submit(
   messages.splice(0, Math.max(messages.length - maxMessages, 0))
   // Get the user input from the form data
 
- // -> add the  input logic here for /parameter in the end (call InputParamGenerator function here)
+  // -> add the  input logic here for /parameter in the end (call InputParamGenerator function here)
 
   const userInput = skip
     ? `{"action": "skip"}`
     : directInput
     ? directInput
     : (formData?.get('input') as string)
+    console.log(userInput, 'userInput')
 
   const content = skip
     ? userInput
