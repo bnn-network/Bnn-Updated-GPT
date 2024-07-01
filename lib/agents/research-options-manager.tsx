@@ -11,7 +11,6 @@ import { nextResearchSchema } from '../schema/next-research'
 export async function researchOptionsManager(
   messages: CoreMessage[]
 ): Promise<any> {
-  
   try {
     const res: any = await generateObject({
       model: openAIInstance('gpt-4o'),
@@ -27,6 +26,7 @@ export async function researchOptionsManager(
    - You can provide a detailed response to the user's query without conducting a web search or retrieving information from a specific URL.
    - This option is suitable when you already possess the relevant information or expertise to address the user's query effectively.
 
+
 3. "search":
    - Choose this option if you do not have enough information to answer the user's query and need to search the web for relevant information.
    - You will need to provide a query string to search for information on the web which should like an article title
@@ -34,6 +34,7 @@ export async function researchOptionsManager(
    - do not give simple queries like "indian elections 2024" or "gaza news 2024" as they are too broad
    - This option is suitable when you lack information about the latest trends or updates on the topic and need to search the web to provide the user with accurate and up-to-date information.
    - When providing the search query, do not add any dates, assumptions, or modifications to the original user query. Use the user's query as-is without appending any additional parameters or dates like "October 2023."
+  - choose this option if there is something harassing or inappropriate in the user's query and you want to avoid it. 
 
 When deciding on the appropriate action, consider the following factors:
 - The specificity and complexity of the user's query.
