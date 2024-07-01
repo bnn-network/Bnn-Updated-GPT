@@ -8,17 +8,20 @@ export async function generateMetadata() {
       'About BNNGPT - Leading AI-Powered Search Engine for Accurate Answers',
     description:
       'Learn how BNNGPT redefines search with AI, delivering precise, human-like responses to your queries.',
-    metadataBase: new URL('https://www.bnngpt.com/about')
+    metadataBase: new URL('https://www.bnngpt.com'),
+    alternates: {
+      canonical: "/about"
+    }
   }
 }
 
 export default function Page() {
   return (
     <>
-     
+
       <div className="inner_page">
         <a href="/" className="logo_div"></a>
-        <h2>About Us</h2>
+        <h1>About Us</h1>
         <h3>Welcome to BNNGPT – The Future of AI-Powered Search</h3>
         <p>
           At BNNGPT, we&apos;re redefining the way you search and interact with

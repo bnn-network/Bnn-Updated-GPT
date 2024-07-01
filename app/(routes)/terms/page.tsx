@@ -6,7 +6,10 @@ export async function generateMetadata() {
     title:
       'BNNGPT Terms of Service - Your Guide to Using Our AI-Powered Search Engine',
     description: `Read BNNGPT's Terms of Service to understand the rules and guidelines for using our AI-powered search engine.`,
-    metadataBase: new URL('https://www.bnngpt.com/terms')
+    metadataBase: new URL('https://www.bnngpt.com'),
+    alternates: {
+      canonical: "/terms"
+    }
   }
 }
 
@@ -15,7 +18,7 @@ export default function Page() {
     <>
       <div className="inner_page">
         <a href="/" className="logo_div"></a>
-        <h2>BNNGPT Terms of Service</h2>
+        <h1>BNNGPT Terms of Service</h1>
         <p>Last updated: May 18th, 2024.</p>
         <p>
           Please read these Terms of Service (“Terms”, “Terms of Service”)

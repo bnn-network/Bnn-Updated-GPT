@@ -5,7 +5,10 @@ export async function generateMetadata() {
   return {
     title: 'BNNGPT Privacy Policy - Protecting Your Data and Privacy',
     description: `Read BNNGPT's Privacy Policy to learn how we collect, use, and protect your information.`,
-    metadataBase: new URL('https://www.bnngpt.com/privacy')
+    metadataBase: new URL('https://www.bnngpt.com'),
+    alternates: {
+      canonical: "/privacy"
+    }
   }
 }
 
@@ -14,7 +17,7 @@ export default function Page() {
     <>
       <div className="inner_page">
         <a href="/" className="logo_div"></a>
-        <h2>BNNGPT Privacy Policy</h2>
+        <h1>BNNGPT Privacy Policy</h1>
         <p>Last updated: May 18th, 2024.</p>
         <p>
           This privacy policy (“Policy”) describes how{' '}

@@ -9,6 +9,17 @@ const DynamicTypingEffect = dynamic(() => import('@/components/TypingEffect'), {
   ssr: false
 })
 
+export async function generateMetadata() {
+  return {
+    title: 'BNNGPT - Discover. Explore. Search.',
+    description: `Real-time, precise answers powered by advanced AI. Enjoy a sleek, beautiful interface. Experience the future of search with BNNGPT.`,
+    metadataBase: new URL('https://www.bnngpt.com'),
+    alternates: {
+      canonical: "/"
+    }
+  }
+}
+
 export const runtime = 'edge'
 
 export default async function Page() {
