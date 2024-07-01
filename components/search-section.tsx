@@ -49,7 +49,7 @@ export function SearchSection({ result }: SearchSectionProps) {
             <ToolBadge tool="search">{searchResults.input}</ToolBadge>
           </Section>
           {thumbnails && thumbnails.length > 0 && (
-            <Section title="thumbnails">
+            <Section title="Media">
               <SearchResultsImageSection
                 images={thumbnails}
                 query={searchResults.input}
