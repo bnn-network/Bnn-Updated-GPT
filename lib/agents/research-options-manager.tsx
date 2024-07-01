@@ -49,11 +49,9 @@ Remember, when performing a search, always use the user's original query without
       messages,
       schema: nextResearchSchema
     })
-
     return res
   } catch (error) {
     // If an error occurs, recursively call the function to retry
-    const recursiveResult: any = await researchOptionsManager(messages)
-    return recursiveResult
+    return { object: { next: 'chat' } }
   }
 }
