@@ -38,6 +38,8 @@
     --modal-inputBox: #F5F5F5;
     --modal-inputBox-secondary: #ECECEC;
     --modal-background: #ffffff;
+    --borders-primary: #DADADA;
+
   }
 
   .dark {
@@ -74,6 +76,8 @@
     --modal-inputBox-secondary: #202020;
    
     --modal-background: #0D0D0D;
+    --borders-primary: #323232;
+ 
   }
 }
 

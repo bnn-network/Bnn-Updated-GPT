@@ -12,17 +12,17 @@ const ImageComponent = () => {
       ? 'https://d30ynstjdvogo0.cloudfront.net/BNN-Final-Logo-white.png'
       : 'https://d30ynstjdvogo0.cloudfront.net/BNN-Final-Logo-black.png'
     : theme === 'dark'
-      ? 'https://d30ynstjdvogo0.cloudfront.net/BNN-Final-Logo-white.png'
-      : 'https://d30ynstjdvogo0.cloudfront.net/BNN-Final-Logo-black.png'
+    ? 'https://d30ynstjdvogo0.cloudfront.net/BNN-Final-Logo-white.png'
+    : 'https://d30ynstjdvogo0.cloudfront.net/BNN-Final-Logo-black.png'
   return (
-    <div className="pl-2 pt-2">
+    <div className="">
       <a href="/">
         <NoSsr>
           <Image
             src={conditionForTheme}
             className={cn('h-8 lg:h-full w-auto opacity-90')}
             alt="Logo"
-            width={66}
+            width={50}
             height={20}
           />
         </NoSsr>

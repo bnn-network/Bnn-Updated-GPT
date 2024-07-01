@@ -26,7 +26,7 @@ export default function Page() {
       </div>
       <FooterAI />
       <div className="fixed bottom-0 w-full -z-10">
-        <Image src={HomePageBg} alt="landing background" />
+        {/* <Image src={HomePageBg} alt="landing background" /> */}
       </div>
     </AI>
   )

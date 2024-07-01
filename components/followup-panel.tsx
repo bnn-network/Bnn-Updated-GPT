@@ -43,9 +43,9 @@ export function FollowupPanel() {
       <Input
         type="text"
         name="input"
-        placeholder="Ask a follow-up question..."
+        placeholder="Ask a question..."
         value={input}
-        className="pr-14 h-12 bg-results-foreground border-muted rounded-2xl"
+        className=" pr-14 h-12 bg-modal-inputBox-secondary border-bdr-borderPrimary rounded-2xl"
         onChange={e => setInput(e.target.value)}
       />
       <Button

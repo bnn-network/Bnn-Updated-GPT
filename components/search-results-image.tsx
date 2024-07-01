@@ -12,7 +12,6 @@ import {
   CarouselPrevious
 } from '@/components/ui/carousel'
 import { useEffect, useState } from 'react'
-import { PlusCircle } from 'lucide-react'
 
 interface SearchResultsImageSectionProps {
   images: string[]
@@ -62,7 +61,6 @@ export const SearchResultsImageSection: React.FC<
               onClick={() => setSelectedIndex(index)}
             >
               <Card className="flex-1 h-[90%] ">
-                {/* <Card className="h-full"> */}
                 <CardContent className=" w-full h-full p-0 bg-modal-inputBoxSecondary rounded">
                   {image ? (
                     <img
@@ -80,7 +78,6 @@ export const SearchResultsImageSection: React.FC<
               </Card>
               {index === 3 && images.length > 4 && (
                 <div className="absolute inset-0 bg-modal-inputBoxSecondary rounded-md flex items-center justify-center font-medium text-sm">
-                  {/* <PlusCircle size={24} /> */}
                   View All
                 </div>
               )}

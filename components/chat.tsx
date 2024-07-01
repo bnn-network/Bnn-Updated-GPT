@@ -22,7 +22,7 @@ export function Chat({ id }: ChatProps) {
   }, [id, path, messages])
 
   return (
-    <div className="px-8 max-w-[110vw] md:max-w-xl overflow-x-scroll lg:overflow-x-hidden sm:px-10 pt-0 md:pt-0 pb-14 md:pb-24 lg:max-w-3xl  lg:mx-auto -mt-10 flex flex-col space-y-3 md:space-y-4 mb-15">
+    <div className="px-8 sm:px-12 mt-14 mb-12 md:pb-24 max-w-3xl mx-auto flex flex-col space-y-3 md:space-y-4 bg-results-foreground p-4">
       <ChatMessages messages={messages} />
       <ChatPanel messages={messages} />
     </div>

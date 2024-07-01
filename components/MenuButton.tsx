@@ -13,6 +13,7 @@ import { SignOutButton } from '@clerk/nextjs'
 import { Bars2Icon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import { LogoutIcon, SunIcon, UserIcon } from '@/assets/icons/icons'
+import HeaderUserIcon from '@/assets/icons/HeaderUserIcon.svg'
 import { useTheme } from 'next-themes'
 import { ModeToggle } from './mode-toggle'
 
@@ -22,8 +23,9 @@ const MenuButton = async () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="z-10" asChild>
-        <Button variant="ghost" size={'icon'} className="z-10 w-8 mt-1 h-8">
-          <User className="size-5" />
+        <Button variant="ghost" size={'icon'} className="z-10 w-8 h-8">
+          {/* <User className="size-5" /> */}
+          <Image src={HeaderUserIcon} alt="" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="mr-6 mb-2 border-none min-w-52">

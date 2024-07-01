@@ -38,7 +38,9 @@ export const search2Tool = async (
     )
     return searchResult
   }
-  const firstSixSources = searchResult.responses.slice(0, 6) ? searchResult.responses.slice(0, 6) : searchResult.responses
+  const firstSixSources = searchResult.responses.slice(0, 6)
+    ? searchResult.responses.slice(0, 6)
+    : searchResult.responses
   const updatedSearchResult = {
     responses: firstSixSources,
     input: searchResult.input
@@ -72,6 +74,8 @@ async function tavilySearch(
   searchDepth: 'basic' | 'advanced' = 'basic'
 ): Promise<any> {
   const apiKey = process.env.TAVILY_API_KEY
+
+  // endpoint: images
   const response = await fetch('https://api.tavily.com/search', {
     method: 'POST',
     headers: {

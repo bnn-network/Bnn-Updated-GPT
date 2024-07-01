@@ -102,8 +102,6 @@ async function submit(
 
   async function processEvents() {
     let action = { next: 'proceed' }
-
-    // If the user skips the task, we proceed to the search
     if (!skip)
       action =
         (await taskManager(
@@ -217,14 +215,19 @@ async function submit(
         answer
       )
       // Add follow-up panel
+      // uiStream.append()
       uiStream.append(
-        <Section title="Follow-up">
-          <FollowupPanel />
-        </Section>
+        <>
+          <div className="h-8"></div>
+          <Section title="Follow-up">
+            <FollowupPanel />
+          </Section>
+        </>
       )
 
       // Add the answer, related queries, and follow-up panel to the state
       // Wait for 0.5 second before adding the answer to the state
+
       await new Promise(resolve => setTimeout(resolve, 500))
 
       aiState.done({
@@ -401,18 +404,25 @@ export const getUIStateFromAIState = async (aiState: Chat) => {
               return {
                 id,
                 component: (
-                  <Section title="Related" separator={true}>
-                    <SearchRelated relatedQueries={relatedQueries.value} />
-                  </Section>
+                  <>
+                    <div className="h-8 rounded-md"></div>
+                    <Section title="Related" separator={true}>
+                      <SearchRelated relatedQueries={relatedQueries.value} />
+                    </Section>
+                    <div className="h-8"></div>
+                  </>
                 )
               }
             case 'followup':
               return {
                 id,
                 component: (
-                  <Section title="Follow-up" className="pb-8">
-                    <FollowupPanel />
-                  </Section>
+                  <>
+                    <Section title="Follow-up" className="pb-8">
+                      <div className="h-8 rounded-md"></div>
+                      <FollowupPanel />
+                    </Section>
+                  </>
                 )
               }
           }

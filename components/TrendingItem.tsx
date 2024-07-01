@@ -98,12 +98,12 @@ function TrendingItem({ name, icon }: Props) {
   const matchingTopic = TopicQueries.find(t => t.topic === name)
 
   return (
-    <div className="relative mb-2">
+    <div className="relative mb-1 border-[1px] border-modal-inputBoxSecondary rounded-md bg-secondary">
       <button
         onClick={handleDropDown}
         className="w-full flex items-center justify-between p-2.5 rounded-full bg-secondary hover:bg-secondary/80 transition-colors duration-200"
       >
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 ">
           <Image
             src={icon}
             alt={name}
@@ -111,21 +111,21 @@ function TrendingItem({ name, icon }: Props) {
             height={16}
             className="text-muted-foreground"
           />
-          <span className="text-xs font-medium">{name}</span>
+          <span className="text-xs font-base text-text-secondary">{name}</span>
         </div>
         <ChevronDownIcon
-          className={`w-4 h-4 text-muted-foreground transition-transform duration-200 ${
+          className={`w-4 h-4 text-muted-foreground transition-transform duration-300 ${
             isOpen ? 'rotate-180' : ''
           }`}
         />
       </button>
 
       {isOpen && matchingTopic && (
-        <div className="mt-1 py-1 bg-background border border-border rounded-lg shadow-sm">
+        <div className="mt-1 py-1 bg-background rounded-lg">
           {matchingTopic.queries.map((query, index) => (
             <button
               key={index}
-              className="w-full text-left px-3 py-2 text-xs hover:bg-secondary/50 transition-colors duration-200"
+              className="w-full text-left px-3 py-2 text-xs text-text-secondary hover:bg-modal-inputBoxSecondary rounded-lg"
               onClick={() => handleSubmit(query)}
             >
               {query}

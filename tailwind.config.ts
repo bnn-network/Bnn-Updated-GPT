@@ -73,6 +73,9 @@ const config = {
           inputBox: 'var(--modal-inputBox)',
           inputBoxSecondary: 'var( --modal-inputBox-secondary)',
           background: 'var( --modal-background)'
+        },
+        bdr: {
+          borderPrimary: 'var( --borders-primary)'
         }
       },
       borderRadius: {

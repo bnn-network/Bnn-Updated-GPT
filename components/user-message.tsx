@@ -14,7 +14,7 @@ export const UserMessage: React.FC<UserMessageProps> = ({
 }) => {
   return (
     <div className="flex items-center w-full space-x-1 mt-2  min-h-10">
-      <div className="text-xl flex-1 break-words w-full">{message}</div>
+      <div className="text-md flex-1 break-words w-full">{message}</div>
       {showShare && chatId && <ChatShare className="z-50" chatId={chatId} />}
     </div>
   )

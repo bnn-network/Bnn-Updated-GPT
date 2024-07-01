@@ -145,6 +145,8 @@ export function BotMessage({
     }
   }
 
+  // fix: the background color of the div of code
+
   return (
     <MemoizedReactMarkdown
       rehypePlugins={[
